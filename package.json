@@ -19,6 +19,7 @@
     "health": "curl -f http://localhost:3001/health || echo 'Health check failed'"
   },
   "devDependencies": {
+    "@rollup/plugin-wasm": "^6.2.2",
     "concurrently": "^8.2.2"
   },
   "dependencies": {
