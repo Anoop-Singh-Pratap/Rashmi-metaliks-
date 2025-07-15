@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Build outputs
+dist/
+frontend/dist/
+backend/dist/
+build/
+frontend/build/
+backend/build/
+
+# Environment files
+.env
+.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+backend/.env
+backend/.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Archives and compressed files
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+
+# Logs
+*.log
+
+# IDE/editor folders
+.vscode/
+.idea/ 

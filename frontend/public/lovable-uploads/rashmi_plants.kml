@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Untitled project</name>
+	<gx:CascadingStyle kml:id="__managed_style_027E89A7D93702424403">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3 class="text-xl font-bold" style="box-sizing: border-box; border-width: 0px; border-style: solid; font-size: 1.25rem; font-weight: 700; margin: 0px; line-height: 1.75rem; color: rgb(237, 237, 237); font-family: Inter, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; white-space: normal; background-color: rgb(22, 24, 29); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Plant 1<br></h3><p class="text-muted-foreground mt-1" style="box-sizing: border-box; border-width: 0px; border-style: solid; margin: 0.25rem 0px 0px; font-family: Inter, sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; white-space: normal; background-color: rgb(22, 24, 29); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Gokulpur, P.O.: Shyamraipur, Dist.: West Midnapur, West Bengal, India.<br></p><div><br></div>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1F184622153702424402">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3 class="text-xl font-bold" style="box-sizing: border-box; border-width: 0px; border-style: solid; font-size: 1.25rem; font-weight: 700; margin: 0px; line-height: 1.75rem; color: rgb(237, 237, 237); font-family: Inter, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; white-space: normal; background-color: rgb(22, 24, 29); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Plant 1<br></h3><p class="text-muted-foreground mt-1" style="box-sizing: border-box; border-width: 0px; border-style: solid; margin: 0.25rem 0px 0px; font-family: Inter, sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; white-space: normal; background-color: rgb(22, 24, 29); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Gokulpur, P.O.: Shyamraipur, Dist.: West Midnapur, West Bengal, India.<br></p><div><br></div>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1809CC6C8E37024243FE">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_07D5A5FBA437024243FE">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_0ED740C0D93702424401">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+</html>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_154CF31AAC3702424400">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+</html>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0EAF5762423702424402">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1F184622153702424402</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_027E89A7D93702424403</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="__managed_style_0A3888125837024243FD">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_07D5A5FBA437024243FE</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_1809CC6C8E37024243FE</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="__managed_style_0EB69568A73702424400">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_154CF31AAC3702424400</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0ED740C0D93702424401</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder id="054A03479236FD5177E3">
+		<name>Rashmi Group</name>
+		<open>1</open>
+		<styleUrl>#__managed_style_0EB69568A73702424400</styleUrl>
+	</Folder>
+	<Placemark id="05FA7C4B6A36FD5524DB">
+		<name>Rashmi Kolkata</name>
+		<LookAt>
+			<longitude>88.36123839066619</longitude>
+			<latitude>22.54451603695034</latitude>
+			<altitude>31.64395827402206</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>429.1190674553219</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0A3888125837024243FD</styleUrl>
+		<Point>
+			<coordinates>88.36111836086609,22.54412275608249,31.17363652369687</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0ED324E37A36FD5219DD">
+		<name>Rml6</name>
+		<LookAt>
+			<longitude>87.39800575401993</longitude>
+			<latitude>22.32620535148628</latitude>
+			<altitude>43.1218133964235</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>578.4400096474565</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0EB69568A73702424400</styleUrl>
+		<Point>
+			<coordinates>87.39800088018508,22.32627262772027,42.98855248035473</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="04D52D78693701687146">
+		<name>RASHMI METALIKS UK LTD.</name>
+		<LookAt>
+			<longitude>-0.07743535583714545</longitude>
+			<latitude>51.51189577404282</latitude>
+			<altitude>32.97520228061478</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>71.47519099925375</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0A3888125837024243FD</styleUrl>
+		<Point>
+			<coordinates>-0.07737247046335716,51.51187730491441,32.88001212194908</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="044F40F18D37016A438A">
+		<name>RASHMI AQUA PTE LTD.</name>
+		<LookAt>
+			<longitude>103.8479266975389</longitude>
+			<latitude>1.280849654523321</latitude>
+			<altitude>37.03116225448828</altitude>
+			<heading>55.14342003864198</heading>
+			<tilt>59.99421688816185</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>102.4105704351314</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0A3888125837024243FD</styleUrl>
+		<Point>
+			<coordinates>103.8479927528802,1.280806292054586,43.51199365418077</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0D671E0A9137016DBB3C">
+		<name>RASHMI PIPE &amp; FITTING FZCO</name>
+		<LookAt>
+			<longitude>55.14711267402212</longitude>
+			<latitude>25.07791956030687</latitude>
+			<altitude>2.323700187481406</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>352.977084208178</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0A3888125837024243FD</styleUrl>
+		<Point>
+			<coordinates>55.14665528532732,25.07801203948215,2.270923724265022</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="05E36CFC11370170B18A">
+		<name>Plant 1</name>
+		<LookAt>
+			<longitude>87.28027844430092</longitude>
+			<latitude>22.37688506198775</latitude>
+			<altitude>56.0956761151086</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>550.7603470328469</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0EAF5762423702424402</styleUrl>
+		<Point>
+			<coordinates>87.2801833298779,22.37651633801149,56.28457453590066</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

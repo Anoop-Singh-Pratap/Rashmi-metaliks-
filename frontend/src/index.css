@@ -1,0 +1,547 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .legal-content {
+    @apply text-base leading-relaxed;
+  }
+  
+  .legal-content h2 { 
+    @apply font-serif text-2xl sm:text-3xl text-red-600 dark:text-amber-400 mb-6 mt-12; 
+  }
+  
+  .legal-content h3 { 
+    @apply font-semibold text-slate-800 dark:text-slate-200 text-xl mb-4; 
+  }
+  
+  .legal-content p { 
+    @apply mb-4 leading-relaxed; 
+  }
+  
+  .legal-content ul { 
+    @apply list-disc pl-6 mb-6 space-y-2; 
+  }
+  
+  .legal-content a { 
+    @apply text-red-600 dark:text-amber-400 hover:underline; 
+  }
+  
+  .legal-content strong { 
+    @apply text-red-600 dark:text-amber-400 font-medium; 
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 225 10% 10%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 225 10% 10%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 10% 10%;
+    
+    --primary: 354 78% 51%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 225 10% 90%;
+    --secondary-foreground: 225 10% 10%;
+    
+    --muted: 225 10% 92%;
+    --muted-foreground: 225 5% 40%;
+    
+    --accent: 225 10% 92%;
+    --accent-foreground: 225 10% 10%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 225 10% 85%;
+    --input: 225 10% 85%;
+    --ring: 354 78% 51%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 225 10% 10%;
+    --sidebar-primary: 354 78% 51%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 225 10% 92%;
+    --sidebar-accent-foreground: 225 10% 10%;
+    --sidebar-muted: 225 10% 92%;
+    --sidebar-muted-foreground: 225 5% 40%;
+    --sidebar-border: 225 10% 85%;
+    --sidebar-ring: 354 78% 51%;
+    
+    --radius: 0.5rem;
+    
+    /* Rashmi Colors */
+    --rashmi-red: 354 78% 51%;
+    --rashmi-dark: 225 10% 10%;
+  }
+ 
+  .dark {
+    --background: 225 15% 8%;
+    --foreground: 0 0% 93%;
+    
+    --card: 225 15% 10%;
+    --card-foreground: 0 0% 93%;
+    
+    --popover: 225 15% 10%;
+    --popover-foreground: 0 0% 93%;
+    
+    --primary: 354 78% 51%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 225 10% 15%;
+    --secondary-foreground: 0 0% 93%;
+    
+    --muted: 225 10% 15%;
+    --muted-foreground: 225 5% 65%;
+    
+    --accent: 225 10% 15%;
+    --accent-foreground: 0 0% 93%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 225 10% 20%;
+    --input: 225 10% 20%;
+    --ring: 354 78% 51%;
+
+    --sidebar-background: 225 15% 10%;
+    --sidebar-foreground: 0 0% 93%;
+    --sidebar-primary: 354 78% 51%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 225 10% 15%;
+    --sidebar-accent-foreground: 0 0% 93%;
+    --sidebar-muted: 225 10% 15%;
+    --sidebar-muted-foreground: 225 5% 65%;
+    --sidebar-border: 225 10% 20%;
+    --sidebar-ring: 354 78% 51%;
+    
+    /* Rashmi Colors */
+    --rashmi-red: 354 78% 51%;
+    --rashmi-dark: 0 0% 93%;
+  }
+}
+ 
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Enhanced table styling for dark mode visibility */
+  .dark .prose table {
+    @apply text-foreground;
+  }
+  
+  .dark .prose table thead {
+    @apply text-foreground;
+  }
+  
+  .dark .prose table tr {
+    @apply border-border;
+  }
+  
+  .dark .prose a {
+    @apply text-rashmi-red hover:text-rashmi-red/80;
+  }
+  
+  /* Fix for table visibility in dark mode */
+  .dark .prose table th,
+  .dark .prose table td {
+    @apply text-foreground border-border;
+  }
+  
+  /* Add styling for prose content */
+  .prose {
+    @apply max-w-none;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply text-foreground font-display;
+  }
+  
+  .prose p, .prose ul, .prose ol {
+    @apply text-muted-foreground;
+  }
+
+  /* Fix for chart text color in dark mode */
+  .dark .recharts-tooltip-item-name,
+  .dark .recharts-tooltip-item-value,
+  .dark .recharts-tooltip-label {
+    @apply text-rashmi-red;
+  }
+
+  .dark .recharts-tooltip-wrapper .recharts-default-tooltip {
+    @apply bg-background/90 border-border;
+  }
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .glass-effect {
+    @apply bg-background/50;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  .metal-surface {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 50%, #d5d5d5 51%, #e8e8e8 100%);
+    box-shadow: 
+      inset 0 0 10px rgba(255, 255, 255, 0.5),
+      0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .metal-surface {
+    background: linear-gradient(135deg, #3a3a3a 0%, #303030 50%, #282828 51%, #383838 100%);
+    box-shadow: 
+      inset 0 0 10px rgba(255, 255, 255, 0.1),
+      0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .animate-spin-slow {
+    animation: spin 12s linear infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .hover-glow:hover {
+    filter: drop-shadow(0 0 8px theme('colors.rashmi-red'));
+  }
+  
+  .water-bar rect {
+    fill: url(#blueGradient);
+    animation: waterFlow 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulseSlow 4s ease-in-out infinite;
+  }
+
+  .animate-wave1 {
+    animation: wave1 8s ease-in-out infinite;
+  }
+  
+  .animate-wave2 {
+    animation: wave2 12s ease-in-out infinite;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes waterFlow {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+@keyframes wave1 {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(15%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes wave2 {
+  0% {
+    transform: translateY(100%) scale(1.2);
+  }
+  50% {
+    transform: translateY(40%) scale(1.2);
+  }
+  100% {
+    transform: translateY(100%) scale(1.2);
+  }
+}
+
+/* Remove default App.css styles that might conflict */
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* Mobile Optimization Styles */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .pl-safe {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .pr-safe {
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .px-safe {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .py-safe {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Improved touch targets */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+/* Prevent overscroll bounce on iOS */
+html, body {
+  height: 100%;
+  overflow-y: auto !important;
+  position: relative;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust based on your header height */
+  overscroll-behavior-y: none;
+}
+
+/* Prevent scroll memory during navigation with JavaScript */
+html {
+  /* Add scroll anchoring prevention */
+  overflow-anchor: none;
+}
+
+/* Reset scroll position on history navigation */
+@media screen {
+  html {
+    scroll-snap-type: none;
+  }
+}
+
+/* Ensure content is scrollable regardless of iframe interaction */
+#root {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile viewport and touch improvements */
+@media (max-width: 768px) {
+  /* Prevent fixed elements from getting cut off */
+  .fixed, 
+  [class*="fixed"] {
+    position: fixed;
+    /* Use safe area insets for notched devices */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    /* Remove transforms as they can break fixed positioning */
+  }
+
+  /* Prevent content from being hidden under fixed headers */
+  .pt-header {
+    padding-top: 4rem; /* Adjust based on your header height */
+  }
+  
+  /* Improve finger-friendly touch targets */
+  button, 
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Remove conflicting styles for HTML/body overflow */
+  /* html, 
+  body {
+    position: relative;
+    overflow-y: auto !important;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+  } */
+  
+  /* Mobile menu open class - this is now handled in App.css */
+  /* body.mobile-menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  } */
+  
+  /* Allow scrolling within the mobile menu itself */
+  [data-mobile="true"] {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 100dvh; /* Use dynamic viewport height */
+    touch-action: pan-y;
+    z-index: 100 !important; /* Ensure highest z-index */
+  }
+  
+  /* Ensure proper root container behavior */
+  #root {
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  /* Fix z-index stacking issues */
+  .z-high {
+    z-index: 20;
+  }
+  
+  .z-higher {
+    z-index: 30;
+  }
+  
+  .z-highest {
+    z-index: 40;
+  }
+  
+  /* Fix header z-index to be between content and menu */
+  header {
+    z-index: 50;
+  }
+  
+  /* Force hardware acceleration for smoother animations */
+  .transform-gpu {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* Form input styling for dark mode */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="tel"],
+.dark input[type="number"],
+.dark input[type="password"],
+.dark input[type="date"],
+.dark input[type="time"],
+.dark select,
+.dark textarea {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+/* Success message styling for dark mode */
+.dark .bg-green-100 {
+  background-color: rgba(16, 185, 129, 0.2); /* Dark mode green background */
+}
+
+.dark .text-green-600 {
+  color: rgb(52, 211, 153); /* Brighter green for dark mode */
+}
+
+/* Fix button text colors in dark mode */
+.dark .text-white {
+  color: white !important;
+}
+
+/* Prevent iframes from capturing scroll events */
+iframe {
+  pointer-events: auto;
+}
+
+/* Ensure map containers don't block scrolling */
+.map-container {
+  position: relative;
+  z-index: 10;
+  height: auto;
+  max-height: 85vh;
+}
+
+.map-container iframe {
+  max-height: 85vh;
+}
+
+/* Ensure sections after maps are still scrollable */
+section {
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+/* Add these scroll utilities */
+.scroll-enable {
+  overflow: auto !important;
+}
+
+.scroll-visible {
+  overflow: visible !important;
+}

@@ -1,0 +1,224 @@
+/* Custom styles for the Enhanced Emissions Chart */
+
+/* ======== CARD EFFECTS ======== */
+
+/* Card effect for the Swiper */
+.achievement-swiper {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.achievement-swiper .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+.achievement-swiper .swiper-slide-active {
+  opacity: 1;
+}
+
+/* Achievement cards swiper styles */
+.achievement-cards-swiper {
+  width: 100%;
+  padding: 10px 0 40px 0;
+}
+
+.achievement-cards-swiper .swiper-slide {
+  height: auto;
+  padding: 10px;
+}
+
+/* ======== ANIMATIONS ======== */
+
+/* Water wave animations */
+@keyframes wave1 {
+  0%, 100% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(10%);
+  }
+}
+
+@keyframes wave2 {
+  0%, 100% {
+    transform: translateY(100%) scale(1.1);
+  }
+  70% {
+    transform: translateY(30%) scale(1.05);
+  }
+}
+
+.animate-wave1 {
+  animation: wave1 15s ease-in-out infinite;
+}
+
+.animate-wave2 {
+  animation: wave2 18s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* Glow animation */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px 0px rgba(22, 163, 74, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(22, 163, 74, 0.4);
+  }
+}
+
+.glow-effect {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Shimmer effect */
+.shimmer {
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pulse animation for milestone dots */
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.milestone-dot {
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+/* ======== COMPONENTS & LAYOUT ======== */
+
+/* Custom chart tooltip styles */
+.custom-tooltip {
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid background pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(229, 57, 53, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(229, 57, 53, 0.03) 1px, transparent 1px);
+}
+
+/* 3D perspective for chart container */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Milestone labels styling */
+.milestone-label {
+  background-color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 11px;
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none;
+  border: 1px solid #e2e8f0;
+  font-weight: 500;
+}
+
+.dark .milestone-label {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: white;
+}
+
+.milestone-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.milestone-text {
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Custom pagination bullets */
+.achievement-swiper .swiper-pagination-bullet,
+.achievement-cards-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(22, 163, 74, 0.5);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.achievement-swiper .swiper-pagination-bullet-active,
+.achievement-cards-swiper .swiper-pagination-bullet-active {
+  background-color: rgba(22, 163, 74, 1);
+  opacity: 1;
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* Improve card styles */
+.card-3d-container {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+/* Navigation arrows for swiper */
+.achievement-cards-swiper .swiper-button-next,
+.achievement-cards-swiper .swiper-button-prev {
+  color: #10b981;
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0.9;
+}
+
+.dark .achievement-cards-swiper .swiper-button-next,
+.dark .achievement-cards-swiper .swiper-button-prev {
+  background-color: #1f2937;
+}
+
+.achievement-cards-swiper .swiper-button-next:after,
+.achievement-cards-swiper .swiper-button-prev:after {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.achievement-cards-swiper .swiper-button-next.swiper-button-disabled,
+.achievement-cards-swiper .swiper-button-prev.swiper-button-disabled {
+  opacity: 0.3;
+} 

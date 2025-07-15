@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    @apply transition-colors duration-300 ease-in-out;
+  }
+}
+
+/* Specific overrides or additions */
+.glass-effect {
+  transition: background-color 300ms ease-in-out, backdrop-filter 300ms ease-in-out;
+  background-color: hsl(var(--background) / 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+header > div:first-child {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
+/* Add custom font definitions if needed */
+@font-face {
+  font-family: 'ClashDisplay-Variable';
+  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2'),
+       url('/fonts/ClashDisplay-Variable.woff') format('woff'),
+       url('/fonts/ClashDisplay-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+.font-display {
+  font-family: 'ClashDisplay-Variable', sans-serif;
+}
+
+/* Animation Keyframes */
+@keyframes slowZoom {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.15); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+
+.animate-float {
+  animation: float 2.5s ease-in-out infinite;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    position: relative;
+    /* Ensure proper touch behavior - critical for mobile */
+    touch-action: auto !important;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove tap highlight */
+  }
+  
+  /* Mobile menu optimizations - ONLY apply when menu is open */
+  html.mobile-menu-open,
+  body.mobile-menu-open {
+    /* Prevent background scrolling when menu is open - ONLY hide overflow */
+    overflow: hidden !important;
+    /* Removed position: fixed, height, width, top, left as they caused issues */
+  }
+  
+  /* Mobile menu itself should still allow scrolling */
+  [data-mobile="true"] {
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Ensure touch targets are appropriately sized */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: auto !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+  
+  /* Fix for navigation links */
+  a, button, [role="button"] {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
+  
+  /* Prevent content from being hidden behind fixed elements */
+  main {
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+    touch-action: auto !important;
+  }
+  
+  /* Allow scrolling on the main content area */
+  #root {
+    touch-action: auto !important;
+    /* Removed height: auto !important; and overflow: visible !important; */
+  }
+  
+  /* Better mobile menu appearance - Let Tailwind handle positioning/sizing/z-index */
+  [data-mobile="true"] {
+    overscroll-behavior: contain;
+    /* Improve hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform;
+    
+    /* Ensure the menu container is scrollable */
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    /* Removed max-height, z-index, position, top, left, right, bottom
+       as these are handled by Tailwind classes in Header.tsx */
+  }
+  
+  /* Fix z-index stacking issues */
+  header {
+    z-index: 9990 !important;
+  }
+  
+  /* Fix modal z-index to be above everything */
+  .fixed.z-\[400\], .fixed.z-\[10000\] {
+    z-index: 10000 !important; /* Higher than mobile menu */
+  }
+  
+  /* Prevent zoom on iOS when clicking on inputs */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="search"],
+  select {
+    font-size: 16px !important;
+  }
+  
+  /* Fix for elements blocking interactions */
+  * {
+    pointer-events: auto !important;
+    touch-action: auto !important;
+  }
+  
+  /* Make sure page scrolls */
+  html, body, #root {
+    /* Removed height: auto !important; */
+    overflow-y: auto !important;
+    /* Removed position: static !important; */
+  }
+  
+  /* Fix possible blocking elements */
+  div, section, main, article {
+    pointer-events: auto !important;
+    touch-action: auto !important;
+  }
+  
+  /* Make buttons and links obviously interactive */
+  button, a, [role="button"] {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2) !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  /* Make sure links have visible tap state */
+  a:active, button:active, [role="button"]:active {
+    opacity: 0.8 !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Fix footer touch events on mobile */
+  footer, footer * {
+    touch-action: auto !important;
+    pointer-events: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+  
+  /* Special override for elements with data-mobile-footer attribute */
+  [data-mobile-footer="true"], 
+  [data-mobile-footer="true"] a, 
+  [data-mobile-footer="true"] button {
+    touch-action: auto !important;
+    pointer-events: auto !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.2) !important;
+    cursor: auto !important;
+  }
+}

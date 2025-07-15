@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Mobile compatibility mode detection -->
+    <script>
+      // Check if we should use compatibility mode
+      (function() {
+        // Detect problematic mobile environment
+        var isProblematicMobile = (
+          window.innerWidth <= 768 && 
+          (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 'ontouchstart' in window)
+        );
+        
+        // Set compatibility mode flag based on user agent and screen size
+        window.COMPATIBILITY_MODE = isProblematicMobile;
+        
+        // Allow forcing compatibility mode via URL parameter
+        if (window.location.search.indexOf('compatibility=true') > -1) {
+          window.COMPATIBILITY_MODE = true;
+        }
+      })();
+    </script>
+    <!-- EMERGENCY FIX: Ensure touch events work -->
+    <script>
+      // Fix for iOS/Safari issues with events being blocked
+      document.addEventListener('DOMContentLoaded', function() {
+        // Force enable scrolling and touch events
+        document.documentElement.style.touchAction = 'auto';
+        document.body.style.touchAction = 'auto';
+        
+        // Remove any event blockers
+        document.addEventListener('touchmove', function(e) {
+          // Don't block touchmove events
+        }, { passive: true });
+        
+        // Fix for any invisible elements blocking events
+        setInterval(function() {
+          document.querySelectorAll('*').forEach(function(el) {
+            const style = window.getComputedStyle(el);
+            // Check for elements that might be blocking events
+            if (style.position === 'fixed' && style.zIndex === '9999' && style.touchAction === 'none') {
+              el.style.touchAction = 'auto';
+            }
+          });
+        }, 1000);
+      });
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
+    <meta name="theme-color" content="#E53935" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Rashmi Metaliks - World's 2nd Largest DI Pipe Manufacturer | Premium Steel Products</title>
+    <meta name="description" content="Rashmi Metaliks - World's 2nd largest DI pipe manufacturer with 770,000 MT annual capacity. Leading producer of high-quality steel products including DI Pipes, TMT Bars, Pig Iron, and more." />
+    <meta name="author" content="Rashmi Metaliks" />
+    <meta property="og:image" content="/og-image.png" />
+    <link rel="canonical" href="https://www.rashmimetaliks.com" />
+    <meta name="robots" content="index, follow" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="alternate" type="application/rss+xml" title="Rashmi Metaliks News" href="https://www.rashmimetaliks.com/rss.xml" />
+    <meta name="keywords" content="Rashmi Metaliks, World's 2nd largest DI pipe manufacturer, 770000 MT capacity, Steel Products, DI Pipes, TMT Bars, Global Steel Leader" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    
+    <!-- Font preload links removed as fonts are missing -->
+    
+    <!-- Fix for iframe scroll issues -->
+    <!-- Removed inline style block for mobile menu fixes as they are handled in CSS/TSX -->
+    
+    <script>
+      // Fix iframe scroll issues
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set correct viewport meta tag
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        if (viewportMeta) {
+          viewportMeta.setAttribute(
+            'content',
+            'width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes'
+          );
+        }
+      
+        // Find all iframes and add event listeners to prevent scroll capture
+        const iframes = document.querySelectorAll('iframe');
+        iframes.forEach(iframe => {
+          iframe.addEventListener('mouseenter', function() {
+            document.body.style.overflow = 'auto';
+          });
+          
+          iframe.addEventListener('mouseleave', function() {
+            document.body.style.overflow = 'auto';
+          });
+        });
+        
+        // Apply mobile fix only for mobile devices
+        const applyMobileFixes = () => {
+          if (window.innerWidth <= 768) {
+            // Mobile-specific fixes
+            document.documentElement.classList.add('mobile');
+            
+            // Don't force overflow auto as it may conflict with mobile menu handling
+            // Let the menu handle overflow itself
+            
+            // Add failsafe for navigation links
+            setTimeout(function() {
+              document.querySelectorAll('a[href], button').forEach(function(el) {
+                if (!el.getAttribute('data-touch-fixed')) {
+                  el.setAttribute('data-touch-fixed', 'true');
+                  el.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                  }, { passive: true });
+                  
+                  // For links, ensure they navigate properly
+                  if (el.tagName === 'A' && el.getAttribute('href') && !el.getAttribute('href').startsWith('#') && !el.getAttribute('target')) {
+                    el.addEventListener('click', function(e) {
+                      const href = this.getAttribute('href');
+                      if (href) {
+                        e.preventDefault();
+                        window.location.href = href;
+                      }
+                    });
+                  }
+                }
+              });
+            }, 1000);
+          } else {
+            document.documentElement.classList.remove('mobile');
+          }
+        };
+        
+        // Apply fixes on load and resize
+        applyMobileFixes();
+        window.addEventListener('resize', applyMobileFixes);
+      });
+    </script>
+    <script>
+      // Global fix for mobile navigation
+      (function() {
+        // Add direct navigation for mobile
+        const fixMobileNavigation = function() {
+          // Fix touch events for all elements
+          document.addEventListener('touchstart', function() {}, {passive: true});
+          
+          // Add a global click handler for links
+          document.addEventListener('click', function(e) {
+            // Check if it's a link
+            if (e.target && e.target.tagName === 'A') {
+              const link = e.target;
+              const href = link.getAttribute('href');
+              
+              // Only handle internal links
+              if (href && !href.startsWith('http') && !href.startsWith('#') && !link.getAttribute('target') && window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                window.location.href = href;
+              }
+            }
+          }, true); // Use capture to ensure it runs first
+        };
+        
+        // Run immediately
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', fixMobileNavigation);
+        } else {
+          fixMobileNavigation();
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Detect page freezes and reload if necessary -->
+    <script>
+      (function() {
+        if (window.innerWidth <= 768) {
+          // Check if the page is responsive
+          let lastResponseTime = Date.now();
+          let checkInterval;
+          
+          function checkResponse() {
+            const now = Date.now();
+            if (now - lastResponseTime > 5000) {
+              // Page hasn't responded for 5 seconds, reload
+              console.log('Page freeze detected, reloading...');
+              window.location.reload();
+            }
+            lastResponseTime = now;
+          }
+          
+          // Set up periodic check
+          checkInterval = setInterval(checkResponse, 2000);
+          
+          // Update last response time when user interacts
+          ['touchstart', 'click', 'scroll', 'keydown'].forEach(function(event) {
+            document.addEventListener(event, function() {
+              lastResponseTime = Date.now();
+            }, { passive: true });
+          });
+          
+          // Clean up after 2 minutes
+          setTimeout(function() {
+            clearInterval(checkInterval);
+          }, 120000);
+        }
+      })();
+    </script>
+    
+    <!-- Emergency fix script -->
+    <script>
+      // Run emergency fix immediately
+      (function() {
+        // Fix any touch action issues
+        document.body.style.touchAction = 'auto';
+        document.documentElement.style.touchAction = 'auto';
+        
+        // Ensure scrolling works - Commenting out as it conflicts with mobile menu scroll lock
+        // document.body.style.overflow = 'auto';
+        // document.documentElement.style.overflow = 'auto';
+        
+        // Check for complete page freeze
+        let mobileFixInterval = setInterval(function() {
+          // Remove any elements that might be blocking events
+          const possibleBlockers = document.querySelectorAll('div[style*="position: fixed"]');
+          possibleBlockers.forEach(function(el) {
+            const computedStyle = window.getComputedStyle(el);
+            if (computedStyle.zIndex === '9999' && computedStyle.touchAction === 'none') {
+              el.style.touchAction = 'auto';
+              el.style.pointerEvents = 'auto';
+              console.log('Fixed a blocking element', el);
+            }
+          });
+          
+          // Ensure all links are clickable
+          document.querySelectorAll('a[href]').forEach(function(link) {
+            link.style.pointerEvents = 'auto';
+            link.style.cursor = 'pointer';
+            
+            // Remove any event listeners and add a direct one
+            if (!link.hasAttribute('data-emergency-fixed')) {
+              link.setAttribute('data-emergency-fixed', 'true');
+              
+              // Clone and replace to remove all event listeners
+              const newLink = link.cloneNode(true);
+              if (link.parentNode) {
+                link.parentNode.replaceChild(newLink, link);
+              }
+              
+              // Add a direct click handler
+              newLink.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('#')) {
+                  e.preventDefault();
+                  window.location.href = href;
+                }
+              });
+            }
+          });
+        }, 1000);
+        
+        // Stop checking after 30 seconds
+        setTimeout(function() {
+          clearInterval(mobileFixInterval);
+        }, 30000);
+      })();
+    </script>
+  </body>
+</html>

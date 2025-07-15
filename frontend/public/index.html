@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rashmi Metaliks</title>
+  
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="/fonts/manrope-v14-latin-regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/manrope-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  
+  <!-- Fix for iframe scroll issues -->
+  <style>
+    html, body {
+      height: 100%;
+      overflow-y: auto !important;
+      position: relative;
+    }
+    
+    iframe {
+      pointer-events: auto;
+    }
+    
+    /* Ensure map containers don't block scrolling */
+    .iframe-container {
+      position: relative;
+      overflow: hidden;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    }
+    
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+  
+  <script>
+    // Fix iframe scroll issues
+    document.addEventListener('DOMContentLoaded', function() {
+      // Ensure body is scrollable
+      document.body.style.overflowY = 'auto';
+      
+      // Find all iframes and add event listeners to prevent scroll capture
+      const iframes = document.querySelectorAll('iframe');
+      iframes.forEach(iframe => {
+        iframe.addEventListener('mouseenter', function() {
+          document.body.style.overflow = 'auto';
+        });
+        
+        iframe.addEventListener('mouseleave', function() {
+          document.body.style.overflow = 'auto';
+        });
+      });
+    });
+    
+    // Control scroll restoration behavior
+    if ('scrollRestoration' in history) {
+      // Set to manual to prevent automatic scroll position restoration
+      history.scrollRestoration = 'manual';
+    }
+    
+    // Ensure scroll position resets on page load
+    window.addEventListener('beforeunload', function() {
+      window.scrollTo(0, 0);
+    });
+    
+    // Also handle page loads
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+    });
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html> 
