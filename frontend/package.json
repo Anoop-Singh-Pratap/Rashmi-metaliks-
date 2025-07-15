@@ -98,6 +98,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@rollup/plugin-wasm": "^6.2.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
