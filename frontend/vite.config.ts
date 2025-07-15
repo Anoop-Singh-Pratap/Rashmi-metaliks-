@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import wasm from "@rollup/plugin-wasm";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -45,13 +46,28 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
+      // force _external_ .wasm (never inline)
+      wasm({
+        // maxFileSize=0 means "always emit as separate asset"
+        maxFileSize: 0
+      }),
       mode === 'development' &&
       componentTagger(),
     ].filter(Boolean),
+    // make sure Vite knows to treat .wasm as asset files
+    assetsInclude: ['**/*.wasm'],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          // name them nicely
+          assetFileNames: '[name][extname]'
+        }
+      }
+    }
   };
 });
