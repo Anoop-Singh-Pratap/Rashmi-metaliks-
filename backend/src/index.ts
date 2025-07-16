@@ -79,6 +79,10 @@ console.log('CORS_ORIGIN:', process.env.CORS_ORIGIN || 'http://localhost:8080 (d
 const app = express();
 const port = parseInt(process.env.PORT || '3001', 10);
 
+// Enable 'trust proxy' to correctly handle secure cookies and redirects
+// behind a reverse proxy like the one we've configured in .htaccess.
+app.set('trust proxy', 1);
+
 // Enhanced Security Headers
 app.use(helmet({
   contentSecurityPolicy: {
@@ -133,6 +137,7 @@ const strictLimiter = rateLimit({
 // Force HTTPS in production
 if (process.env.NODE_ENV === 'production') {
   app.use((req, res, next) => {
+    // We trust the x-forwarded-proto header because 'trust proxy' is enabled.
     if (req.header('x-forwarded-proto') !== 'https') {
       res.redirect(`https://${req.header('host')}${req.url}`);
     } else {

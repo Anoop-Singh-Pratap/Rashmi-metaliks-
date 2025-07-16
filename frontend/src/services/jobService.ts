@@ -1,3 +1,5 @@
+import { getApiUrl, API_CONFIG } from '../config/api';
+
 export interface JobListing {
   id: string;
   title: string;
@@ -19,7 +21,7 @@ export interface JobListing {
  */
 export const fetchJobListings = async (): Promise<JobListing[]> => {
   try {
-    const response = await fetch('/api/jobs');
+    const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.JOBS));
     
     if (!response.ok) {
       console.error('Error fetching job listings:', response.statusText);
@@ -96,7 +98,7 @@ const getFallbackJobListings = (): JobListing[] => {
  */
 export const fetchJobById = async (id: string): Promise<JobListing | null> => {
   try {
-    const response = await fetch(`/api/jobs/${id}`);
+    const response = await fetch(getApiUrl(`${API_CONFIG.ENDPOINTS.JOBS}/${id}`));
     
     if (!response.ok) {
       console.error('Error fetching job listing:', response.statusText);

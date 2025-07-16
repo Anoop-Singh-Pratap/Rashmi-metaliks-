@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { getApiUrl, API_CONFIG } from '../config/api';
 import SEO from '../components/SEO';
 import { organizationSchema, generateBreadcrumbSchema } from '../lib/schema';
 import { useToast } from '@/hooks/use-toast';
@@ -182,7 +183,7 @@ const ContactUs = () => {
     
     try {
       // Attempt to submit the form
-      const response = await fetch('/api/contact', {
+      const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.CONTACT), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, ChangeEvent, DragEvent, FormEv
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence, useAnimation, Variants } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { getApiUrl, API_CONFIG } from '../config/api';
 import {
   Upload, Check, FileText, Building, User, Phone, Mail, Briefcase, CheckCircle, Globe, X, AlertCircle, Loader2, ChevronRight, ArrowRight, TrendingUp, Handshake, ShieldCheck, Award, Plus
 } from 'lucide-react'; // Added more icons for variety
@@ -406,7 +407,7 @@ const VendorRegistration = () => {
       }
 
       // Send data to backend
-      const response = await fetch('/api/vendors', {
+      const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.VENDORS), {
         method: 'POST',
         body: formData,
       });

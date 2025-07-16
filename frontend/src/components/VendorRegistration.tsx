@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, ChangeEvent, DragEvent, FormEvent } from 'react';
+import { getApiUrl, API_CONFIG } from '../config/api';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence, useAnimation, Variants } from 'framer-motion';
 import {
@@ -396,7 +397,7 @@ const VendorRegistration = () => {
       }
 
       // Send data to backend
-      const response = await fetch('/api/vendors', {
+      const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.VENDORS), {
         method: 'POST',
         body: formData,
       });

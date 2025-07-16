@@ -57,7 +57,7 @@ export async function generateSitemap() {
           .replace(/\/index$/i, ''); // Handle both index.tsx and Index.tsx
         
         // Format route properly
-        const formattedRoute = route === '' ? '' : route.replace(/([A-Z])/g, (match) => `-${match.toLowerCase()}`).toLowerCase();
+        const formattedRoute = route === '' ? '' : route.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
         // Set priority based on route depth
         let priority = '0.7';

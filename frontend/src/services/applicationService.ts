@@ -1,4 +1,5 @@
 import { uploadFile } from '../lib/supabase';
+import { getApiUrl, API_CONFIG } from '../config/api';
 
 export interface ApplicationData {
   firstName: string;
@@ -42,7 +43,7 @@ export const submitApplication = async (data: ApplicationData, resumeFile: File 
     }
     
     // Submit application data to the backend API
-    const response = await fetch('/api/applications', {
+    const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.APPLICATIONS), {
       method: 'POST',
       body: formData,
       // Add timeout to prevent hanging requests

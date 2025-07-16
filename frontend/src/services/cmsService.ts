@@ -6,6 +6,7 @@
  */
 
 import { toast } from '@/hooks/use-toast';
+import { getCmsUrl, getApiUrl, API_CONFIG } from '../config/api';
 
 // Add type declaration for the window.ENV property
 declare global {
@@ -17,7 +18,7 @@ declare global {
 }
 
 // Constants - use the environment variables properly
-const API_URL = import.meta.env.VITE_REACT_APP_CMS_API_URL || 'http://localhost:1337';
+const API_URL = API_CONFIG.CMS_URL;
 console.log('Using CMS API URL:', API_URL);
 
 /**
@@ -486,7 +487,7 @@ export async function updateNews(id: number, data: {
     }
     
     // Call the backend API
-    const response = await fetch(`/api/news/${id}`, {
+    const response = await fetch(getApiUrl(`${API_CONFIG.ENDPOINTS.NEWS}/${id}`), {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -540,7 +541,7 @@ export async function createNews(data: {
     }
     
     // Call the backend API
-    const response = await fetch('/api/news', {
+    const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.NEWS), {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${authToken}`
