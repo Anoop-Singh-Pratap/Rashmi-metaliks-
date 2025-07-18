@@ -108,15 +108,12 @@ const Hero = () => {
             specializing in high-quality integrated Iron & Steel Products with a focus on innovation and technology.
           </p>
           <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: '1.2s' }}>
-            <Link 
-              to="/products"
+            <button 
+              onClick={handleScrollDown}
               className="bg-rashmi-red hover:bg-rashmi-red/90 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-block text-center"
-              onClick={() => {
-                console.log('🔍 HERO BUTTON: Explore Products clicked');
-              }}
             >
-              Explore Products
-            </Link>
+              Dive In
+            </button>
             <Link 
               to="/about-rashmi"
               className="border-2 border-white text-white hover:bg-white hover:text-rashmi-dark px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-block text-center"

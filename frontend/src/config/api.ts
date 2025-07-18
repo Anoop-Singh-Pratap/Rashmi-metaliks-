@@ -3,9 +3,9 @@
 
 // Get the API base URL from environment variables
 const getApiBaseUrl = () => {
-  // In production, use relative paths to leverage Apache reverse proxy
+  // In production, use the direct, secure backend URL.
   if (import.meta.env.PROD) {
-    return '';
+    return 'http://111.118.189.60:3001';
   }
   
   // In development, use localhost

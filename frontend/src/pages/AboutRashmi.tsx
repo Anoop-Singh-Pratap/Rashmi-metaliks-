@@ -1521,7 +1521,7 @@ const AboutRashmi = () => {
                 { name: "Larsen & Toubro", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/logo/qakagnnhzabsa6cqigtt" },
                 { name: "UP jal nigam", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/logo/lnfhkijyh69seoiq3ydk" },
                 { name: "SCL Infratech", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/logo/tpaalsh4sq579houtpyp" },
-                { name: "ZMC Project", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/logo/ythfuoh51fizx1ag7wgb" },
+                { name: "Kalpataru Group", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/v1752836207/kalpataru_limited_logo_b5qmnt.jpg" },
                 { name: "WPL", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/logo/uaecaacuyg0xmvtsfror" },
                 { name: "New Delhi Municipal Corporation", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/logo/fj3df7oqoj3rtyvwubjf" },
                 { name: "RIICO", logo: "https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/logo/qvlmznwoqjfyjv6clahk" },

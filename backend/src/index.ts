@@ -107,7 +107,10 @@ app.use(helmet({
   referrerPolicy: { policy: "strict-origin-when-cross-origin" }
 }));
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:8080',
+  origin: [
+    process.env.CORS_ORIGIN || 'http://localhost:8080',
+    'https://rashmimetaliks.com'
+  ],
   credentials: true
 }));
 
@@ -134,10 +137,11 @@ const strictLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// Force HTTPS in production
+// The force HTTPS redirect is no longer needed, as we are handling this at the server level (e.g., cPanel).
+// This was likely contributing to the redirect loop.
+/*
 if (process.env.NODE_ENV === 'production') {
   app.use((req, res, next) => {
-    // We trust the x-forwarded-proto header because 'trust proxy' is enabled.
     if (req.header('x-forwarded-proto') !== 'https') {
       res.redirect(`https://${req.header('host')}${req.url}`);
     } else {
@@ -145,6 +149,7 @@ if (process.env.NODE_ENV === 'production') {
     }
   });
 }
+*/
 
 app.use(generalLimiter);
 app.use(securityMiddleware); // Additional security headers

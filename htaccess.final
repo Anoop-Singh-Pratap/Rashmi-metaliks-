@@ -1,0 +1,21 @@
+# ==============================================================================
+# Apache Server Configuration for React App
+# ==============================================================================
+# This file ensures that all navigation is handled by the React Router.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # If the requested file or directory doesn't exist, serve the index.html file.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# cPanel PHP Handler (Do not edit)
+# ------------------------------------------------------------------------------
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php81 .php .php8 .phtml
+</IfModule> 
