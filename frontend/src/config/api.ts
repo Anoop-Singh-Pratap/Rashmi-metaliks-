@@ -3,23 +3,17 @@
 
 // Get the API base URL from environment variables
 const getApiBaseUrl = () => {
-  // In production, use a relative path to avoid mixed-content errors
+  // In production, use relative paths to leverage Apache reverse proxy
   if (import.meta.env.PROD) {
     return '';
   }
   
-  // In development, use localhost with the backend port
+  // In development, use localhost
   return 'http://localhost:3001';
 };
 
 // Get the CMS API URL from environment variables
 const getCmsApiUrl = () => {
-  // In production, use the live CMS domain.
-  if (import.meta.env.PROD) {
-    return 'https://cms.rashmigroup.com';
-  }
-  
-  // For local development, use the default Strapi port from environment variables or fallback.
   return import.meta.env.VITE_REACT_APP_CMS_API_URL || 'http://localhost:1337';
 };
 

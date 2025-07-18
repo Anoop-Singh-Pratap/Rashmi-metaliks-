@@ -87,11 +87,19 @@ const ProductViewer: React.FC<ProductViewerProps> = ({
     };
     
     const handleTouchMove = (event: TouchEvent) => {
-      if (event.touches.length > 0) {
-        mouseX = (event.touches[0].clientX - windowHalfX) / 50; // More sensitive for touch
-        mouseY = (event.touches[0].clientY - windowHalfY) / 50;
-        targetRotation = mouseX * 0.5;
-        event.preventDefault(); // Prevent scrolling while touching the component
+      // Only handle touch events if they're within the component bounds
+      if (event.touches.length > 0 && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const touch = event.touches[0];
+        
+        // Check if touch is within component bounds
+        if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+            touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+          mouseX = (touch.clientX - windowHalfX) / 50; // More sensitive for touch
+          mouseY = (touch.clientY - windowHalfY) / 50;
+          targetRotation = mouseX * 0.5;
+          event.preventDefault(); // Only prevent scrolling when touching the component
+        }
       }
     };
     
@@ -114,6 +122,7 @@ const ProductViewer: React.FC<ProductViewerProps> = ({
     };
     
     window.addEventListener('mousemove', handleMouseMove);
+    // Use passive: false only when necessary and add bounds checking
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('resize', handleResize);
     animate();

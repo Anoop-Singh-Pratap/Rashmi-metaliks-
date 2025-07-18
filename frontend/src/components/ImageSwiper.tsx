@@ -71,7 +71,7 @@ const defaultSlides: Slide[] = [
 ];
 
 const ImageSwiper: React.FC<ImageSwiperProps> = ({ slides }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [realIndex, setRealIndex] = useState(0);
   const usedSlides = slides && slides.length > 0 ? slides : defaultSlides;
 
   return (
@@ -93,7 +93,7 @@ const ImageSwiper: React.FC<ImageSwiperProps> = ({ slides }) => {
         navigation={true}
         modules={[EffectCoverflow, Pagination, Navigation]}
         className="mySwiper"
-        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        onSlideChange={(swiper) => setRealIndex(swiper.realIndex)}
       >
         {usedSlides.map((slide, index) => (
           <SwiperSlide key={index}>
@@ -110,7 +110,7 @@ const ImageSwiper: React.FC<ImageSwiperProps> = ({ slides }) => {
       <div className="mt-10 max-w-3xl mx-auto relative h-28">
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeIndex}
+            key={realIndex}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -131,7 +131,7 @@ const ImageSwiper: React.FC<ImageSwiperProps> = ({ slides }) => {
             />
             {/* Title with staggered reveal effect */}
             <h3 className="text-2xl font-bold text-foreground mb-3 font-display relative inline-block">
-              {usedSlides[activeIndex]?.title}
+              {usedSlides[realIndex]?.title}
               <motion.div 
                 className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-rashmi-red/0 via-rashmi-red to-rashmi-red/0"
                 initial={{ scaleX: 0 }}
@@ -146,7 +146,7 @@ const ImageSwiper: React.FC<ImageSwiperProps> = ({ slides }) => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.2 }}
             >
-              {usedSlides[activeIndex]?.description}
+              {usedSlides[realIndex]?.description}
             </motion.p>
             {/* Initiative number indicator */}
             <motion.div 
@@ -155,7 +155,7 @@ const ImageSwiper: React.FC<ImageSwiperProps> = ({ slides }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, delay: 0.25 }}
             >
-              0{activeIndex + 1}/0{usedSlides.length}
+              0{realIndex + 1}/0{usedSlides.length}
             </motion.div>
           </motion.div>
         </AnimatePresence>

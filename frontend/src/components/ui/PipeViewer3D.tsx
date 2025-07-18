@@ -345,7 +345,6 @@ const PipeViewer3D: React.FC = () => {
       <div
         ref={mountRef}
         className={`w-full h-full transition-opacity duration-500 ${isLoading || error ? 'opacity-0' : 'opacity-100'}`} // Hide canvas on error too
-        style={{ touchAction: 'none' }} // Prevent page scroll on touch devices
       />
     </div>
   );

@@ -1,0 +1,64 @@
+# ==============================================================================
+# Apache Server Configuration for React/Node.js App
+# ==============================================================================
+
+# Enable the rewrite engine
+RewriteEngine On
+
+# Set the base path for rewrite rules
+RewriteBase /
+
+# ------------------------------------------------------------------------------
+# Rule 1: Reverse Proxy for API requests
+# ------------------------------------------------------------------------------
+# This rule forwards any request starting with /api/ to the backend Node.js
+# server running on port 3001. Using ProxyPass instead of RewriteRule for better
+# handling of HTTP/HTTPS mixed content issues.
+
+# Enable proxy modules
+<IfModule mod_proxy.c>
+    <IfModule mod_proxy_http.c>
+        ProxyRequests Off
+        ProxyPreserveHost On
+        
+        # Proxy API requests to backend
+        ProxyPass /api/ http://localhost:3001/api/
+        ProxyPassReverse /api/ http://localhost:3001/api/
+        
+        # Handle WebSocket connections if needed
+        ProxyPass /ws/ ws://localhost:3001/ws/
+        ProxyPassReverse /ws/ ws://localhost:3001/ws/
+    </IfModule>
+</IfModule>
+
+# Fallback using RewriteRule if mod_proxy is not available
+<IfModule !mod_proxy.c>
+    # Use RewriteRule with [P] flag as fallback
+    RewriteRule ^api/(.*)$ http://localhost:3001/api/$1 [P,L]
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# Rule 2: Frontend Routing for React App (Single Page Application)
+# ------------------------------------------------------------------------------
+# This rule handles client-side routing. If a requested file or directory
+# does not exist on the server, it serves the main index.html file,
+# allowing React Router to handle the URL.
+
+# Do not apply the rule for the index.html file itself
+RewriteRule ^index\.html$ - [L]
+
+# If the requested file doesn't exist...
+RewriteCond %{REQUEST_FILENAME} !-f
+# ...and the requested directory doesn't exist...
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...and it's not an API request...
+RewriteCond %{REQUEST_URI} !^/api/
+# ...then rewrite the request to /index.html
+RewriteRule . /index.html [L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the "ea-php81" package as the default "PHP" programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php81 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit 

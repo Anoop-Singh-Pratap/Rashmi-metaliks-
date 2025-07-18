@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { motion, useScroll, useTransform, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowDown, Check, Ruler, Pipette, Waves, ShieldCheck, ChevronDown, BookOpen, ArrowRight, MapPin, Award, Users, Settings, AlertCircle, Info } from 'lucide-react';
 import Header from '../components/Header';
@@ -342,21 +342,7 @@ const DiPipes = () => {
   const isHeroInView = useInView(heroRef);
   const isStatsInView = useInView(statsRef);
   const heroControls = useAnimation();
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-  
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [0.95, 1]);
-  
-  // Parallax effects from index.html
-  const heroImageY = useTransform(scrollYProgress, [0, 0.5], [0, 200]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.7]);
-  const textY = useTransform(scrollYProgress, [0, 0.2], [0, -30]);
-  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
-  
+
   const pipeFeatures = [
     {
       title: "High Strength",
@@ -486,8 +472,11 @@ const DiPipes = () => {
   // Combined schema array for SEO component
   const schemas = [diPipesSchema, faqSchema, breadcrumbSchema];
 
+
+
   return (
-    <div ref={containerRef} className={`min-h-screen bg-background text-foreground relative transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+    <div ref={containerRef} className="min-h-screen bg-background text-foreground">
+      <div className={`relative transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       {/* Render the styles component here */}
       <DiPipesStyles />
 
@@ -508,44 +497,35 @@ const DiPipes = () => {
       <section 
         id="overview" 
         ref={heroRef}
-        className="relative pt-32 md:pt-40 pb-24 md:pb-32 min-h-[100vh] w-full flex items-center overflow-hidden perspective-container"
+        className="relative pt-32 md:pt-40 pb-24 md:pb-32 min-h-[100vh] w-full flex items-center perspective-container"
         style={{ 
           position: 'relative',
           height: 'calc(100vh - 80px)' // Subtract header height
         }}
       >
+        <div className="absolute inset-0 overflow-hidden">
         {/* Background pattern overlay */}
-        <div className="absolute inset-0 z-0 opacity-10 w-full h-full">
+        <div className="absolute inset-0 z-0 opacity-10 w-full h-full bg-overlay">
           <div className="absolute inset-0 bg-grid-pattern w-full h-full"></div>
         </div>
         
         {/* Background gradient shapes */}
-        <div className="absolute -top-96 -right-96 w-[100vw] h-[100vh] rounded-full bg-rashmi-red/3 blur-3xl geometric-pattern opacity-50"></div>
-        <div className="absolute -bottom-96 -left-96 w-[100vw] h-[100vh] rounded-full bg-rashmi-red/3 blur-3xl geometric-pattern opacity-50"></div>
+        <div className="absolute -top-96 -right-96 w-[100vw] h-[100vh] rounded-full bg-rashmi-red/3 blur-3xl geometric-pattern opacity-50 bg-overlay"></div>
+        <div className="absolute -bottom-96 -left-96 w-[100vw] h-[100vh] rounded-full bg-rashmi-red/3 blur-3xl geometric-pattern opacity-50 bg-overlay"></div>
         
         {/* Background with parallax */}
         <motion.div 
-          className="absolute inset-0 z-0 w-full h-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-rashmi-dark/20 via-rashmi-dark/10 to-background w-full h-full"></div>
-          
-          {/* Parallax background */}
-          <motion.div
-            className="absolute inset-0 opacity-20 w-full h-full"
-            style={{ 
-              y: heroImageY,
-              filter: "brightness(0.8) saturate(1.2)"
-            }}
-          >
-            <div className="absolute inset-0 geometric-pattern w-full h-full"></div>
-          </motion.div>
-          
-          {/* Subtle grid overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(229,57,53,0.05)_1px,transparent_1px),linear-gradient(to_right,rgba(229,57,53,0.05)_1px,transparent_1px)] bg-[size:50px_50px] dark:bg-[linear-gradient(rgba(229,57,53,0.1)_1px,transparent_1px),linear-gradient(to_right,rgba(229,57,53,0.1)_1px,transparent_1px)] w-full h-full"></div>
-        </motion.div>
+          className="absolute inset-0 z-0 w-full h-full bg-overlay parallax-background"
+          style={{
+            background: 'radial-gradient(circle at 30% 70%, rgba(229, 57, 53, 0.1) 0%, transparent 50%)',
+          }}
+        />
+        
+        {/* Grid overlay */}
+        <div className="absolute inset-0 z-0 opacity-5 w-full h-full bg-overlay">
+          <div className="absolute inset-0 bg-grid-pattern w-full h-full"></div>
+        </div>
+        </div>
 
         <div className="container mx-auto px-4 relative z-10 w-full">
           <motion.div 
@@ -553,7 +533,6 @@ const DiPipes = () => {
             animate={heroControls}
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
-            style={{ y: textY }}
           >
             {/* Category label with improved animation */}
             <motion.div 
@@ -699,7 +678,6 @@ const DiPipes = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          style={{ opacity: scrollIndicatorOpacity }}
           onClick={() => scrollToSection('features')}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
@@ -1462,6 +1440,7 @@ const DiPipes = () => {
       <div style={{ position: 'relative', zIndex: 100 }}>
         <Footer />
       </div>
+    </div>
     </div>
   );
 };

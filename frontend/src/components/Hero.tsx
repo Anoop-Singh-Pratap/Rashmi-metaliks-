@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RevealText from './ui/RevealText';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   // Parallel video playback when in view
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,21 +43,32 @@ const Hero = () => {
     }
   };
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <div ref={containerRef} className="relative w-full h-screen">
+    <section className="hero-section relative w-full h-screen">
       {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full bg-overlay video-background overflow-hidden">
         {/* Subtle gradient for text readability without darkening the video too much */}
-        <div className="absolute inset-0 bg-gradient-to-b from-rashmi-dark/30 to-transparent z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-rashmi-dark/30 to-transparent z-10 gradient-overlay"></div>
         
         {/* Video element with updated source and styling */}
         <video
           ref={videoRef}
-          className="w-full h-full object-cover scale-105 transform-gpu" // Scale slightly to avoid white edges during animation
+          className="w-full h-full object-cover scale-105 transform-gpu video-background" // Scale slightly to avoid white edges during animation
           muted
           loop
           playsInline
           poster="https://images.unsplash.com/photo-1618761299062-ba2dbbcebd92?ixlib=rb-4.0.3&auto=format&fit=crop&q=80"
+          onLoadedData={() => {
+            console.log('🔍 HERO VIDEO: Video loaded');
+            setVideoLoaded(true);
+          }}
+          onError={() => {
+            console.log('🔍 HERO VIDEO: Video error');
+            setVideoError(true);
+          }}
           style={{
             filter: "brightness(1.1) contrast(1.05)",
             transition: "transform 15s ease-in-out",
@@ -94,20 +109,22 @@ const Hero = () => {
           </p>
           <div className="flex flex-wrap gap-4 animate-fade-in" style={{ animationDelay: '1.2s' }}>
             <Link 
-              to="/#products"
-              className="bg-rashmi-red text-white px-6 py-3 rounded-md hover:bg-rashmi-red/90 transition-colors 
-                      shadow-lg hover:shadow-rashmi-red/20 flex items-center group"
+              to="/products"
+              className="bg-rashmi-red hover:bg-rashmi-red/90 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-block text-center"
+              onClick={() => {
+                console.log('🔍 HERO BUTTON: Explore Products clicked');
+              }}
             >
-              <span>Explore Products</span>
-              <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={18} />
+              Explore Products
             </Link>
-            
-            <Link
+            <Link 
               to="/about-rashmi"
-              className="bg-transparent border border-white/30 text-white px-6 py-3 rounded-md 
-                      hover:bg-white/10 transition-all"
+              className="border-2 border-white text-white hover:bg-white hover:text-rashmi-dark px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-block text-center"
+              onClick={() => {
+                console.log('🔍 HERO BUTTON: Learn More clicked');
+              }}
             >
-              Our Journey
+              Learn More
             </Link>
           </div>
         </div>
@@ -116,7 +133,6 @@ const Hero = () => {
       {/* Scroll Down Indicator */}
       <div 
         ref={scrollRef}
-        onClick={handleScrollDown}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-white flex flex-col items-center 
                  cursor-pointer animate-float"
       >
@@ -126,6 +142,7 @@ const Hero = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 

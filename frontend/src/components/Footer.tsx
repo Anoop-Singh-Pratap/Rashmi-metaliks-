@@ -119,15 +119,6 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a 
-                  href="/"
-                  onClick={scrollToSection('products')}
-                  className="text-gray-300 hover:text-rashmi-red transition-colors flex items-center"
-                >
-                  <ArrowRight size={16} className="mr-2" /> Our Products
-                </a>
-              </li>
-              <li>
                 <Link to="/media" className="text-gray-300 hover:text-rashmi-red transition-colors flex items-center">
                   <ArrowRight size={16} className="mr-2" /> Media & News
                 </Link>
@@ -205,8 +196,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 text-rashmi-red" />
-                <a href="mailto:info@rashmi.com" className="text-gray-300 hover:text-rashmi-red transition-colors">
-                  info@rashmi.com
+                <a href="mailto:info@rashmigroup.com" className="text-gray-300 hover:text-rashmi-red transition-colors">
+                  info@rashmigroup.com
                 </a>
               </li>
             </ul>

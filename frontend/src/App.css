@@ -98,46 +98,89 @@ header > div:first-child {
 
 /* Animation Keyframes */
 @keyframes slowZoom {
-  0% { transform: scale(1.05); }
-  100% { transform: scale(1.15); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%, 100% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-  opacity: 0; /* Start hidden */
+  animation: fadeIn 0.6s ease-out;
 }
 
-.animate-float {
-  animation: float 2.5s ease-in-out infinite;
+/* Add a specific override for the hero section to ensure scrolling is enabled */
+.hero-section {
+  touch-action: auto !important;
 }
 
-/* Mobile optimizations */
+/* CRITICAL MOBILE SCROLLING FIX - Apply to all screen sizes */
+html, body {
+  overflow-x: hidden !important; /* Prevent horizontal scroll */
+  overflow-y: auto !important; /* Ensure vertical scrolling works */
+  touch-action: auto !important; /* Allow all default touch behaviors */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* CRITICAL: Only apply touch-action: none to actual background overlay classes */
+.bg-overlay, 
+.video-background, 
+.parallax-background,
+.gradient-overlay {
+  pointer-events: none !important;
+  touch-action: none !important;
+}
+
+/* IMPORTANT: Allow touch scrolling on pattern elements by making them more specific */
+.geometric-pattern:not(.interactive),
+.bg-grid-pattern:not(.interactive) {
+  pointer-events: none !important;
+  /* Remove touch-action: none to allow scrolling */
+}
+
+/* IMPORTANT: Ensure content areas can scroll */
+main, 
+section, 
+article, 
+.container,
+div:not(.bg-overlay):not(.video-background):not(.parallax-background):not(.gradient-overlay) {
+  touch-action: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* CRITICAL: Ensure scroll containers work on mobile */
+.min-h-screen,
+.min-h-\[100vh\] {
+  touch-action: auto !important;
+  overflow-y: auto !important;
+}
+
+/* Interactive elements should support touch manipulation */
+button, a, [role="button"], [onclick], input, select, textarea {
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: rgba(0,0,0,0.2) !important;
+  cursor: pointer !important;
+}
+
+/* Mobile-specific styles */
 @media (max-width: 768px) {
-  body {
-    overflow-x: hidden;
-    position: relative;
-    /* Ensure proper touch behavior - critical for mobile */
-    touch-action: auto !important;
-    -webkit-overflow-scrolling: touch;
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove tap highlight */
-  }
-  
   /* Mobile menu optimizations - ONLY apply when menu is open */
   html.mobile-menu-open,
   body.mobile-menu-open {
-    /* Prevent background scrolling when menu is open - ONLY hide overflow */
+    /* Prevent background scrolling when menu is open */
     overflow: hidden !important;
-    /* Removed position: fixed, height, width, top, left as they caused issues */
   }
   
   /* Mobile menu itself should still allow scrolling */
@@ -151,7 +194,7 @@ header > div:first-child {
   button, a, [role="button"] {
     min-height: 44px;
     min-width: 44px;
-    touch-action: auto !important;
+    touch-action: manipulation !important;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
   
@@ -170,10 +213,9 @@ header > div:first-child {
   /* Allow scrolling on the main content area */
   #root {
     touch-action: auto !important;
-    /* Removed height: auto !important; and overflow: visible !important; */
   }
   
-  /* Better mobile menu appearance - Let Tailwind handle positioning/sizing/z-index */
+  /* Better mobile menu appearance */
   [data-mobile="true"] {
     overscroll-behavior: contain;
     /* Improve hardware acceleration */
@@ -183,8 +225,6 @@ header > div:first-child {
     /* Ensure the menu container is scrollable */
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch;
-    /* Removed max-height, z-index, position, top, left, right, bottom
-       as these are handled by Tailwind classes in Header.tsx */
   }
   
   /* Fix z-index stacking issues */
@@ -194,7 +234,7 @@ header > div:first-child {
   
   /* Fix modal z-index to be above everything */
   .fixed.z-\[400\], .fixed.z-\[10000\] {
-    z-index: 10000 !important; /* Higher than mobile menu */
+    z-index: 10000 !important;
   }
   
   /* Prevent zoom on iOS when clicking on inputs */
@@ -205,25 +245,6 @@ header > div:first-child {
   input[type="search"],
   select {
     font-size: 16px !important;
-  }
-  
-  /* Fix for elements blocking interactions */
-  * {
-    pointer-events: auto !important;
-    touch-action: auto !important;
-  }
-  
-  /* Make sure page scrolls */
-  html, body, #root {
-    /* Removed height: auto !important; */
-    overflow-y: auto !important;
-    /* Removed position: static !important; */
-  }
-  
-  /* Fix possible blocking elements */
-  div, section, main, article {
-    pointer-events: auto !important;
-    touch-action: auto !important;
   }
   
   /* Make buttons and links obviously interactive */
@@ -260,4 +281,20 @@ header > div:first-child {
     -webkit-tap-highlight-color: rgba(0,0,0,0.2) !important;
     cursor: auto !important;
   }
+  
+  /* Ensure content areas can scroll properly */
+  main, section, article, div {
+    touch-action: auto !important;
+  }
+  
+  /* Ensure interactive elements always work */
+  a, button, [role="button"], input, select, textarea, [tabindex]:not([tabindex="-1"]) {
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+}
+
+/* Only disable touch for specific background overlay classes */
+.no-touch-action {
+  touch-action: none !important;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider } from './context/ThemeContext';
@@ -40,6 +40,12 @@ import SustainabilityPage from './pages/SustainabilityPage';
 function App() {
   // Add useEffect to set the viewport meta tag for better mobile handling
   useEffect(() => {
+    // iOS touch fix
+    const isIOS = /iP(hone|ad)/.test(navigator.userAgent);
+    if (isIOS) {
+      document.body.addEventListener('touchstart', () => {}, { passive: true });
+    }
+
     // CRITICAL FIX FOR MOBILE FREEZING
     // Sometimes animations or event handling can freeze the page
     // This ensures the page remains interactive
@@ -77,13 +83,13 @@ function App() {
     if (viewportMeta) {
       viewportMeta.setAttribute(
         'content',
-        'width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=0'
+        'width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes'
       );
     } else {
       // Create it if it doesn't exist
       const meta = document.createElement('meta');
       meta.name = 'viewport';
-      meta.content = 'width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=0';
+      meta.content = 'width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes';
       document.head.appendChild(meta);
     }
     
@@ -99,16 +105,8 @@ function App() {
             e.stopPropagation();
           }, { passive: true });
           
-          // For mobile, directly use window.location.href for internal navigation
-          if (window.innerWidth <= 768) {
-            const href = link.getAttribute('href');
-            if (href && !href.startsWith('http') && !href.startsWith('#') && !link.getAttribute('target')) {
-              link.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.location.href = href;
-              });
-            }
-          }
+          // Remove the aggressive navigation override that breaks React Router
+          // Let React Router handle navigation naturally
         }
       });
       
@@ -123,49 +121,11 @@ function App() {
       });
     };
     
-    // Run diagnostics immediately and periodically
+    // Run diagnostics immediately
     diagnoseTouch();
-    const interval = setInterval(diagnoseTouch, 2000);
-    
-    // Add a fix for video autoplay on mobile
-    const fixVideoAutoplay = () => {
-      // Find all video elements with autoplay attribute
-      const videos = document.querySelectorAll('video[autoplay]');
-      
-      // Force play on all video elements
-      videos.forEach(video => {
-        // Add event listeners to retry play
-        const videoElement = video as HTMLVideoElement;
-        videoElement.addEventListener('loadedmetadata', () => {
-          videoElement.play().catch(error => console.log("Autoplay prevented initially:", error));
-        });
-        
-        // Try to play if already loaded
-        if (videoElement.readyState >= 2) {
-          videoElement.play().catch(error => console.log("Autoplay retry prevented:", error));
-        }
-      });
-    };
-    
-    // Run the video autoplay fix
-    fixVideoAutoplay();
-    
-    // Re-run the video fix when necessary (e.g., after navigation)
-    document.addEventListener('DOMContentLoaded', fixVideoAutoplay);
-    window.addEventListener('load', fixVideoAutoplay);
-    
-    // Periodically check for new videos that might be added dynamically
-    const videoInterval = setInterval(fixVideoAutoplay, 2000);
-    
+
     return () => {
-      clearInterval(interval);
-      // Clean up animation frame
-      if (animationId) {
-        cancelAnimationFrame(animationId);
-      }
-      clearInterval(videoInterval);
-      document.removeEventListener('DOMContentLoaded', fixVideoAutoplay);
-      window.removeEventListener('load', fixVideoAutoplay);
+      animationId && cancelAnimationFrame(animationId);
     };
   }, []);
 

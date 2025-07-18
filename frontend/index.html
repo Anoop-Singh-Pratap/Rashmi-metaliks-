@@ -33,16 +33,8 @@
           // Don't block touchmove events
         }, { passive: true });
         
-        // Fix for any invisible elements blocking events
-        setInterval(function() {
-          document.querySelectorAll('*').forEach(function(el) {
-            const style = window.getComputedStyle(el);
-            // Check for elements that might be blocking events
-            if (style.position === 'fixed' && style.zIndex === '9999' && style.touchAction === 'none') {
-              el.style.touchAction = 'auto';
-            }
-          });
-        }, 1000);
+        // Remove the problematic setInterval - it causes performance issues
+        // and interferes with touch events
       });
     </script>
     <meta charset="UTF-8" />
@@ -210,63 +202,5 @@
       })();
     </script>
     
-    <!-- Emergency fix script -->
-    <script>
-      // Run emergency fix immediately
-      (function() {
-        // Fix any touch action issues
-        document.body.style.touchAction = 'auto';
-        document.documentElement.style.touchAction = 'auto';
-        
-        // Ensure scrolling works - Commenting out as it conflicts with mobile menu scroll lock
-        // document.body.style.overflow = 'auto';
-        // document.documentElement.style.overflow = 'auto';
-        
-        // Check for complete page freeze
-        let mobileFixInterval = setInterval(function() {
-          // Remove any elements that might be blocking events
-          const possibleBlockers = document.querySelectorAll('div[style*="position: fixed"]');
-          possibleBlockers.forEach(function(el) {
-            const computedStyle = window.getComputedStyle(el);
-            if (computedStyle.zIndex === '9999' && computedStyle.touchAction === 'none') {
-              el.style.touchAction = 'auto';
-              el.style.pointerEvents = 'auto';
-              console.log('Fixed a blocking element', el);
-            }
-          });
-          
-          // Ensure all links are clickable
-          document.querySelectorAll('a[href]').forEach(function(link) {
-            link.style.pointerEvents = 'auto';
-            link.style.cursor = 'pointer';
-            
-            // Remove any event listeners and add a direct one
-            if (!link.hasAttribute('data-emergency-fixed')) {
-              link.setAttribute('data-emergency-fixed', 'true');
-              
-              // Clone and replace to remove all event listeners
-              const newLink = link.cloneNode(true);
-              if (link.parentNode) {
-                link.parentNode.replaceChild(newLink, link);
-              }
-              
-              // Add a direct click handler
-              newLink.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href && !href.startsWith('http') && !href.startsWith('#')) {
-                  e.preventDefault();
-                  window.location.href = href;
-                }
-              });
-            }
-          });
-        }, 1000);
-        
-        // Stop checking after 30 seconds
-        setTimeout(function() {
-          clearInterval(mobileFixInterval);
-        }, 30000);
-      })();
-    </script>
   </body>
 </html>

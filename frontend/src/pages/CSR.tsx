@@ -8,7 +8,6 @@ import RevealText from '../components/ui/RevealText';
 import ImageSwiper from '../components/ImageSwiper';
 import '../styles/swiper.css';
 import { Card3D, Glow, FloatingAnimation, Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/AceternityComponents';
-import { getCSRItems } from '../services/cmsService';
 
 // Lazy load heavy components
 const EnhancedWaterUsageChart = lazy(() => import('../components/EnhancedWaterUsageChart'));
@@ -423,8 +422,34 @@ const CSR = () => {
   const [activeTab, setActiveTab] = useState('emissions');
   const [activeMetricsTab, setActiveMetricsTab] = useState('emissions');
   const [activeScrollySection, setActiveScrollySection] = useState(0);
-  const [csrSlides, setCsrSlides] = useState([]);
   
+  // --- BEGIN: Local CSR Images (no backend dependency) ---
+  // Dubgoal High School (4 images)
+  // Khatranga Primary School (7 images)
+  // Khatranga High School (5 images)
+  const allCsrImages = [
+    // Dubgoal High School
+    { image: '/CSR/Dubgoal/Dubgoal 1.jpeg', title: 'Dubgoal High School', description: 'Rashmi remade Dubgoal High School with modern facilities.' },
+    { image: '/CSR/Dubgoal/Dubgoal 2.jpeg', title: 'Dubgoal High School', description: 'A new era for Dubgoal High School students.' },
+    { image: '/CSR/Dubgoal/Dubgoal 3.jpeg', title: 'Dubgoal High School', description: 'Modern classrooms and infrastructure.' },
+    { image: '/CSR/Dubgoal/Dubgoal 4.jpeg', title: 'Dubgoal High School', description: 'Empowering education at Dubgoal.' },
+    // Khatranga Primary School
+    { image: '/CSR/Khatranga /khatranga 1.jpeg', title: 'Khatranga Primary School', description: 'Rashmi developed Khatranga Primary School for young learners.' },
+    { image: '/CSR/Khatranga /khatranga 2.jpeg', title: 'Khatranga Primary School', description: 'Bright spaces for primary education.' },
+    { image: '/CSR/Khatranga /khatranga 3.jpeg', title: 'Khatranga Primary School', description: 'Safe and inspiring school environment.' },
+    { image: '/CSR/Khatranga /khatranga 4.jpeg', title: 'Khatranga Primary School', description: 'Community support for early education.' },
+    { image: '/CSR/Khatranga /khatranga 5.jpeg', title: 'Khatranga Primary School', description: 'Modern amenities for children.' },
+    { image: '/CSR/Khatranga /khatranga 6.jpeg', title: 'Khatranga Primary School', description: 'A new chapter for Khatranga Primary.' },
+    { image: '/CSR/Khatranga /khatranga 7.jpeg', title: 'Khatranga Primary School', description: 'Building the foundation for the future.' },
+    // Khatranga High School
+    { image: '/CSR/Khatranga H/KhatrangaH 1.jpeg', title: 'Khatranga High School', description: 'Rashmi developed Khatranga High School for higher learning.' },
+    { image: '/CSR/Khatranga H/KhatrangaH 2.jpeg', title: 'Khatranga High School', description: 'Upgraded facilities for high school students.' },
+    { image: '/CSR/Khatranga H/KhatrangaH 3.jpeg', title: 'Khatranga High School', description: 'A modern campus for Khatranga.' },
+    { image: '/CSR/Khatranga H/KhatrangaH 4.jpeg', title: 'Khatranga High School', description: 'Empowering the next generation.' },
+    { image: '/CSR/Khatranga H/KhatrangaH 5.jpeg', title: 'Khatranga High School', description: 'A milestone in educational development.' },
+  ];
+  // --- END: Local CSR Images ---
+
   // Advanced parallax effects from index.html
   const heroImageY = useTransform(scrollYProgress, [0, 0.5], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.7]);
@@ -436,13 +461,6 @@ const CSR = () => {
       heroControls.start({ opacity: 1, y: 0 });
     }
   }, [isHeroInView, heroControls]);
-
-  useEffect(() => {
-    getCSRItems().then((slides) => {
-      setCsrSlides(slides);
-      console.log('CSR Swiper Slides:', slides);
-    });
-  }, []);
 
   // Timeline data for impact stories - Merged from both pages
   const impactStories = [
@@ -1008,9 +1026,9 @@ const CSR = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our CSR Initiatives</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our CSR Initiatives in Education</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore our commitment to social responsibility through these impactful moments captured across our various initiatives.
+              Explore our commitment to social responsibility through these impactful moments captured across our various school development initiatives.
             </p>
           </motion.div>
           
@@ -1021,54 +1039,11 @@ const CSR = () => {
             transition={{ duration: 0.8 }}
             className="max-w-7xl mx-auto"
           >
-            <ImageSwiper slides={csrSlides} />
+            <ImageSwiper slides={allCsrImages} />
           </motion.div>
         </div>
       </section>
       
-      {/* Impact Stories Timeline Section - Commented out as requested 
-      <section className="relative py-24 bg-background/50 overflow-hidden">
-        <div className="absolute inset-0 opacity-5 geometric-pattern"></div>
-        <FloatingAnimation 
-          className="absolute top-1/4 right-10 w-32 h-32 bg-rashmi-red/10 rounded-full blur-3xl" 
-          yOffset={20}
-          duration={7}
-        />
-        
-        <div className="container mx-auto px-4 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <div className="mb-3">
-              <span className="text-rashmi-red text-sm font-medium uppercase tracking-wider">Our Journey</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">CSR Impact Stories</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Milestones in our journey of creating positive environmental and social impact through sustainable initiatives.
-            </p>
-            <div className="w-24 h-1 bg-rashmi-red mx-auto mt-6 rounded-full"></div>
-          </motion.div>
-          
-          <div className="space-y-16 md:space-y-24 mx-auto max-w-5xl">
-            {impactStories.map((story, index) => (
-              <StoryItem 
-                key={index}
-                year={story.year}
-                title={story.title}
-                description={story.description}
-                image={story.image}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-      */}
-
       {/* New Visual Impact Comparison Section */}
       <section className="relative py-24 bg-background/95 overflow-hidden">
         <div className="container mx-auto px-4 relative">
