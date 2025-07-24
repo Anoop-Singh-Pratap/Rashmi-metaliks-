@@ -107,10 +107,7 @@ app.use(helmet({
   referrerPolicy: { policy: "strict-origin-when-cross-origin" }
 }));
 app.use(cors({
-  origin: [
-    process.env.CORS_ORIGIN || 'http://localhost:8080',
-    'https://rashmimetaliks.com'
-  ],
+  origin: process.env.CORS_ORIGIN || 'http://localhost:8080',
   credentials: true
 }));
 
@@ -137,9 +134,7 @@ const strictLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-// The force HTTPS redirect is no longer needed, as we are handling this at the server level (e.g., cPanel).
-// This was likely contributing to the redirect loop.
-/*
+// The force HTTPS redirect is necessary when behind a proxy.
 if (process.env.NODE_ENV === 'production') {
   app.use((req, res, next) => {
     if (req.header('x-forwarded-proto') !== 'https') {
@@ -149,7 +144,6 @@ if (process.env.NODE_ENV === 'production') {
     }
   });
 }
-*/
 
 app.use(generalLimiter);
 app.use(securityMiddleware); // Additional security headers
@@ -216,14 +210,14 @@ export default app;
 
 // Start the server (both development and production for traditional hosting)
 app.listen(port, '0.0.0.0', () => {
-  console.log(`🚀 Server is running on port ${port}`);
-  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🌐 Server accessible at: http://0.0.0.0:${port}`);
+    console.log(`🚀 Server is running on port ${port}`);
+    console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🌐 Server accessible at: http://0.0.0.0:${port}`);
 
-  // Log startup success
-  if (process.env.NODE_ENV === 'production') {
-    console.log('✅ Production server started successfully');
-  } else {
-    console.log('🔧 Development server started successfully');
-  }
-});
+    // Log startup success
+    if (process.env.NODE_ENV === 'production') {
+      console.log('✅ Production server started successfully');
+    } else {
+      console.log('🔧 Development server started successfully');
+    }
+  });

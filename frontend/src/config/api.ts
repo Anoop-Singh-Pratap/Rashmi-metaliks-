@@ -3,13 +3,13 @@
 
 // Get the API base URL from environment variables
 const getApiBaseUrl = () => {
-  // In production, use the direct, secure backend URL.
+  // In production, use relative paths to leverage the Apache reverse proxy.
   if (import.meta.env.PROD) {
-    return 'http://111.118.189.60:3001';
+    return '';
   }
   
   // In development, use localhost
-  return 'http://localhost:3001';
+  return 'http://localhost:3002';
 };
 
 // Get the CMS API URL from environment variables

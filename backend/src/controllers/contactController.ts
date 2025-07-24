@@ -3,7 +3,6 @@ import Joi from 'joi';
 import { v4 as uuidv4 } from 'uuid';
 import { ContactFormData } from '../types/contact';
 import { sendContactFormEmail } from '../services/emailService';
-import { sendCustomContactFormEmail } from '../services/customEmailService';
 
 // In-memory store for submissions when email sending fails
 const contactSubmissionsStore: ContactFormData[] = [];
@@ -54,19 +53,10 @@ export const submitContactForm = async (req: Request, res: Response) => {
       try {
         const emailSent = await sendContactFormEmail(contactData);
         if (emailSent) {
-          console.log(`Contact form email sent to original service successfully - Ref: ${referenceId}`);
+          console.log(`Contact form email sent successfully - Ref: ${referenceId}`);
         }
       } catch (error) {
-        console.error(`Error sending primary contact email:`, error);
-      }
-      
-      try {
-        const customEmailSent = await sendCustomContactFormEmail(contactData);
-        if (customEmailSent) {
-          console.log(`Contact form email sent to custom service successfully - Ref: ${referenceId}`);
-        }
-      } catch (error) {
-        console.error(`Error sending custom contact form email:`, error);
+        console.error(`Error sending contact email:`, error);
       }
     };
 

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { supabaseAdmin } from '../config/supabase';
+// import { supabaseAdmin } from '../config/supabase';
 
-// Mock job listings data
+// In-memory store for job listings (mock data)
 const mockJobs = [
   {
     id: 1,
@@ -50,48 +50,13 @@ const mockJobs = [
 /**
  * Get all active job listings
  */
-export const getJobs = async (req: Request, res: Response) => {
+export const getJobListings = async (req: Request, res: Response) => {
   try {
-    // Log for debugging
-    console.log('Fetching job listings');
-    
-    // Check if supabaseAdmin is configured
-    if (supabaseAdmin && process.env.SUPABASE_SERVICE_KEY !== 'your_supabase_service_role_key') {
-      // Attempt to use Supabase if properly configured
-      try {
-        const { data, error } = await supabaseAdmin
-          .from('job_listings')
-          .select('*')
-          .eq('is_active', true)
-          .order('posted_date', { ascending: false });
-          
-        if (error) {
-          console.error('Error fetching job listings from Supabase:', error);
-          throw new Error('Falling back to mock data');
-        }
-        
-        // Parse responsibilities from JSONB to array for each job
-        const parsedData = data.map((job: any) => ({
-          ...job,
-          responsibilities: Array.isArray(job.responsibilities) 
-            ? job.responsibilities 
-            : JSON.parse(job.responsibilities)
-        }));
-        
-        return res.status(200).json(parsedData);
-      } catch (supabaseError) {
-        console.warn('Using mock job data due to Supabase error');
-        // Fall through to mock data
-      }
-    }
-    
-    // Return mock data if Supabase is not available
-    console.log('Returning mock job listings data');
-    return res.status(200).json(mockJobs);
+    console.log('Fetching job listings from mock data');
+    res.status(200).json(mockJobs);
   } catch (error) {
-    console.error('Error in getJobs controller:', error);
-    // Still return mock data on error to avoid frontend issues
-    return res.status(200).json(mockJobs);
+    console.error('Error fetching job listings:', error);
+    res.status(500).json({ message: 'Error fetching job listings' });
   }
 };
 
@@ -101,59 +66,18 @@ export const getJobs = async (req: Request, res: Response) => {
 export const getJobById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    console.log(`Fetching job by ID from mock data: ${id}`);
     
-    // Log for debugging
-    console.log(`Fetching job with ID: ${id}`);
+    const jobId = parseInt(id, 10);
+    const job = mockJobs.find(j => j.id === jobId);
     
-    if (!id) {
-      return res.status(400).json({ message: 'Job ID is required' });
+    if (job) {
+      res.status(200).json(job);
+    } else {
+      res.status(404).json({ message: 'Job not found' });
     }
-    
-    // Check if supabaseAdmin is configured
-    if (supabaseAdmin && process.env.SUPABASE_SERVICE_KEY !== 'your_supabase_service_role_key') {
-      // Attempt to use Supabase if properly configured
-      try {
-        const { data, error } = await supabaseAdmin
-          .from('job_listings')
-          .select('*')
-          .eq('id', id)
-          .single();
-          
-        if (error) {
-          console.error('Error fetching job by ID from Supabase:', error);
-          throw new Error('Falling back to mock data');
-        }
-        
-        if (!data) {
-          return res.status(404).json({ message: 'Job not found' });
-        }
-        
-        // Parse responsibilities from JSONB to array
-        const parsedData = {
-          ...data,
-          responsibilities: Array.isArray(data.responsibilities) 
-            ? data.responsibilities 
-            : JSON.parse(data.responsibilities)
-        };
-        
-        return res.status(200).json(parsedData);
-      } catch (supabaseError) {
-        console.warn('Using mock job data due to Supabase error');
-        // Fall through to mock data
-      }
-    }
-    
-    // Find the job in mock data
-    const mockJob = mockJobs.find(job => job.id === parseInt(id, 10));
-    
-    if (!mockJob) {
-      return res.status(404).json({ message: 'Job not found' });
-    }
-    
-    console.log('Returning mock job data for ID:', id);
-    return res.status(200).json(mockJob);
   } catch (error) {
-    console.error('Error in getJobById controller:', error);
-    return res.status(500).json({ message: 'An unexpected error occurred' });
+    console.error('Error fetching job by ID:', error);
+    res.status(500).json({ message: 'Error fetching job by ID' });
   }
 }; 

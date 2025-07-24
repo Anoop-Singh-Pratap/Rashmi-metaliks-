@@ -3,7 +3,6 @@ import Joi from 'joi';
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import { sendJobApplicationEmail, JobApplicationData } from '../services/emailService';
-import { sendCustomJobApplicationEmail, CustomJobApplicationData } from '../services/customEmailService';
 
 // Enhanced validation schema for application data
 const applicationSchema = Joi.object({
@@ -72,54 +71,19 @@ export const submitApplication = async (req: Request, res: Response) => {
       applicationId
     };
     
-    // Prepare custom application data for custom email service
-    const customApplicationData: CustomJobApplicationData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      position,
-      department,
-      experience,
-      education,
-      resumeUrl: undefined, // No file storage for now
-      coverLetter,
-      source,
-      applicationId
-    };
-    
     // Store in memory for backup/tracking
     applicationSubmissionsStore.push(applicationData);
     console.log(`Application stored in memory - Total applications: ${applicationSubmissionsStore.length}`);
     
     // Send emails asynchronously without blocking the response
     const sendEmailsAsync = async () => {
-      let emailSuccess = false;
-      let emailErrors: string[] = [];
-      
-      // Send email notification to original service (HR department)
       try {
         await sendJobApplicationEmail(applicationData, multerReq.file);
         console.log(`Application email sent to HR for ${firstName} ${lastName}`);
-        emailSuccess = true;
       } catch (emailError) {
         const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown email error';
         console.error('Error sending application email to HR:', errorMessage);
-        emailErrors.push(`HR email: ${errorMessage}`);
       }
-      
-      // Send email notification to custom email service
-      try {
-        await sendCustomJobApplicationEmail(customApplicationData, multerReq.file);
-        console.log(`Custom application email sent for ${firstName} ${lastName}`);
-        emailSuccess = true;
-      } catch (customEmailError) {
-        const errorMessage = customEmailError instanceof Error ? customEmailError.message : 'Unknown email error';
-        console.error('Error sending custom application email:', errorMessage);
-        emailErrors.push(`Custom email: ${errorMessage}`);
-      }
-      
-      console.log(`Email processing completed for application ${applicationId}. Success: ${emailSuccess}, Errors: ${emailErrors.length}`);
     };
     
     // Start email sending process in background

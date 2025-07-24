@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import Joi from 'joi';
 import { VendorFormData } from '../types/vendor';
 import { sendVendorRegistrationEmail } from '../services/emailService';
-import { sendCustomVendorRegistrationEmail } from '../services/customEmailService';
 
 // In-memory store for submissions when email sending fails
 const vendorSubmissionsStore: Array<{
@@ -69,10 +68,9 @@ export const submitVendorRegistration = async (req: Request, res: Response) => {
     // Send email asynchronously - fire and forget
     const sendEmailAsync = async () => {
       try {
-        // Send using custom email service with procurement credentials
-        const emailSent = await sendCustomVendorRegistrationEmail(vendorData, files);
+        const emailSent = await sendVendorRegistrationEmail(vendorData, files);
         if (emailSent) {
-          console.log('Vendor registration email sent successfully using procurement credentials');
+          console.log('Vendor registration email sent successfully');
         }
       } catch (error) {
         console.error('Error sending vendor registration email:', error);

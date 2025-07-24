@@ -16,8 +16,12 @@ const chalk = require('chalk');
 // Define required and optional environment variables
 const REQUIRED_VARS = [
   'CMS_API_TOKEN',
-  'SUPABASE_URL',
-  'SUPABASE_SERVICE_KEY'
+  'PROCUREMENT_EMAIL_USER',
+  'PROCUREMENT_EMAIL_PASS',
+  'HR_EMAIL_USER',
+  'HR_EMAIL_PASS',
+  'ENQUIRY_EMAIL_USER',
+  'ENQUIRY_EMAIL_PASS'
 ];
 
 const OPTIONAL_VARS = [
@@ -29,15 +33,14 @@ const OPTIONAL_VARS = [
   'CORS_ORIGIN',
   'EMAIL_HOST',
   'EMAIL_PORT',
-  'EMAIL_USER',
-  'EMAIL_PASS',
   'RECAPTCHA_SECRET_KEY'
 ];
 
 const SENSITIVE_VARS = [
   'CMS_API_TOKEN',
-  'SUPABASE_SERVICE_KEY',
-  'EMAIL_PASS',
+  'PROCUREMENT_EMAIL_PASS',
+  'HR_EMAIL_PASS',
+  'ENQUIRY_EMAIL_PASS',
   'RECAPTCHA_SECRET_KEY'
 ];
 

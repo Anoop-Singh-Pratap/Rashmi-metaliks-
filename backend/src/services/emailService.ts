@@ -38,34 +38,33 @@ const getCountryName = (countryCode: string): string => {
   return countryMapping[countryCode] || countryCode;
 };
 
-// Create email transporter using environment variables
-const createTransporter = () => {
-  // Validate required email configuration
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.error('Email configuration missing: EMAIL_USER and EMAIL_PASS are required');
+// Create email transporter using specific credentials
+const createTransporter = (user: string, pass: string) => {
+  if (!user || !pass) {
+    console.error('Email configuration missing: User and Pass are required');
     throw new Error('Email service not properly configured');
   }
 
   return nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.office365.com', // Use Microsoft's SMTP server
+    host: process.env.EMAIL_HOST || 'smtp.office365.com',
     port: Number(process.env.EMAIL_PORT || 587),
-    secure: process.env.EMAIL_SECURE === 'true', // Should be false for port 587 with STARTTLS
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    },
-    requireTLS: true, // Ensure TLS is used
-    pool: true, // Use connection pooling
-    maxConnections: 5, // Maximum number of connections
-    maxMessages: 100, // Maximum messages per connection
-    rateDelta: 1000, // Rate limiting - 1 second between messages
-    rateLimit: 5 // Rate limiting - 5 messages per rateDelta
+    secure: process.env.EMAIL_SECURE === 'true',
+    auth: { user, pass },
+    requireTLS: true,
+    pool: true,
+    maxConnections: 5,
+    maxMessages: 100,
+    rateDelta: 1000,
+    rateLimit: 5
   });
 };
 
 export const sendContactFormEmail = async (data: ContactFormData): Promise<boolean> => {
   try {
-    const transporter = createTransporter();
+    const transporter = createTransporter(
+      process.env.ENQUIRY_EMAIL_USER!,
+      process.env.ENQUIRY_EMAIL_PASS!
+    );
 
     // Generate unique reference ID for tracking
     const refId = `RMQ-${uuidv4().substring(0, 8).toUpperCase()}`;
@@ -164,26 +163,11 @@ export const sendContactFormEmail = async (data: ContactFormData): Promise<boole
       </html>
     `;
 
-    // Create array of recipients based on subject matter
-    let recipients = ['contact@rashmigroup.com']; // Default recipient
-    
-    // Add specific department emails based on product interest
-    if (data.selectedProducts && data.selectedProducts.length > 0) {
-      if (data.selectedProducts.includes('Ductile Iron Pipe') || data.selectedProducts.includes('DI Fittings')) {
-        recipients.push('pipes@rashmigroup.com');
-      }
-      if (data.selectedProducts.includes('TMT Bars')) {
-        recipients.push('tmt@rashmigroup.com');
-      }
-      // Add other product-specific emails as needed
-    }
-
-    // Send primary email to company
+    // Send primary email to globalenquiry@rashmigroup.com only
     try {
       await transporter.sendMail({
-        from: '"Rashmi Metaliks Website" <noreply@rashmigroup.com>',
-        to: recipients.join(','),
-        cc: 'procurement@rashmigroup.com', // Always CC procurement
+        from: `"Rashmi Metaliks Website" <${process.env.ENQUIRY_EMAIL_USER}>`,
+        to: process.env.ENQUIRY_EMAIL_USER,
         subject: `Contact Inquiry: ${data.subject} - Ref: ${refId}`,
         html: htmlContent,
         headers: {
@@ -191,7 +175,7 @@ export const sendContactFormEmail = async (data: ContactFormData): Promise<boole
           'X-Reference-ID': refId
         }
       });
-      console.log(`Contact form email sent to ${recipients.join(', ')}`);
+      console.log(`Contact form email sent to ${process.env.ENQUIRY_EMAIL_USER}`);
     } catch (error) {
       console.error('Error sending primary contact email:', error);
       // Continue to send confirmation email even if primary email fails
@@ -205,7 +189,7 @@ export const sendContactFormEmail = async (data: ContactFormData): Promise<boole
     while (!confirmationSent && attempts < maxAttempts) {
       try {
         await transporter.sendMail({
-          from: '"Rashmi Metaliks Customer Support" <noreply@rashmigroup.com>',
+          from: `"Rashmi Metaliks Customer Support" <${process.env.ENQUIRY_EMAIL_USER}>`,
           to: data.email,
           subject: `Thank you for contacting Rashmi Metaliks - Ref: ${refId}`,
           html: confirmationHtml,
@@ -235,7 +219,10 @@ export const sendContactFormEmail = async (data: ContactFormData): Promise<boole
 
 export const sendVendorRegistrationEmail = async (data: VendorFormData, files?: Express.Multer.File[]): Promise<boolean> => {
   try {
-    const transporter = createTransporter();
+    const transporter = createTransporter(
+      process.env.PROCUREMENT_EMAIL_USER!,
+      process.env.PROCUREMENT_EMAIL_PASS!
+    );
 
     // Generate unique reference ID
     const refId = `TOKEN-${uuidv4().substring(0, 8).toUpperCase()}`;
@@ -277,8 +264,8 @@ export const sendVendorRegistrationEmail = async (data: VendorFormData, files?: 
 
     // Prepare email options
     const mailOptions = {
-      from: '"Rashmi Metaliks Vendor Portal" <procurement@rashmigroup.com>',
-      to: 'procurement@rashmigroup.com', // Updated recipient email
+      from: `"Rashmi Metaliks Vendor Portal" <${process.env.PROCUREMENT_EMAIL_USER}>`,
+      to: process.env.PROCUREMENT_EMAIL_USER,
       subject: `New Vendor Registration: ${data.companyName} - Token ID: ${refId}`,
       html: htmlContent,
       attachments: [] as any[]
@@ -307,7 +294,7 @@ export const sendVendorRegistrationEmail = async (data: VendorFormData, files?: 
 
     // Send confirmation email to the vendor
     await transporter.sendMail({
-      from: '"Rashmi Metaliks Procurement" <procurement@rashmigroup.com>',
+      from: `"Rashmi Metaliks Procurement" <${process.env.PROCUREMENT_EMAIL_USER}>`,
       to: data.email,
       subject: `Your Vendor Registration - Token ID: ${refId}`,
       html: `
@@ -351,7 +338,10 @@ export interface JobApplicationData {
 
 export const sendJobApplicationEmail = async (data: JobApplicationData, resumeFile?: Express.Multer.File): Promise<boolean> => {
   try {
-    const transporter = createTransporter();
+    const transporter = createTransporter(
+      process.env.HR_EMAIL_USER!,
+      process.env.HR_EMAIL_PASS!
+    );
 
     // Generate unique reference ID for the application
     const appId = data.applicationId || `RMJOB-${Date.now().toString().slice(-6)}`;
@@ -460,11 +450,10 @@ export const sendJobApplicationEmail = async (data: JobApplicationData, resumeFi
       </html>
     `;
 
-    // Prepare email options for the HR department
+    // Send primary email to globalhr@rashmigroup.com only
     const mailOptions = {
-      from: '"Rashmi Metaliks Careers" <careers@rashmigroup.com>',
-      to: 'hr@rashmigroup.com', // HR department email
-      cc: 'recruitment@rashmigroup.com', // Optional CC
+      from: `"Rashmi Metaliks Careers" <${process.env.HR_EMAIL_USER}>`,
+      to: process.env.HR_EMAIL_USER,
       subject: `Job Application: ${data.position} - ${data.firstName} ${data.lastName} - Ref: ${appId}`,
       html: htmlContent,
       attachments: [] as any[]
@@ -479,10 +468,9 @@ export const sendJobApplicationEmail = async (data: JobApplicationData, resumeFi
       });
     }
 
-    // Send primary email to HR
     try {
       await transporter.sendMail(mailOptions);
-      console.log(`Job application email sent to HR - Ref: ${appId}`);
+      console.log(`Job application email sent to ${process.env.HR_EMAIL_USER} - Ref: ${appId}`);
     } catch (error) {
       console.error(`Error sending HR application email - Ref: ${appId}:`, error);
       // Continue to send confirmation email even if HR email fails
@@ -496,7 +484,7 @@ export const sendJobApplicationEmail = async (data: JobApplicationData, resumeFi
     while (!confirmationSent && attempts < maxAttempts) {
       try {
         await transporter.sendMail({
-          from: '"Rashmi Metaliks HR" <careers@rashmigroup.com>',
+          from: `"Rashmi Metaliks HR" <${process.env.HR_EMAIL_USER}>`,
           to: data.email,
           subject: `Your Application for ${data.position} - Ref: ${appId}`,
           html: confirmationHtml,
