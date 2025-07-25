@@ -10,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop';
 // Pages
 import Index from './pages/Index';
 import AboutRashmi from './pages/AboutRashmi';
+import Products from './pages/Products';
 import DiPipes from './pages/DiPipes';
 import DiFittings from './pages/DiFittings';
 import TmtBar from './pages/TmtBar';
@@ -149,6 +150,7 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Index /></PageTransition>} />
         <Route path="/about-rashmi" element={<PageTransition><AboutRashmi /></PageTransition>} />
+        <Route path="/products" element={<PageTransition><Products /></PageTransition>} />
         <Route path="/di-pipes" element={<PageTransition><DiPipes /></PageTransition>} />
         <Route path="/di-fittings" element={<PageTransition><DiFittings /></PageTransition>} />
         <Route path="/tmt-bar" element={<PageTransition><TmtBar /></PageTransition>} />
@@ -174,6 +176,13 @@ function AnimatedRoutes() {
         <Route path="/admin/api-debug" element={<PageTransition><ApiDebugger /></PageTransition>} />
         <Route path="/emissions-demo" element={<Navigate to="/sustainability" replace />} />
         <Route path="/sustainability" element={<PageTransition><SustainabilityPage /></PageTransition>} />
+        
+        {/* Simple redirects for navigation items to existing pages */}
+        <Route path="/management" element={<Navigate to="/about-rashmi" replace />} />
+        <Route path="/history" element={<Navigate to="/about-rashmi" replace />} />
+        <Route path="/downloads" element={<Navigate to="/brochures" replace />} />
+        <Route path="/about" element={<Navigate to="/about-rashmi" replace />} />
+        
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
