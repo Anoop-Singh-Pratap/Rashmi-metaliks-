@@ -30,6 +30,10 @@ import CSR from './pages/CSR';
 import Brochures from './pages/Brochures';
 import TermsAndConditions from './pages/TermsAndConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Products from './pages/Products';
+import Management from './pages/Management';
+import History from './pages/History';
+import Downloads from './pages/Downloads';
 import NewsAdmin from './pages/NewsAdmin';
 import ApiDebugger from './pages/ApiDebugger';
 import RashmiLock from './pages/RashmiLock';
@@ -148,7 +152,10 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+        <Route path="/about" element={<Navigate to="/about-rashmi" replace />} />
         <Route path="/about-rashmi" element={<PageTransition><AboutRashmi /></PageTransition>} />
+        <Route path="/products" element={<PageTransition><Products /></PageTransition>} />
+        <Route path="/contact" element={<Navigate to="/contact-us" replace />} />
         <Route path="/di-pipes" element={<PageTransition><DiPipes /></PageTransition>} />
         <Route path="/di-fittings" element={<PageTransition><DiFittings /></PageTransition>} />
         <Route path="/tmt-bar" element={<PageTransition><TmtBar /></PageTransition>} />
@@ -168,6 +175,9 @@ function AnimatedRoutes() {
         <Route path="/certifications" element={<PageTransition><Certifications /></PageTransition>} />
         <Route path="/csr" element={<PageTransition><CSR /></PageTransition>} />
         <Route path="/brochures" element={<PageTransition><Brochures /></PageTransition>} />
+        <Route path="/management" element={<PageTransition><Management /></PageTransition>} />
+        <Route path="/history" element={<PageTransition><History /></PageTransition>} />
+        <Route path="/downloads" element={<PageTransition><Downloads /></PageTransition>} />
         <Route path="/terms-and-conditions" element={<PageTransition><TermsAndConditions /></PageTransition>} />
         <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
         <Route path="/admin/news" element={<PageTransition><NewsAdmin /></PageTransition>} />
