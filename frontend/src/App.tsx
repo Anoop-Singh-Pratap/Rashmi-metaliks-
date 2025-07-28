@@ -6,6 +6,7 @@ import { Toaster } from './components/ui/toaster';
 import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
 import ScrollToTop from './components/ScrollToTop';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 // Pages
 import Index from './pages/Index';
@@ -133,6 +134,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
+        <GoogleAnalytics />
         <ScrollToTop />
         <Header />
         <AnimatedRoutes />

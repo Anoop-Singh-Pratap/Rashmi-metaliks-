@@ -525,7 +525,7 @@ const VendorRegistration = () => {
               </CardHeader>
 
               <CardContent>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" data-form-type="vendor">
                   {/* Progress Bar */}
                   {uploadProgress > 0 && (
                     <div className="mb-6">

@@ -16,7 +16,7 @@ const emailAccounts = [
   {
     name: 'Procurement',
     email: 'procurement@rashmigroup.com',
-    pass: 'Rashmi@2026',
+    pass: 'Asingh@2024',
     purpose: 'Vendor registrations'
   }
 ];

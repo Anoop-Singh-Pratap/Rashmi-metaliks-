@@ -373,7 +373,7 @@ const ApplyJob = () => {
                       </div>
                     )}
                     
-                    <form onSubmit={handleSubmit} className="p-6 space-y-6">
+                    <form onSubmit={handleSubmit} className="p-6 space-y-6" data-form-type="job">
                       {/* Personal Information */}
                       <div>
                         <h3 className="text-lg font-semibold mb-4 pb-2 border-b border-border">

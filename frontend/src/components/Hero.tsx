@@ -114,7 +114,7 @@ const Hero = () => {
             >
               Dive In
             </button>
-            <Link 
+            <Link
               to="/about-rashmi"
               className="border-2 border-white text-white hover:bg-white hover:text-rashmi-dark px-8 py-3 rounded-lg font-semibold transition-all duration-300 inline-block text-center"
               onClick={() => {

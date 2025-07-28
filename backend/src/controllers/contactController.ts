@@ -51,12 +51,15 @@ export const submitContactForm = async (req: Request, res: Response) => {
     // Send emails asynchronously - fire and forget
     const sendEmailsAsync = async () => {
       try {
+        console.log('DEBUG: About to call sendContactFormEmail with data:', { name: contactData.name, email: contactData.email });
         const emailSent = await sendContactFormEmail(contactData);
+        console.log('DEBUG: sendContactFormEmail returned:', emailSent);
         if (emailSent) {
           console.log(`Contact form email sent successfully - Ref: ${referenceId}`);
         }
       } catch (error) {
         console.error(`Error sending contact email:`, error);
+        console.error(`DEBUG: Full error details:`, JSON.stringify(error, Object.getOwnPropertyNames(error)));
       }
     };
 

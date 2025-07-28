@@ -531,7 +531,7 @@ const ContactUs = () => {
                   </div>
                 )}
                 
-                <form className="space-y-4" onSubmit={handleSubmit}>
+                <form className="space-y-4" onSubmit={handleSubmit} data-form-type="contact">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>

@@ -210,14 +210,14 @@ export default app;
 
 // Start the server (both development and production for traditional hosting)
 app.listen(port, '0.0.0.0', () => {
-    console.log(`🚀 Server is running on port ${port}`);
-    console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`🌐 Server accessible at: http://0.0.0.0:${port}`);
+  console.log(`🚀 Server is running on port ${port}`);
+  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🌐 Server accessible at: http://0.0.0.0:${port}`);
 
-    // Log startup success
-    if (process.env.NODE_ENV === 'production') {
-      console.log('✅ Production server started successfully');
-    } else {
-      console.log('🔧 Development server started successfully');
-    }
-  });
+  // Log startup success
+  if (process.env.NODE_ENV === 'production') {
+    console.log('✅ Production server started successfully');
+  } else {
+    console.log('🔧 Development server started successfully');
+  }
+});

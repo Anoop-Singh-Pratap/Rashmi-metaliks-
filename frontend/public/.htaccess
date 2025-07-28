@@ -3,7 +3,7 @@ RewriteBase /
 
 # Proxy API requests to backend server using HTTP (backend doesn't support HTTPS)
 RewriteRule ^api/(.*)$ http://localhost:3001/api/$1 [P,L]
-
+ 
 # Handle React Router - serve index.html for all non-file requests
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

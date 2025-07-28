@@ -342,7 +342,7 @@ const DiPipes = () => {
   const isHeroInView = useInView(heroRef);
   const isStatsInView = useInView(statsRef);
   const heroControls = useAnimation();
-
+  
   const pipeFeatures = [
     {
       title: "High Strength",
@@ -516,7 +516,7 @@ const DiPipes = () => {
         {/* Background with parallax */}
         <motion.div 
           className="absolute inset-0 z-0 w-full h-full bg-overlay parallax-background"
-          style={{
+            style={{ 
             background: 'radial-gradient(circle at 30% 70%, rgba(229, 57, 53, 0.1) 0%, transparent 50%)',
           }}
         />
@@ -1440,7 +1440,7 @@ const DiPipes = () => {
       <div style={{ position: 'relative', zIndex: 100 }}>
         <Footer />
       </div>
-    </div>
+      </div>
     </div>
   );
 };

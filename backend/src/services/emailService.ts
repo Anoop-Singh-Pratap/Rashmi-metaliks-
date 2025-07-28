@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { VendorFormData } from '../types/vendor';
 import { ContactFormData } from '../types/contact';
 
+console.log('DEBUG: emailService.ts module loaded');
+
 // Country code to name mapping
 const countryMapping: { [key: string]: string } = {
   'in': 'India',
@@ -40,12 +42,19 @@ const getCountryName = (countryCode: string): string => {
 
 // Create email transporter using specific credentials
 const createTransporter = (user: string, pass: string) => {
+  console.log('DEBUG: createTransporter called with:', {
+    EMAIL_HOST: process.env.EMAIL_HOST,
+    EMAIL_PORT: process.env.EMAIL_PORT,
+    EMAIL_SECURE: process.env.EMAIL_SECURE,
+    user,
+    pass: pass ? '***' : 'NOT SET'
+  });
   if (!user || !pass) {
     console.error('Email configuration missing: User and Pass are required');
     throw new Error('Email service not properly configured');
   }
 
-  return nodemailer.createTransport({
+  const smtpConfig = {
     host: process.env.EMAIL_HOST || 'smtp.office365.com',
     port: Number(process.env.EMAIL_PORT || 587),
     secure: process.env.EMAIL_SECURE === 'true',
@@ -56,11 +65,18 @@ const createTransporter = (user: string, pass: string) => {
     maxMessages: 100,
     rateDelta: 1000,
     rateLimit: 5
-  });
+  };
+  console.log('DEBUG SMTP CONFIG:', JSON.stringify({ ...smtpConfig, auth: { ...smtpConfig.auth, pass: '***' } }, null, 2));
+  return nodemailer.createTransport(smtpConfig);
 };
 
 export const sendContactFormEmail = async (data: ContactFormData): Promise<boolean> => {
+  console.log('DEBUG: sendContactFormEmail called with data:', { name: data.name, email: data.email, subject: data.subject });
   try {
+    console.log('DEBUG: About to create transporter with credentials:', { 
+      user: process.env.ENQUIRY_EMAIL_USER, 
+      pass: process.env.ENQUIRY_EMAIL_PASS ? '***' : 'NOT SET' 
+    });
     const transporter = createTransporter(
       process.env.ENQUIRY_EMAIL_USER!,
       process.env.ENQUIRY_EMAIL_PASS!

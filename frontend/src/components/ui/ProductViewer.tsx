@@ -97,7 +97,7 @@ const ProductViewer: React.FC<ProductViewerProps> = ({
             touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
           mouseX = (touch.clientX - windowHalfX) / 50; // More sensitive for touch
           mouseY = (touch.clientY - windowHalfY) / 50;
-          targetRotation = mouseX * 0.5;
+        targetRotation = mouseX * 0.5;
           event.preventDefault(); // Only prevent scrolling when touching the component
         }
       }
