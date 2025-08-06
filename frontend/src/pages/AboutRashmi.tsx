@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import RevealText from '@/components/ui/RevealText';
 import ExploreButton from '@/components/ui/ExploreButton';
+import SEO from '@/components/SEO';
+import { organizationSchema, generateFAQSchema } from '@/lib/schema';
 import { motion, Variants, animate, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
 import { Award, Factory, Check, MapPin, FileText, Briefcase, Clock, Users, Globe, Target, Lightbulb, Rocket, BadgeCheck, Leaf, ChevronDown, CheckCircle2, TrendingUp, CheckSquare, ArrowUpRight, ArrowDown, Building, ChevronRight, ExternalLink, Eye, Flag, HardDrive, HelpCircle, Image, Info, Loader2, Mail, Map, Menu, Minus, Package, Phone, Plus, Shield, Star, X } from 'lucide-react';
 import { throttle } from 'lodash'; // Add this import
@@ -246,12 +248,32 @@ const AboutRashmi = () => {
     );
   };
   
+  // SEO Schema for About page
+  const aboutFAQSchema = generateFAQSchema([
+    {
+      question: "What makes Rashmi Metaliks the world's 2nd largest DI pipe manufacturer?",
+      answer: "Rashmi Metaliks has achieved this position through our massive 770,000 MT annual production capacity, state-of-the-art manufacturing facilities, and commitment to quality with ISO certifications."
+    },
+    {
+      question: "Where are Rashmi Metaliks manufacturing facilities located?",
+      answer: "Our manufacturing facilities are strategically located in West Bengal, India, with advanced production lines for ductile iron pipes and other steel products."
+    },
+    {
+      question: "What certifications does Rashmi Metaliks hold?",
+      answer: "We are ISO 9001:2015 certified for quality management, ISO 14001:2015 for environmental management, and OHSAS 18001:2007 for occupational health & safety."
+    }
+  ]);
+
   return (
     <div className="min-h-screen">
+      <SEO
+        title="About Rashmi Metaliks | World's 2nd Largest DI Pipe Manufacturer | 770,000 MT Capacity"
+        description="Learn about Rashmi Metaliks - World's 2nd largest DI pipe manufacturer with 770,000 MT annual capacity. ISO certified manufacturing facilities in West Bengal, India. Leading global steel manufacturer since 1984."
+        keywords="Rashmi Metaliks, World's 2nd largest DI pipe manufacturer, 770000 MT capacity, steel production India, ISO certified pipes, ductile iron pipes manufacturer, largest ductile iron pipe company, biggest DI pipe manufacturer, West Bengal steel industry, global steel leader"
+        canonicalUrl="/about-rashmi"
+        schema={[organizationSchema, aboutFAQSchema]}
+      />
       <Helmet>
-        <title>About Rashmi Group | Global Leader in Steel Manufacturing</title>
-        <meta name="description" content="Learn about Rashmi Group - World's 2nd largest DI pipe manufacturer with 7.7L MT annual capacity and ISO certified manufacturing facilities in West Bengal, India." />
-        <meta name="keywords" content="Rashmi Group, DI pipe manufacturer, steel production India, ISO certified pipes" />
         <style>{`
           .will-change-transform {
             will-change: transform;

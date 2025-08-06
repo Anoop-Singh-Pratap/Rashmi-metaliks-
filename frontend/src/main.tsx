@@ -2,6 +2,24 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
+
+// Initialize SEO performance optimizations
+const initializeSEOPerformance = async () => {
+  try {
+    const { initializeSEOPerformance: initSEO, criticalCSS, inlineCriticalCSS } = await import('./lib/seo-performance');
+    initSEO();
+    inlineCriticalCSS(criticalCSS);
+  } catch (error) {
+    console.log('SEO performance initialization skipped:', error);
+  }
+};
+
+// Initialize after DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeSEOPerformance);
+} else {
+  initializeSEOPerformance();
+}
 import { HelmetProvider } from 'react-helmet-async'
 
 // Initialize mobile touch handling

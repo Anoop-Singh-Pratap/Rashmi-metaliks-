@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+  <url>
+    <loc>https://www.rashmimetaliks.com/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.rashmimetaliks.com/lovable-uploads/Rashmi-logo-light.png</image:loc>
+      <image:title>Rashmi Metaliks - World's 2nd Largest DI Pipe Manufacturer</image:title>
+      <image:caption>Leading manufacturer of ductile iron pipes with 770,000 MT annual capacity</image:caption>
+    </image:image>
+  </url>
 
   <url>
     <loc>https://www.rashmimetaliks.com/about-rashmi</loc>
@@ -163,5 +177,30 @@
     <lastmod>2025-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Strategic SEO Pages for #1 Rankings -->
+  <url>
+    <loc>https://www.rashmimetaliks.com/largest-ductile-iron-pipe-manufacturer</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rashmimetaliks.com/lovable-uploads/Product_DiPipes.jpeg</image:loc>
+      <image:title>World's 2nd Largest Ductile Iron Pipe Manufacturer - Rashmi Metaliks</image:title>
+      <image:caption>770,000 MT annual capacity makes Rashmi Metaliks among the largest DI pipe manufacturers globally</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.rashmimetaliks.com/ductile-iron-pipe-leadership</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rashmimetaliks.com/lovable-uploads/Rashmi-logo-light.png</image:loc>
+      <image:title>Global Ductile Iron Pipe Industry Leadership Analysis</image:title>
+      <image:caption>Comprehensive analysis of world's largest ductile iron pipe manufacturers</image:caption>
+    </image:image>
   </url>
 </urlset>

@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
 import ScrollToTop from './components/ScrollToTop';
 import GoogleAnalytics from './components/GoogleAnalytics';
+import FloatingVendorButton from './components/FloatingVendorButton';
+import { initializeAnalyticsVerification } from './lib/analytics-verification';
 
 // Pages
 import Index from './pages/Index';
@@ -26,6 +28,9 @@ import ApplyJob from './pages/ApplyJob';
 import ContactUs from './pages/ContactUs';
 import QualityAssurance from './pages/QualityAssurance';
 import WhyRashmiDiPipes from './pages/WhyRashmiDiPipes';
+import LargestDuctileIronPipeManufacturer from './pages/LargestDuctileIronPipeManufacturer';
+import DuctileIronPipeLeadership from './pages/DuctileIronPipeLeadership';
+import FloatingVendorDemo from './pages/FloatingVendorDemo';
 import Certifications from './pages/Certifications';
 import NotFound from './pages/NotFound';
 import CSR from './pages/CSR';
@@ -126,6 +131,9 @@ function App() {
     // Run diagnostics immediately
     diagnoseTouch();
 
+    // Initialize analytics verification to ensure only GTM-53NK9DHX is used
+    initializeAnalyticsVerification();
+
     return () => {
       animationId && cancelAnimationFrame(animationId);
     };
@@ -138,6 +146,7 @@ function App() {
         <ScrollToTop />
         <Header />
         <AnimatedRoutes />
+        <FloatingVendorButton />
         <Toaster />
       </Router>
     </ThemeProvider>
@@ -169,6 +178,9 @@ function AnimatedRoutes() {
         <Route path="/vendor-registration" element={<PageTransition><VendorRegistration /></PageTransition>} />
         <Route path="/quality-assurance" element={<PageTransition><QualityAssurance /></PageTransition>} />
         <Route path="/why-rashmi-di-pipes" element={<PageTransition><WhyRashmiDiPipes /></PageTransition>} />
+        <Route path="/largest-ductile-iron-pipe-manufacturer" element={<PageTransition><LargestDuctileIronPipeManufacturer /></PageTransition>} />
+        <Route path="/ductile-iron-pipe-leadership" element={<PageTransition><DuctileIronPipeLeadership /></PageTransition>} />
+        <Route path="/floating-vendor-demo" element={<PageTransition><FloatingVendorDemo /></PageTransition>} />
         <Route path="/certifications" element={<PageTransition><Certifications /></PageTransition>} />
         <Route path="/csr" element={<PageTransition><CSR /></PageTransition>} />
         <Route path="/brochures" element={<PageTransition><Brochures /></PageTransition>} />

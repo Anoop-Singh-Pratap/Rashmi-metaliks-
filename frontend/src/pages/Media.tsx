@@ -564,10 +564,10 @@ const Media = () => {
                 {/* LinkedIn feed embed using iframe */}
                 <div className="linkedin-feed-container overflow-hidden rounded-lg">
                   <iframe 
-                    src='https://widgets.sociablekit.com/linkedin-page-posts/iframe/25562308' 
+                    src='https://widgets.sociablekit.com/linkedin-page-posts/iframe/25584919' 
                     frameBorder='0' 
                     width='100%'
-                    height='800'
+                    height='1000'
                     title="Rashmi Metaliks LinkedIn Feed"
                     className="bg-white"
                   ></iframe>

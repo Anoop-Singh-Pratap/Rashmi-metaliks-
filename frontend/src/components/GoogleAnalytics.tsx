@@ -1,70 +1,78 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// Declare gtag function type
+// Declare GTM dataLayer type
 declare global {
   interface Window {
-    gtag: (
+    dataLayer: any[];
+    gtag?: (
       command: 'config' | 'event',
       targetId: string,
-      config?: {
-        page_path?: string;
-        page_title?: string;
-        custom_map?: Record<string, string>;
-        event_category?: string;
-        event_label?: string;
-        value?: number;
-      }
+      config?: any
     ) => void;
   }
 }
 
-// Google Analytics tracking component
+// Google Tag Manager tracking component - GTM-53NK9DHX ONLY
 const GoogleAnalytics: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Track page views when route changes
-    if (window.gtag) {
-      window.gtag('config', 'GTM-NV5Z3DL7', {
+    // Initialize dataLayer if it doesn't exist
+    window.dataLayer = window.dataLayer || [];
+
+    // Ensure GTM is loaded and track page views
+    const trackPageView = () => {
+      window.dataLayer.push({
+        event: 'page_view',
         page_path: location.pathname + location.search,
         page_title: document.title,
-        custom_map: {
-          'custom_parameter_1': 'company_name',
-          'custom_parameter_2': 'industry'
-        }
+        page_location: window.location.href,
+        company_name: 'Rashmi Metaliks',
+        industry: 'Steel Manufacturing',
+        gtm_id: 'GTM-53NK9DHX' // Ensure only this GTM ID is used
       });
-    }
 
-    // Track custom events for important interactions
+      // Debug log for verification
+      console.log('GTM Page View Tracked:', {
+        path: location.pathname,
+        title: document.title,
+        gtm: 'GTM-53NK9DHX'
+      });
+    };
+
+    // Track immediately
+    trackPageView();
+
+    // Track custom events for important interactions using GTM dataLayer
     const trackContactForm = () => {
-      if (window.gtag) {
-        window.gtag('event', 'form_submit', {
-          event_category: 'Contact',
-          event_label: 'Contact Form',
-          value: 1
-        });
-      }
+      window.dataLayer.push({
+        event: 'form_submit',
+        form_type: 'contact',
+        event_category: 'Contact',
+        event_label: 'Contact Form',
+        value: 1
+      });
     };
 
     const trackVendorRegistration = () => {
-      if (window.gtag) {
-        window.gtag('event', 'form_submit', {
-          event_category: 'Vendor',
-          event_label: 'Vendor Registration',
-          value: 1
-        });
-      }
+      window.dataLayer.push({
+        event: 'form_submit',
+        form_type: 'vendor',
+        event_category: 'Vendor',
+        event_label: 'Vendor Registration',
+        value: 1
+      });
     };
 
     const trackJobApplication = () => {
-      if (window.gtag) {
-        window.gtag('event', 'form_submit', {
-          event_category: 'Careers',
-          event_label: 'Job Application',
-          value: 1
-        });
-      }
+      window.dataLayer.push({
+        event: 'form_submit',
+        form_type: 'job',
+        event_category: 'Careers',
+        event_label: 'Job Application',
+        value: 1
+      });
     };
 
     // Add event listeners for form submissions

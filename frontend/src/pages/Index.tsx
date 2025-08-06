@@ -53,10 +53,10 @@ const Index = () => {
 
   return (
     <>
-      <SEO 
-        title="Rashmi Metaliks | Leading Steel Manufacturer in India"
-        description="Rashmi Metaliks is a premier steel manufacturing company producing high-quality ductile iron pipes, TMT bars, and other steel products with a focus on sustainability and innovation."
-        keywords="steel manufacturer, ductile iron pipes, TMT bars, pig iron, sponge iron, steel production, Rashmi Metaliks, India steel company"
+      <SEO
+        title="Rashmi Metaliks | World's 2nd Largest DI Pipe Manufacturer | 770,000 MT Capacity | Leading Steel Producer"
+        description="Rashmi Metaliks - World's 2nd largest ductile iron pipe manufacturer with 770,000 MT annual capacity. Among the largest DI pipe manufacturers globally, serving 50+ countries with premium quality steel products including DI pipes, TMT bars, and more. India's largest ductile iron pipe producer."
+        keywords="Rashmi Metaliks, World's 2nd largest DI pipe manufacturer, largest ductile iron pipe manufacturer, biggest DI pipe manufacturer, 770000 MT capacity, world's largest ductile iron pipe company, leading DI pipe producer, India's largest ductile iron pipe manufacturer, steel manufacturer, ductile iron pipes, TMT bars, pig iron, sponge iron, global DI pipe leader"
         canonicalUrl="/"
         ogType="website"
         ogImage="/lovable-uploads/About-Rashmi.jpg"

@@ -480,10 +480,10 @@ const DiPipes = () => {
       {/* Render the styles component here */}
       <DiPipesStyles />
 
-      <SEO 
-        title="Ductile Iron Pipes | Premium DI Pipe Products | Rashmi Metaliks - World's 2nd Largest Manufacturer"
-        description="Premium quality Ductile Iron Pipes from Rashmi Metaliks - World's 2nd largest DI pipe manufacturer with 770,000 MT annual capacity. Our DI pipes offer exceptional strength, corrosion resistance and longevity for water and sewage applications."
-        keywords="Ductile Iron Pipes, DI Pipes, World's 2nd largest DI pipe manufacturer, 770000 MT capacity, Water Distribution Pipes, Rashmi Metaliks, Corrosion Resistant Pipes, Global Leadership"
+      <SEO
+        title="Ductile Iron Pipes | World's 2nd Largest DI Pipe Manufacturer | Rashmi Metaliks - 770,000 MT Capacity"
+        description="Premium quality Ductile Iron Pipes from Rashmi Metaliks - World's 2nd largest DI pipe manufacturer with 770,000 MT annual capacity. Our DI pipes offer exceptional strength, corrosion resistance and longevity for water and sewage applications. Leading global manufacturer of DI pipes with EN 545, ISO 2531, AWWA C151 compliance."
+        keywords="Ductile Iron Pipes, DI Pipes, World's 2nd largest DI pipe manufacturer, 770000 MT capacity, Water Distribution Pipes, Rashmi Metaliks, Corrosion Resistant Pipes, Global Leadership, largest ductile iron pipe company, biggest DI pipe manufacturer, leading ductile iron pipe producer, world's largest ductile iron pipe manufacturer, EN 545, ISO 2531, AWWA C151, ductile iron water pipes, cast iron pipes"
         canonicalUrl="/di-pipes"
         ogType="product"
         ogImage="/lovable-uploads/compressed/Product_DiPipes.webp"

@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Rashmi Metaliks - World's 2nd Largest DI Pipe Manufacturer</title>
     <description>Latest updates and news from Rashmi Metaliks - World's 2nd largest DI pipe manufacturer with 770,000 MT annual capacity. Leading producer of high-quality steel products including DI Pipes, TMT Bars, Pig Iron, and more.</description>
     <link>https://www.rashmimetaliks.com</link>
     <atom:link href="https://www.rashmimetaliks.com/rss.xml" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Mar 2024 00:00:00 GMT</lastBuildDate>
-    <pubDate>Wed, 13 Mar 2024 00:00:00 GMT</pubDate>
+    <lastBuildDate>Wed, 15 Jan 2025 10:00:00 GMT</lastBuildDate>
+    <pubDate>Wed, 15 Jan 2025 10:00:00 GMT</pubDate>
     <generator>Rashmi Metaliks Web Platform</generator>
+    <copyright>© 2025 Rashmi Metaliks Limited. All rights reserved.</copyright>
+    <managingEditor>info@rashmimetaliks.com (Rashmi Metaliks)</managingEditor>
+    <webMaster>webmaster@rashmimetaliks.com (Rashmi Metaliks Web Team)</webMaster>
+    <category>Steel Manufacturing</category>
+    <category>Ductile Iron Pipes</category>
+    <category>Industrial Equipment</category>
+    <ttl>60</ttl>
+    <image>
+      <url>https://www.rashmimetaliks.com/lovable-uploads/Rashmi-logo-light.png</url>
+      <title>Rashmi Metaliks - World's 2nd Largest DI Pipe Manufacturer</title>
+      <link>https://www.rashmimetaliks.com</link>
+      <width>300</width>
+      <height>100</height>
+    </image>
     
     <item>
       <title>Rashmi Metaliks Achieves Position as World's 2nd Largest DI Pipe Manufacturer</title>

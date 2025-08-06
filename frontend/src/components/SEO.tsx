@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { organizationSchema, localBusinessSchema, manufacturingSchema } from '../lib/schema';
 
 interface SEOProps {
   title: string;
@@ -37,21 +38,25 @@ const SEO: React.FC<SEOProps> = ({
   
   // Handle rendering multiple schemas
   const renderSchemas = () => {
-    if (!schema) return null;
-    
-    if (Array.isArray(schema)) {
-      return schema.map((schemaItem, index) => (
-        <script key={index} type="application/ld+json">
-          {JSON.stringify(schemaItem)}
-        </script>
-      ));
+    const allSchemas = [];
+
+    // Always include default schemas for better SEO
+    allSchemas.push(organizationSchema, localBusinessSchema, manufacturingSchema);
+
+    // Add page-specific schemas
+    if (schema) {
+      if (Array.isArray(schema)) {
+        allSchemas.push(...schema);
+      } else {
+        allSchemas.push(schema);
+      }
     }
-    
-    return (
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
+
+    return allSchemas.map((schemaItem, index) => (
+      <script key={index} type="application/ld+json">
+        {JSON.stringify(schemaItem)}
       </script>
-    );
+    ));
   };
   
   return (

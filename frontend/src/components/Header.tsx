@@ -6,7 +6,7 @@ import { useTheme } from '@/context/ThemeContext';
 import { useScrollTrigger } from '@/hooks/useScrollPosition';
 
 // All icon imports removed for simplicity
-import { Download, FileText, Building, Factory, Leaf, FileCheck, Award, Phone, Briefcase } from 'lucide-react';
+import { Download, FileText, Building, Factory, Leaf, FileCheck, Award, Phone, Briefcase, TrendingUp } from 'lucide-react';
 import MobileMenu from './MobileMenu'; // Add import for MobileMenu
 
 // Hook to detect clicks outside
@@ -52,11 +52,13 @@ const Header = () => {
   
   // Navigation links - unchanged
   const navLinks = [
-    { 
-      label: 'Our Company', 
+    {
+      label: 'Our Company',
       dropdown: true,
       items: [
         { label: 'About Rashmi', href: '/about-rashmi', icon: <Building size={16} className="mr-2 text-rashmi-red/80" /> },
+        { label: 'Industry Leadership', href: '/largest-ductile-iron-pipe-manufacturer', icon: <Award size={16} className="mr-2 text-rashmi-red/80" /> },
+        { label: 'Global Rankings', href: '/ductile-iron-pipe-leadership', icon: <TrendingUp size={16} className="mr-2 text-rashmi-red/80" /> },
         { label: 'Media & News', href: '/media', icon: <FileText size={16} className="mr-2 text-rashmi-red/80" /> },
         { label: 'Contact Us', href: '/contact-us', icon: <Phone size={16} className="mr-2 text-rashmi-red/80" /> },
       ]

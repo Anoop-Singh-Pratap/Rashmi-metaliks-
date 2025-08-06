@@ -1,10 +1,40 @@
-# Robots.txt for Rashmi Metaliks
+# Robots.txt for Rashmi Metaliks - World's 2nd Largest DI Pipe Manufacturer
 User-agent: *
 Allow: /
 
-# Disallow admin pages
+# Disallow admin pages and private areas
 Disallow: /admin/
 Disallow: /admin/*
+Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
 
-# Sitemap
+# Allow important SEO pages
+Allow: /di-pipes
+Allow: /di-fittings
+Allow: /about-rashmi
+Allow: /products
+Allow: /contact
+
+# Crawl delay for better server performance
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Sitemap locations
 Sitemap: https://www.rashmimetaliks.com/sitemap.xml
+Sitemap: https://www.rashmimetaliks.com/rss.xml
+
+# Host directive for preferred domain
+Host: https://www.rashmimetaliks.com
