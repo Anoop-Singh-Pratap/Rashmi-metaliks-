@@ -216,7 +216,7 @@ const QualityAssurance = () => {
                         transition={{ duration: 1.5 }}
                     >
                         {/* Updated to a high-quality video showing quality testing processes */}
-                        <source src="https://res.cloudinary.com/dada5hjp3/video/upload/v1744694427/GettyImages-1348822324_ku1g3c" type="video/mp4" />
+                        <source src="/lovable-uploads/QualityAssurance.mov" type="video/mp4" />
                         Your browser does not support the video tag.
                     </motion.video>
                     {/* Overlay with enhanced gradient */}
