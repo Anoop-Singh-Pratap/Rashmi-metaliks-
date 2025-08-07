@@ -28,19 +28,11 @@ const DIPipesManufacturing: React.FC = () => {
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]));
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  // Cloudinary optimization parameters for different purposes
-  const cloudinaryParams = {
-    lowQuality: 'f_auto,q_10,e_blur:1000,w_50',
-    thumbnail: 'f_auto,q_auto,w_20',
-    preview: 'f_auto,q_auto,w_300',
-    full: 'f_auto,q_auto'
-  };
-
-  // Replace the URL to include optimization parameters
-  const getOptimizedUrl = (url: string, quality: keyof typeof cloudinaryParams): string => {
-    if (url.includes('cloudinary.com')) {
-      return url.replace(/f_auto,q_auto/, cloudinaryParams[quality]);
-    }
+  // Since we're now using local images, we don't need Cloudinary optimization
+  // but we'll keep the function for consistency and potential future use
+  const getOptimizedUrl = (url: string, quality?: string): string => {
+    // For local images, just return the URL as-is
+    // In the future, you could implement local image optimization here
     return url;
   };
 
@@ -50,7 +42,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Selection of Material',
       description: 'If the molten iron composition deviates from established standards, it is rectified by introducing alloy and other elements.',
       icon: <FlaskConical size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/ldfxfyeuce5fsfegkp4y',
+      imageUrl: '/lovable-uploads/placeholders/selection_of_material.jpg',
       details: [
         'Strict quality control checks on raw materials',
         'Advanced spectrometry monitors chemical composition',
@@ -62,7 +54,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Composition Adjustment',
       description: 'A small quantity of pure magnesium is introduced into the molten iron to foster the development of a spheroidal graphite microstructure.',
       icon: <Microscope size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/illkzdlborbheoxu55kw',
+      imageUrl: '/lovable-uploads/placeholders/composition_adjustment.JPG',
       details: [
         'Magnesium treatment transforms graphite from flake to nodular form',
         'Precise chemical balancing ensures optimal ductility',
@@ -74,7 +66,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Magnesium Treatment',
       description: 'A controlled amount of magnesium is added to create the spheroidal graphite structure that gives ductile iron its unique properties.',
       icon: <FlaskConical size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/zyuoxq1wama751kv2xgg',
+      imageUrl: '/lovable-uploads/placeholders/magnesium_treatment.jpg',
       details: [
         'Precise magnesium addition for optimal nodularity',
         'Temperature-controlled process for consistent results',
@@ -86,7 +78,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Centrifugal Casting',
       description: 'Pipes are formed using centrifugal casting method.',
       icon: <Cog size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/xoznqzxzdqhvgiebxwcd',
+      imageUrl: '/lovable-uploads/placeholders/centrifugal_casting.jpg',
       details: [
         'Rotating molds ensure even distribution and density',
         'Centrifugal force removes impurities from the pipe wall',
@@ -98,7 +90,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Annealing',
       description: 'The heat treatment process is employed to enhance the mechanical properties of the pipes.',
       icon: <Gauge size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/uxe32ivpxnfax0syvx03',
+      imageUrl: '/lovable-uploads/placeholders/annealing.jpg',
       details: [
         'Temperature controlled to within ±5°C for optimal results',
         'Stress relief improves pipe performance under pressure',
@@ -110,7 +102,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Hydrostatic Pressure Testing',
       description: 'To perform the leak test, hydrostatic pressure is applied internally and is steadily maintained for 10 seconds.',
       icon: <Droplets size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/xkziejwx1zcepyfh2vdl',
+      imageUrl: '/lovable-uploads/placeholders/hydrostatic_preassure.JPG',
       details: [
         'Each pipe tested at pressure exceeding maximum working conditions',
         'Computer-controlled testing equipment ensures accuracy',
@@ -122,7 +114,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Cutting and Grinding',
       description: 'Pipes are subjected to spigot end cutting and grinding to attain the required end chamfer. (Applicable for sampling)',
       icon: <Wrench size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/uxvcid8aowffppuwvngw',
+      imageUrl: '/lovable-uploads/placeholders/cutting_grinding.JPG',
       details: [
         'CNC precision cutting ensures perfect joint compatibility',
         'Automated grinding produces consistent chamfer angles',
@@ -134,7 +126,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Zinc Coating',
       description: 'Zinc coating, due to the galvanizing effect, increases the corrosion resistance of the pipe.',
       icon: <Droplets size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/pfs3jfb5afdlxdjypxpx',
+      imageUrl: '/lovable-uploads/placeholders/0B1A9898.JPG',
       details: [
         'Zinc metallization provides sacrificial protection against corrosion',
         'Coating thickness controlled to optimize protection and cost',
@@ -146,7 +138,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Bituminous Coating',
       description: 'Bituminous paint is applied uniformly by a spraying machine. The mean thickness of the coating is 70 μm.',
       icon: <Droplets size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/cvseznc4l2molf7ve1v4',
+      imageUrl: '/lovable-uploads/placeholders/0B1A9906.JPG',
       details: [
         'UV-resistant coating extends service life in all environments',
         'Environmentally friendly bitumen formula minimizes impact',
@@ -158,7 +150,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Quality Testing',
       description: 'The pipes are rigorously tested on all predefined parameters to ensure the highest quality standards.',
       icon: <CircleCheck size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/yyzyxwtjb0k6cqgqxdsk',
+      imageUrl: '/lovable-uploads/placeholders/testing.jpg',
       details: [
         'Multi-stage quality assurance protocols exceed industry standards',
         'Statistical process control identifies trends before issues occur',
@@ -170,7 +162,7 @@ const DIPipesManufacturing: React.FC = () => {
       title: 'Storage',
       description: 'The quality-approved pipes are stacked in a controlled environment and marked for transportation',
       icon: <Warehouse size={24} />,
-      imageUrl: 'https://res.cloudinary.com/dada5hjp3/image/upload/f_auto,q_auto/v1/dip%20manufacturing%20process/toj5gxmivwq3ukbvfzlk',
+      imageUrl: '/lovable-uploads/placeholders/Storage.JPG',
       details: [
         'Weather-protected storage prevents damage before installation',
         'Computerized inventory management ensures traceability',
@@ -236,21 +228,18 @@ const DIPipesManufacturing: React.FC = () => {
                 }`}
                 whileHover={{ y: -5 }}
               >
-                {/* Preload thumbnail images for overview */}
+                {/* Preload images for smoother transitions */}
                 {index !== activeStep && (
                   <div className="w-8 h-8 mb-2 overflow-hidden rounded-full opacity-0 absolute">
-                    <img 
-                      src={getOptimizedUrl(step.imageUrl, 'thumbnail')} 
-                      alt="" 
-                      width="32" 
-                      height="32" 
+                    <img
+                      src={getOptimizedUrl(step.imageUrl)}
+                      alt=""
+                      width="32"
+                      height="32"
                       loading="lazy"
                       onLoad={() => {
-                        // This preloads the thumbnails in the background
-                        if (!loadedImages.has(index)) {
-                          const fullImg = new Image();
-                          fullImg.src = getOptimizedUrl(step.imageUrl, 'preview');
-                        }
+                        // Mark this image as preloaded
+                        setLoadedImages(prev => new Set([...prev, index]));
                       }}
                     />
                   </div>
@@ -299,30 +288,32 @@ const DIPipesManufacturing: React.FC = () => {
               className="bg-card border border-border rounded-xl overflow-hidden shadow-lg"
             >
               <div className="grid md:grid-cols-2 h-full">
-                {/* Image Side with Progressive Loading */}
+                {/* Image Side */}
                 <div className="relative h-[250px] md:h-full overflow-hidden">
-                  {/* Low quality placeholder */}
-                  <img 
-                    src={getOptimizedUrl(processSteps[activeStep].imageUrl, 'lowQuality')}
-                    alt={processSteps[activeStep].title + " placeholder"}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isImageLoaded ? 'opacity-0' : 'opacity-100'}`}
-                    style={{ filter: 'blur(10px)' }}
-                    loading="eager"
-                  />
-                  
-                  {/* Main image with lazy loading */}
-                  <img 
-                    src={getOptimizedUrl(processSteps[activeStep].imageUrl, 'full')}
-                    alt={processSteps[activeStep].title}
+                  {/* Main image */}
+                  <img
+                    src={getOptimizedUrl(processSteps[activeStep].imageUrl)}
+                    alt={`${processSteps[activeStep].title} - DI Pipe Manufacturing Process`}
                     className={`w-full h-full object-cover transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
                     loading="lazy"
                     onLoad={() => setIsImageLoaded(true)}
+                    onError={(e) => {
+                      console.error(`Failed to load image: ${processSteps[activeStep].imageUrl}`);
+                      setIsImageLoaded(true); // Still show the content even if image fails
+                    }}
                   />
-                  
+
+                  {/* Loading placeholder */}
+                  {!isImageLoaded && (
+                    <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
+                      <div className="text-gray-400 dark:text-gray-500">Loading...</div>
+                    </div>
+                  )}
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 p-6">
                     <div className="inline-block bg-rashmi-red text-white text-sm font-medium px-3 py-1 rounded-full mb-2">
-                      {processSteps[activeStep].title}
+                      Step {activeStep + 1}
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-1">{processSteps[activeStep].title}</h3>
                   </div>
