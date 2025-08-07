@@ -828,7 +828,7 @@ const VendorRegistration = () => {
                         controlsList="nodownload nofullscreen noremoteplayback"
                       >
                         <source
-                          src="https://res.cloudinary.com/dada5hjp3/video/upload/v1744700600/0_Business_Agreement_1080x1920_tzq7hk.mp4"
+                          src="/lovable-uploads/Vendor-video.mp4"
                           type="video/mp4"
                         />
                         <track
