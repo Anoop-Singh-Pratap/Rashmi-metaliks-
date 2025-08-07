@@ -71,6 +71,18 @@ export default {
 					dark: '#202020',
 					gray: '#3A3A3A',
 					light: '#F5F5F5',
+				},
+				cream: {
+					50: '#FFFEF7',
+					100: '#FFFBEB',
+					200: '#FEF3C7',
+					300: '#FDE68A',
+					400: '#FCD34D',
+					500: '#F59E0B',
+					600: '#D97706',
+					700: '#B45309',
+					800: '#92400E',
+					900: '#78350F',
 				}
 			},
 			borderRadius: {

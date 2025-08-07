@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, FileText, Search, Filter, Home, X, Award, Globe, Check, Shield, Download, Eye, ClipboardCheck, Calendar, ExternalLink } from 'lucide-react';
+import { ArrowLeft, FileText, Search, Filter, Home, X, Award, Globe, Check, Shield, Download, Eye, ClipboardCheck, Calendar, ExternalLink, FolderOpen, File, ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
@@ -149,73 +149,76 @@ const approvals = [
   }
 ];
 
-// Certificate data - Verified list of 21 certificates
+// Certificate data - Comprehensive audit-based data with all certificates from folders
 const certifications: Certificate[] = [
   // ISO Management System Certifications (4)
   {
     id: 1,
-    title: "BSI ISO 9001:2015",
+    title: "BSI ISO 9001:2015 Quality Management System Certificate",
     category: "management",
     region: "global",
     description: "Quality Management System certification ensuring our products meet customer and regulatory requirements",
     issueDate: "2021-12-30",
-    expiryDate: "2023-12-30", // Note: Expiry dates might need updating if source website changes
+    expiryDate: "2024-12-30",
     certificateNumber: "FM 729671",
+    standard: "ISO 9001:2015",
     featured: true,
-    certificationBody: "BSI",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/ISO-9001-2015-Cert.pdf",
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/ISO-9001-2015-Cert-725x1024.jpg",
+    certificationBody: "BSI (British Standards Institution)",
+    fileUrl: "/certificates/ISO 9001.pdf",
+    thumbnailUrl: "/certificates/ISO 9001.png",
     pdfSize: "1.2 MB"
   },
   {
     id: 2,
-    title: "BSI ISO 14001",
+    title: "BSI ISO 14001:2015 Environmental Management System Certificate",
     category: "management",
     region: "global",
     description: "Environmental Management System certification ensuring our operations minimize environmental impact",
     issueDate: "2020-12-30",
-    expiryDate: "2023-12-30", // Note: Expiry dates might need updating
+    expiryDate: "2024-12-30",
     certificateNumber: "EMS 729670",
+    standard: "ISO 14001:2015",
     featured: true,
-    certificationBody: "BSI",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2021/12/02.-EMS-14001-RML-Valid-till-30-12-2023.pdf",
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2021/12/BIS-14001-Rashmi-Metaliks-1.jpg",
+    certificationBody: "BSI (British Standards Institution)",
+    fileUrl: "/certificates/ISO 14001.pdf",
+    thumbnailUrl: "/certificates/ISO 14001.png",
     pdfSize: "1.1 MB"
   },
   {
     id: 3,
-    title: "BSI ISO 45001",
+    title: "BSI ISO 45001:2018 Occupational Health and Safety Management System Certificate",
     category: "management",
     region: "global",
     description: "Occupational Health and Safety Management System certification ensuring a safe workplace for all employees",
     issueDate: "2021-01-15",
-    expiryDate: "2023-12-30", // Note: Expiry dates might need updating
+    expiryDate: "2024-12-30",
     certificateNumber: "OHS 729672",
+    standard: "ISO 45001:2018",
     featured: true,
-    certificationBody: "BSI",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2021/12/OHS-45001.pdf",
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2021/12/BSI-45001-1.jpg",
+    certificationBody: "BSI (British Standards Institution)",
+    fileUrl: "/certificates/ISO 45001.pdf",
+    thumbnailUrl: "/certificates/ISO 45001.png",
     pdfSize: "950 KB"
   },
   {
     id: 4,
-    title: "WRAS OPC Certificate",
-    category: "management", // Kept as management as per code, list didn't specify
+    title: "WRAS Approved Material Certificate - Ordinary Portland Cement",
+    category: "management",
     region: "europe",
     description: "Water Regulations Advisory Scheme certification for Ordinary Portland Cement used in our products",
     issueDate: "2022-03-10",
     expiryDate: "2025-03-10",
-    certificationBody: "WRAS",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/WRAS-OPC.pdf",
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/WRAS-OPC_page-0001-724x1024.jpg",
+    certificationBody: "WRAS (Water Regulations Advisory Scheme)",
+    fileUrl: "/certificates/WRAS-OPC.pdf",
+    thumbnailUrl: "/certificates/WRAS-OPC.png",
     pdfSize: "1.0 MB"
   },
 
-  // Kitemark Certifications (2)
+  // Product Certifications - Kitemark (2)
   {
     id: 5,
-    title: "Kitemark EN 545",
-    category: "product", // Kitemark is product related
+    title: "BSI Kitemark Certificate for EN 545 Compliance",
+    category: "product",
     region: "europe",
     description: "BSI Kitemark certification confirming our DI pipes, fittings and flanged pipes comply with EN 545 standard for water pipelines",
     issueDate: "2022-02-15",
@@ -223,15 +226,15 @@ const certifications: Certificate[] = [
     certificateNumber: "KM 793696",
     standard: "EN 545:2010",
     featured: true,
-    certificationBody: "BSI",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/KM-793696-001-EN-545..pdf", // Corrected link from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/KM-793696-001-EN-545._page-0001-724x1024.jpg", // Corrected link from list
+    certificationBody: "BSI (British Standards Institution)",
+    fileUrl: "/certificates/KM 793696 - 001 EN 545..pdf",
+    thumbnailUrl: "/certificates/KM 793696 - 001 EN 545.png",
     pdfSize: "1.3 MB"
   },
   {
     id: 6,
-    title: "Kitemark ISO 2531",
-    category: "product", // Kitemark is product related
+    title: "BSI Kitemark Certificate for ISO 2531 Compliance",
+    category: "product",
     region: "global",
     description: "BSI Kitemark certification confirming our DI pipes, fittings and flanged pipes comply with ISO 2531 international standard",
     issueDate: "2022-02-15",
@@ -239,210 +242,156 @@ const certifications: Certificate[] = [
     certificateNumber: "KM 793698",
     standard: "ISO 2531:2009",
     featured: true,
-    certificationBody: "BSI",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/KM-793698-001-ISO-2531..pdf", // Corrected link from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/KM-793698-001-ISO-2531._page-0001-724x1024.jpg", // Corrected link from list
+    certificationBody: "BSI (British Standards Institution)",
+    fileUrl: "/certificates/KM 793698 - 001 ISO 2531..pdf",
+    thumbnailUrl: "/certificates/KM 793698 - 001 ISO 2531.png",
     pdfSize: "1.2 MB"
   },
 
-  // NABL Certification (1)
+
+  // DI Pipe Certificates (4)
   {
     id: 7,
-    title: "NABL Certificate TC-8688", // Title corrected from list
-    category: "laboratory",
-    region: "asia",
-    description: "National Accreditation Board for Testing and Calibration Laboratories certification for our testing facilities",
-    issueDate: "2022-01-20",
-    expiryDate: "2024-01-20", // Note: Expiry dates might need updating
-    certificateNumber: "TC-8688",
-    certificationBody: "NABL",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/NABL-certificate-TC-8688.pdf.pdf", // Corrected link from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/NABL-certificate-TC-8688.pdf_page-0001-724x1024.jpg", // Corrected link from list
-    pdfSize: "2.1 MB"
-  },
-
-  // DI Pipe Product Certificates (5)
-  {
-    id: 8, // Renumbered IDs
-    title: "DI Pipe Product Certificate #1",
-    category: "pipes", // Changed category based on user list section
-    region: "global", // Assuming global if not specified
-    description: "Product certificate for DI pipes conforming to international standards (Ref: 1a-01)",
-    certificateNumber: "1a-01", // Added from implied title
-    certificationBody: "Bureau Veritas", // Assuming based on similar certs
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1a-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1a-01-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.3 MB" // Size inferred from similar certs
-  },
-  {
-    id: 9,
-    title: "DI Pipe Product Certificate #2",
+    title: "Bureau Veritas Product Certificate 1053_001_REV7",
     category: "pipes",
     region: "global",
-    description: "Product certificate for DI pipes conforming to international standards (Ref: 1a-02)",
-    certificateNumber: "1a-02",
-    certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1a-02-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1a-02-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.2 MB"
-  },
-  {
-    id: 10,
-    title: "DI Pipe Product Certificate #3",
-    category: "pipes",
-    region: "global",
-    description: "Product certificate for DI pipes conforming to international standards (Ref: 2a-01)",
-    certificateNumber: "2a-01",
-    certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/2a-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/2a-01-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.1 MB"
-  },
-  {
-    id: 11,
-    title: "DI Pipe International Certificate",
-    category: "pipes",
-    region: "global",
-    description: "Product certificate for DI pipes conforming to international standards (Ref: 975_001_REV5_ENG)",
-    certificateNumber: "975_001_REV5_ENG",
-    certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/975_001_REV5_ENG-signed-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/975_001_REV5_ENG-signed-01-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.4 MB"
-  },
-   {
-    id: 12, // Corrected ID
-    title: "SASO Certificate", // Title corrected from list
-    category: "pipes",
-    region: "middleeast",
-    description: "Saudi Standards, Metrology and Quality Organization certification for our Ductile Iron Pipes",
-    issueDate: "2022-05-10",
-    expiryDate: "2024-05-10", // Note: Expiry dates might need updating
-    standard: "SASO 1020, SASO 1014, SASO 1016/1017",
-    certificationBody: "SASO",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/Rashmi_SASO_Certificate.pdf", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/Rashmi_SASO_Certificate_page-0001-725x1024.jpg", // Link corrected from list
-    pdfSize: "1.7 MB",
-    featured: true
-  },
-
-  // BIS 8329:2000 Certification (1)
-  {
-    id: 13, // Corrected ID
-    title: "BIS Renewal Certificate", // Title corrected from list
-    category: "pipes", // Changed category based on list section
-    region: "asia",
-    description: "Bureau of Indian Standards certification for Ductile Iron Pipes for Water and Sewage Applications (IS 8329:2000)",
-    standard: "IS 8329:2000",
-    certificationBody: "BIS",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/BIS-renewal_page-0001-scaled.jpg", // Link corrected from list (was PDF link before)
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/BIS-renewal_page-0001-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.5 MB" // Size inferred
-  },
-
-  // DI Fitting & Flanging Unit Certificates (8)
-  {
-    id: 14, // Corrected ID
-    title: "BIS License for Fitting Plant",
-    category: "fittings",
-    region: "asia",
-    description: "Bureau of Indian Standards license for the production of DI fittings",
-    certificationBody: "BIS",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/BIS-License-Fitting-plant-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/BIS-License-Fitting-plant-01-718x1024.jpg", // Link corrected from list
-    pdfSize: "1.6 MB" // Size inferred
-  },
-  {
-    id: 15, // Corrected ID
-    title: "BIS License for Flanging Unit",
-    category: "fittings",
-    region: "asia",
-    description: "Bureau of Indian Standards license for the production of flanged pipes",
-    certificationBody: "BIS",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/BIS-License-copy-Flanging-unit-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/BIS-License-copy-Flanging-unit-01-718x1024.jpg", // Link corrected from list
-    pdfSize: "1.5 MB" // Size inferred
-  },
-  {
-    id: 16, // Corrected ID
-    title: "International Technical Certification #1",
-    category: "fittings", // Changed category based on list section
-    region: "global",
-    description: "Product certificate for DI fittings conforming to international standards (Ref: 1319_001_REV0_ENG)",
-    certificateNumber: "1319_001_REV0_ENG",
-    certificationBody: "Bureau Veritas", // Assuming
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1319_001_REV0_ENG-signed-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1319_001_REV0_ENG-signed-01-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.3 MB" // Size inferred
-  },
-  {
-    id: 17, // Corrected ID
-    title: "International Technical Certification #2",
-    category: "fittings",
-    region: "global",
-    description: "Product certificate for DI fittings conforming to international standards (Ref: 1318_002_REV0_ENG)",
-    certificateNumber: "1318_002_REV0_ENG",
-    certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1318_002_REV0_ENG-signed-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1318_002_REV0_ENG-signed-01-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.2 MB"
-  },
-  {
-    id: 18, // Corrected ID
-    title: "International Technical Certification #3",
-    category: "fittings",
-    region: "global",
-    description: "Product certificate for DI fittings conforming to international standards (Ref: 1318_001_REV0_ENG)",
-    certificateNumber: "1318_001_REV0_ENG",
-    certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1318_001_REV0_ENG-signed-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1318_001_REV0_ENG-signed-01-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.2 MB"
-  },
-  {
-    id: 19, // Corrected ID
-    title: "International Technical Certification #4",
-    category: "fittings",
-    region: "global",
-    description: "Product certificate for DI fittings conforming to international standards (Ref: 1319_001_REV0_ENG-1)",
-    certificateNumber: "1319_001_REV0_ENG-1",
-    certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1319_001_REV0_ENG-signed-1-01-scaled.jpg", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/06/1319_001_REV0_ENG-signed-1-01-724x1024.jpg", // Link corrected from list
-    pdfSize: "1.3 MB"
-  },
-  {
-    id: 20, // Corrected ID
-    title: "International Technical Certification #5 (Rev4) - Page 1",
-    category: "product", // Broad category for multi-standard cert
-    region: "global",
-    description: "Comprehensive certification verifying compliance with multiple international standards (Page 1)",
-    certificateNumber: "1053_001_REV4",
+    description: "Comprehensive certification verifying compliance with multiple international standards for ductile iron pipes",
+    certificateNumber: "1053_001_REV7_ENG",
     standard: "EN 545:2010, EN 598:2007+A1:2009, ISO 2531:2009, ISO 7186:2011",
-    issueDate: "2023-08-31",
-    expiryDate: "2026-08-31", // Note: Expiry dates might need updating
     certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/1053_001_REV4_ENG-signed.pdf", // Link corrected from list
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/1053_001_REV4_ENG-signed_page-0001-724x1024.jpg", // Link corrected from list
+    fileUrl: "/certificates/1053_001_REV7_ENG-signed.pdf",
+    thumbnailUrl: "/certificates/1053_001_REV7_ENG-signed.png",
     pdfSize: "2.5 MB",
     featured: true
   },
   {
-    id: 21, // Corrected ID
-    title: "International Technical Certification #5 (Rev4) - Page 2",
-    category: "product",
+    id: 8,
+    title: "Bureau Veritas Product Certificate 975_001_REV8",
+    category: "pipes",
     region: "global",
-    description: "Comprehensive certification verifying compliance with multiple international standards (Page 2)",
-    certificateNumber: "1053_001_REV4",
-    standard: "EN 545:2010, EN 598:2007+A1:2009, ISO 2531:2009, ISO 7186:2011",
-    issueDate: "2023-08-31",
-    expiryDate: "2026-08-31",
+    description: "Product certificate for DI pipes conforming to international standards",
+    certificateNumber: "975_001_REV8_ENG",
     certificationBody: "Bureau Veritas",
-    fileUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/1053_001_REV4_ENG-signed.pdf#page=2", // Link corrected from list (added page fragment)
-    thumbnailUrl: "https://rashmimetaliks.com/wp-content/uploads/2023/09/1053_001_REV4_ENG-signed_page-0002-724x1024.jpg", // Link corrected from list
-    pdfSize: "2.5 MB"
-    // Note: Not marking page 2 as featured
-  }
+    fileUrl: "/certificates/975_001_REV8_ENG-signed.pdf",
+    thumbnailUrl: "/certificates/975_001_REV8_ENG-signed.png",
+    pdfSize: "1.4 MB"
+  },
+  {
+    id: 9,
+    title: "Bureau Veritas Product Certificate 975_002_REV8",
+    category: "pipes",
+    region: "global",
+    description: "Product certificate for DI pipes conforming to international standards",
+    certificateNumber: "975_002_REV8_ENG",
+    certificationBody: "Bureau Veritas",
+    fileUrl: "/certificates/975_002_REV8_ENG-signed.pdf",
+    thumbnailUrl: "/certificates/975_002_REV8_ENG-signed.png",
+    pdfSize: "1.3 MB"
+  },
+  {
+    id: 10,
+    title: "SASO Quality Mark Certificate for Ductile Iron Pipes",
+    category: "pipes",
+    region: "middleeast",
+    description: "Saudi Standards, Metrology and Quality Organization certification for our Ductile Iron Pipes",
+    issueDate: "2022-05-10",
+    expiryDate: "2025-05-10",
+    standard: "SASO 1020, SASO 1014, SASO 1016/1017",
+    certificationBody: "SASO (Saudi Standards, Metrology and Quality Organization)",
+    fileUrl: "/certificates/Rashmi_SASO_Certificate.pdf",
+    thumbnailUrl: "/certificates/Rashmi_SASO_Certificate.png",
+    pdfSize: "1.7 MB",
+    featured: true
+  },
+  // Laboratory Certification (1)
+  {
+    id: 11,
+    title: "Technical Certificate TC-15394",
+    category: "laboratory",
+    region: "global",
+    description: "Technical certification for testing and quality assurance procedures",
+    certificateNumber: "TC-15394",
+    certificationBody: "Technical Certification Body",
+    fileUrl: "/certificates/Certificate TC-15394.pdf.pdf",
+    thumbnailUrl: "/certificates/Certificate TC-15394.png",
+    pdfSize: "1.1 MB"
+  },
+
+  // Approval Certificate (1)
+  {
+    id: 12,
+    title: "Official Endorsement Certificate",
+    category: "approval",
+    region: "global",
+    description: "Official endorsement certificate validating our quality standards",
+    certificationBody: "Certification Authority",
+    fileUrl: "/certificates/17) Endorsement- 19.pdf",
+    thumbnailUrl: "/certificates/17) Endorsement- 19.png",
+    pdfSize: "950 KB"
+  },
+
+
+
+  // DI Fitting & Flanging Unit Certificates (5)
+  {
+    id: 13,
+    title: "BIS License for Ductile Iron Fittings Manufacturing Plant",
+    category: "fittings",
+    region: "asia",
+    description: "Bureau of Indian Standards license for the production of DI fittings",
+    certificationBody: "BIS (Bureau of Indian Standards)",
+    fileUrl: "/certificates/DI Fittings/BIS License-Fitting plant.pdf",
+    thumbnailUrl: "/certificates/DI Fittings/BIS License-Fitting plant-01.jpg",
+    pdfSize: "1.6 MB"
+  },
+  {
+    id: 14,
+    title: "BIS License for Flanging Unit Operations",
+    category: "fittings",
+    region: "asia",
+    description: "Bureau of Indian Standards license for the production of flanged pipes",
+    certificationBody: "BIS (Bureau of Indian Standards)",
+    fileUrl: "/certificates/DI Fittings/BIS License copy- Flanging unit.pdf",
+    thumbnailUrl: "/certificates/DI Fittings/BIS License copy- Flanging unit-01.jpg",
+    pdfSize: "1.5 MB"
+  },
+  {
+    id: 15,
+    title: "Bureau Veritas DI Fittings Certificate 1319_001_REV0",
+    category: "fittings",
+    region: "global",
+    description: "Product certificate for DI fittings conforming to international standards",
+    certificateNumber: "1319_001_REV0_ENG",
+    certificationBody: "Bureau Veritas",
+    fileUrl: "/certificates/DI Fittings/1319_001_REV0_ENG-signed.pdf",
+    thumbnailUrl: "/certificates/DI Fittings/1319_001_REV0_ENG-signed-01.jpg",
+    pdfSize: "1.3 MB"
+  },
+  {
+    id: 16,
+    title: "Bureau Veritas DI Fittings Certificate 1318_002_REV0",
+    category: "fittings",
+    region: "global",
+    description: "Product certificate for DI fittings conforming to international standards",
+    certificateNumber: "1318_002_REV0_ENG",
+    certificationBody: "Bureau Veritas",
+    fileUrl: "/certificates/DI Fittings/1318_002_REV0_ENG-signed.pdf",
+    thumbnailUrl: "/certificates/DI Fittings/1318_002_REV0_ENG-signed-01.jpg",
+    pdfSize: "1.2 MB"
+  },
+  {
+    id: 17,
+    title: "Bureau Veritas DI Fittings Certificate 1318_001_REV0",
+    category: "fittings",
+    region: "global",
+    description: "Product certificate for DI fittings conforming to international standards",
+    certificateNumber: "1318_001_REV0_ENG",
+    certificationBody: "Bureau Veritas",
+    fileUrl: "/certificates/DI Fittings/1318_001_REV0_ENG-signed.pdf",
+    thumbnailUrl: "/certificates/DI Fittings/1318_001_REV0_ENG-signed-01.jpg",
+    pdfSize: "1.2 MB"
+  },
+
 ];
 
 // Combined data for unified display
@@ -453,6 +402,8 @@ const allCertificateData: Certificate[] = [
     ...cert
   })),
 ];
+
+// Certificate data loaded successfully
 
 // Add custom animations for better performance
 const fadeInUpVariants = {
@@ -496,8 +447,29 @@ const Certifications = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<Certificate | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+  const [isDetailPanelOpen, setIsDetailPanelOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+
+  // Handle image loading errors
+  const handleImageError = (imageUrl: string) => {
+    setImageErrors(prev => new Set(prev).add(imageUrl));
+  };
+
+  // Handle certificate selection for slide-in panel
+  const handleCertificateSelect = (certificate: Certificate) => {
+    setSelectedItem(certificate);
+    setIsDetailPanelOpen(true);
+  };
+
+  // Close detail panel
+  const closeDetailPanel = () => {
+    setIsDetailPanelOpen(false);
+    setTimeout(() => setSelectedItem(null), 300); // Wait for animation to complete
+  };
+
+
   
   useEffect(() => {
     // Scroll to top when page loads
@@ -540,10 +512,12 @@ const Certifications = () => {
   const filteredItems = allCertificateData.filter(item => {
     const matchesCategory = selectedCategory === "all" || item.category === selectedCategory;
     const matchesRegion = selectedRegion === "all" || item.region === selectedRegion;
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesRegion && matchesSearch;
   });
+
+  // Debug logging removed - issue resolved
 
   // Handle modal close
   const closeModal = () => {
@@ -551,11 +525,11 @@ const Certifications = () => {
   };
 
   // Close modal when clicking outside
-  const handleModalClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      closeModal();
-    }
-  };
+  // const handleModalClick = (e: React.MouseEvent) => {
+  //   if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+  //     closeModal();
+  //   }
+  // };
   
   // Item icon based on category
   const getItemIcon = (category: string) => {
@@ -817,13 +791,14 @@ const Certifications = () => {
                           </motion.div>
                         )}
                         
-                        {cert.thumbnailUrl ? (
+                        {cert.thumbnailUrl && !imageErrors.has(cert.thumbnailUrl) ? (
                           <div className="h-60 overflow-hidden bg-gradient-to-b from-muted/30 dark:from-gray-700/30 to-white dark:to-gray-800 relative w-full p-0">
-                            <img 
-                              src={cert.thumbnailUrl} 
+                            <img
+                              src={cert.thumbnailUrl}
                               alt={`${cert.title} thumbnail`}
                               className="w-full h-full object-scale-down mx-auto"
                               style={{ maxWidth: "100%" }}
+                              onError={() => handleImageError(cert.thumbnailUrl!)}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-gray-800 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                           </div>
@@ -946,7 +921,7 @@ const Certifications = () => {
                   </button>
                 </div>
               ) : viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredItems.map((item, index) => (
                     <motion.div
                       key={item.id}
@@ -955,146 +930,208 @@ const Certifications = () => {
                       initial="hidden"
                       animate="visible"
                       whileHover={shouldReduceMotion ? {} : "hover"}
-                      className="bg-white dark:bg-gray-800 border border-border dark:border-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all group relative"
-                      style={{
-                        transform: "perspective(1000px) rotateY(0deg)",
-                        transformStyle: "preserve-3d",
-                        transition: "all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)"
-                      }}
+                      className="group cursor-pointer p-2"
                       role="button"
                       tabIndex={0}
-                      onClick={() => setSelectedItem(item)}
-                      onKeyPress={(e) => (e.key === 'Enter' || e.key === ' ') && setSelectedItem(item)}
+                      onClick={() => handleCertificateSelect(item)}
+                      onKeyPress={(e) => (e.key === 'Enter' || e.key === ' ') && handleCertificateSelect(item)}
                       aria-label={`View details of ${item.title}`}
+                      style={{
+                        minHeight: '450px',
+                        display: 'block',
+                        visibility: 'visible'
+                      }}
                     >
-                      {/* Certificate envelope flap with subtle gradient */}
-                      <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-rashmi-red/10 dark:from-rashmi-red/20 to-transparent z-10 after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-[1px] after:bg-rashmi-red/5 dark:after:bg-rashmi-red/10"></div>
-                      
-                      {/* Stamp-like element with improved design for featured items */}
-                      {item.featured && (
-                        <motion.div 
-                          className="absolute top-4 right-4 w-16 h-16 rounded-full bg-rashmi-red/5 dark:bg-rashmi-red/10 border border-rashmi-red/20 dark:border-rashmi-red/30 flex items-center justify-center z-20 shadow-sm"
-                          style={{ transformOrigin: "center center" }}
-                          initial={{ rotate: 12 }}
-                          whileHover={shouldReduceMotion ? {} : { rotate: 0, scale: 1.05 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                        >
-                          <motion.div className="text-rashmi-red dark:text-rashmi-red/90 text-center">
-                            <Award className="mx-auto" size={20} />
-                            <span className="text-[10px] uppercase font-bold tracking-wider mt-0.5 block">Featured</span>
-                          </motion.div>
-                        </motion.div>
-                      )}
-                      
-                      {item.thumbnailUrl ? (
-                        <div className="h-60 overflow-hidden bg-gradient-to-b from-muted/30 dark:from-gray-700/30 to-white dark:to-gray-800 relative w-full p-0">
-                          <img 
-                            src={item.thumbnailUrl} 
-                            alt={`${item.title} thumbnail`}
-                            className="w-full h-full object-scale-down mx-auto"
-                            style={{ maxWidth: "100%" }}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-gray-800 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        </div>
-                      ) : (
-                        <div className="h-60 bg-gradient-to-b from-muted/30 dark:from-gray-700/30 to-white dark:to-gray-800 flex items-center justify-center">
-                          <motion.div 
-                            className="w-24 h-24 rounded-full bg-muted/20 dark:bg-gray-700/50 flex items-center justify-center"
-                            whileHover={shouldReduceMotion ? {} : { rotate: 5, scale: 1.05 }}
-                            transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                          >
-                            {getItemIcon(item.category)}
-                          </motion.div>
-                        </div>
-                      )}
-                      
-                      {/* Card fold line with improved subtle styling */}
-                      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-border/70 dark:via-gray-600/70 to-transparent"></div>
-                      
-                      <div className="p-6 relative">
-                        <div className="flex mb-4">
-                          <div className="h-12 w-12 rounded-full bg-muted dark:bg-gray-700 flex items-center justify-center mr-3">
-                            {getItemIcon(item.category)}
-                          </div>
-                          {item.featured && !item.thumbnailUrl && (
-                            <div className="text-xs px-2 h-6 rounded bg-rashmi-red/10 dark:bg-rashmi-red/20 text-rashmi-red dark:text-rashmi-red/90 font-medium flex items-center">
-                              Featured
-                            </div>
-                          )}
-                        </div>
-                        
-                        <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white leading-tight min-h-[3rem] w-full">{item.title}</h3>
-                        <p className="text-sm text-muted-foreground dark:text-gray-300 mb-4 line-clamp-3">{item.description}</p>
-                        
-                        {/* Certificate metadata with improved layout */}
-                        <div className="space-y-2 mb-4">
-                          {item.certificationBody && (
-                            <div className="text-sm text-muted-foreground dark:text-gray-400 flex items-center">
-                              <span className="w-3 h-[1px] bg-muted-foreground/30 dark:bg-gray-500/50 mr-2"></span>
-                              Issued by <span className="font-semibold ml-1 text-gray-700 dark:text-gray-300">{item.certificationBody}</span>
-                            </div>
-                          )}
-                          
-                          {item.standard && (
-                            <div className="text-sm text-muted-foreground dark:text-gray-400 flex items-center">
-                              <span className="w-3 h-[1px] bg-muted-foreground/30 dark:bg-gray-500/50 mr-2"></span>
-                              Standard: <span className="font-semibold ml-1 text-gray-700 dark:text-gray-300">{item.standard}</span>
-                            </div>
-                          )}
-                          
-                          {item.issueDate && (
-                            <div className="text-sm text-muted-foreground dark:text-gray-400 flex items-center">
-                              <span className="w-3 h-[1px] bg-muted-foreground/30 dark:bg-gray-500/50 mr-2"></span>
-                              Issued: <span className="font-semibold ml-1 text-gray-700 dark:text-gray-300">{new Date(item.issueDate).toLocaleDateString()}</span>
-                            </div>
-                          )}
-                        </div>
-                        
-                        <motion.button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedItem(item);
+                      {/* Envelope Container - Fixed sizing */}
+                      <div className="relative w-full max-w-md mx-auto">
+
+                        {/* Envelope Base - Ensure visibility with inline styles */}
+                        <div
+                          className="relative rounded-lg shadow-lg group-hover:shadow-xl transition-all duration-300 overflow-visible min-h-[420px] w-full"
+                          style={{
+                            background: 'linear-gradient(to bottom right, #ef4444, #dc2626)',
+                            minHeight: '420px',
+                            width: '100%'
                           }}
-                          className="inline-flex items-center text-base font-medium text-rashmi-red dark:text-rashmi-red/90 hover:text-rashmi-red/80 dark:hover:text-rashmi-red/70"
-                          whileHover={shouldReduceMotion ? {} : { x: 3 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
                         >
-                          <Eye size={18} className="mr-1" />
-                          View Details
-                        </motion.button>
-                        
-                        {/* Download and View buttons */}
-                        {item.fileUrl && (
-                          <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/30 dark:border-gray-700/50">
-                            <a 
-                              href={item.fileUrl}
-                              download
-                              onClick={(e) => e.stopPropagation()}
-                              className="inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-md bg-muted/50 dark:bg-gray-700/70 hover:bg-muted dark:hover:bg-gray-700 transition-colors"
-                              title={`Download ${item.title} certificate`}
-                            >
-                              <Download size={14} className="mr-1.5" />
-                              Download
-                              {item.pdfSize && <span className="ml-1 text-muted-foreground dark:text-gray-400">({item.pdfSize})</span>}
-                            </a>
-                            
-                            <a 
-                              href={item.fileUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="inline-flex items-center text-sm font-medium px-3 py-1.5 rounded-md bg-muted/50 dark:bg-gray-700/70 hover:bg-muted dark:hover:bg-gray-700 transition-colors"
-                              title={`View ${item.title} certificate in browser`}
-                            >
-                              <ExternalLink size={14} className="mr-1.5" />
-                              View in Browser
-                            </a>
+
+                          {/* Envelope Flaps */}
+                          <div className="absolute inset-0">
+                            {/* Left flap */}
+                            <div
+                              className="absolute top-0 left-0 w-1/2 h-full transform origin-top-left rotate-0 transition-transform group-hover:rotate-1 shadow-inner"
+                              style={{
+                                background: 'linear-gradient(to bottom right, #f87171, #ef4444)'
+                              }}
+                            ></div>
+                            {/* Right flap */}
+                            <div
+                              className="absolute top-0 right-0 w-1/2 h-full transform origin-top-right rotate-0 transition-transform group-hover:-rotate-1 shadow-inner"
+                              style={{
+                                background: 'linear-gradient(to bottom left, #f87171, #ef4444)'
+                              }}
+                            ></div>
+                            {/* Bottom flap */}
+                            <div
+                              className="absolute bottom-0 left-0 right-0 h-1/3 shadow-lg"
+                              style={{
+                                background: 'linear-gradient(to top, #dc2626, #ef4444)'
+                              }}
+                            ></div>
+                            {/* Envelope seam lines */}
+                            <div
+                              className="absolute top-0 left-1/2 w-px h-full transform -translate-x-1/2"
+                              style={{ backgroundColor: 'rgba(185, 28, 28, 0.3)' }}
+                            ></div>
+                            <div
+                              className="absolute bottom-1/3 left-0 right-0 h-px"
+                              style={{ backgroundColor: 'rgba(185, 28, 28, 0.3)' }}
+                            ></div>
                           </div>
-                        )}
-                        
-                        {/* Bottom decorative edge */}
-                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-rashmi-red/20 dark:via-rashmi-red/30 to-transparent"></div>
+
+                          {/* Envelope Opening */}
+                          <div
+                            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4/5 h-3 rounded-b-sm shadow-inner"
+                            style={{
+                              background: 'linear-gradient(to bottom, #b91c1c, #991b1b)'
+                            }}
+                          ></div>
+
+                          {/* Featured Badge - Wax Seal Style */}
+                          {item.featured && (
+                            <motion.div
+                              className="absolute top-3 right-3 w-12 h-12 rounded-full flex items-center justify-center z-30 shadow-lg border-3 border-yellow-300"
+                              style={{
+                                background: 'linear-gradient(to bottom right, #facc15, #eab308)',
+                                color: '#b91c1c',
+                                boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.2)'
+                              }}
+                              initial={{ rotate: 12, scale: 0.9 }}
+                              whileHover={shouldReduceMotion ? {} : { rotate: 0, scale: 1 }}
+                              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                            >
+                              <Award size={16} className="drop-shadow-sm" />
+                            </motion.div>
+                          )}
+
+                          {/* Certificate Document Emerging from Envelope - Fixed positioning */}
+                          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-30">
+
+                            {/* Certificate Paper */}
+                            <motion.div
+                              className="relative"
+                              initial={{ y: 10, opacity: 0.9 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4 }}
+                              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                            >
+                              {/* Certificate Document - Ensure visibility */}
+                              {item.thumbnailUrl && !imageErrors.has(item.thumbnailUrl) ? (
+                                <div className="w-52 h-64 bg-white border-2 border-gray-300 rounded-sm shadow-xl relative overflow-hidden transform rotate-1 group-hover:rotate-0 transition-transform duration-300"
+                                  style={{
+                                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                                    minWidth: '208px',
+                                    minHeight: '256px'
+                                  }}
+                                >
+
+                                  {/* Certificate Image - High Resolution */}
+                                  <img
+                                    src={item.thumbnailUrl}
+                                    alt={`${item.title} thumbnail`}
+                                    className="w-full h-full object-contain p-2"
+                                    loading="lazy"
+                                    onError={() => handleImageError(item.thumbnailUrl!)}
+                                  />
+
+                                  {/* Subtle paper shadow overlay */}
+                                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 pointer-events-none"></div>
+
+                                  {/* Certificate type indicator */}
+                                  <div
+                                    className="absolute top-2 right-2 w-6 h-6 text-white rounded-full flex items-center justify-center shadow-sm text-xs font-bold"
+                                    style={{ backgroundColor: '#ef4444' }}
+                                  >
+                                    {item.category.charAt(0).toUpperCase()}
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="w-52 h-64 bg-white border-2 border-gray-300 rounded-sm shadow-xl relative overflow-hidden transform rotate-1 group-hover:rotate-0 transition-transform duration-300 flex items-center justify-center"
+                                  style={{
+                                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                                    minWidth: '208px',
+                                    minHeight: '256px'
+                                  }}
+                                >
+
+                                  {/* Fallback content */}
+                                  <div className="text-center z-10">
+                                    <File className="w-16 h-16 text-gray-400 mx-auto mb-3" />
+                                    <div className="text-sm text-gray-500 px-2 font-medium">Certificate</div>
+                                    <div className="text-xs text-gray-400 px-2 mt-1">Preview not available</div>
+                                  </div>
+
+                                  {/* Certificate type indicator */}
+                                  <div
+                                    className="absolute top-2 right-2 w-6 h-6 text-white rounded-full flex items-center justify-center shadow-sm text-xs font-bold"
+                                    style={{ backgroundColor: '#ef4444' }}
+                                  >
+                                    {item.category.charAt(0).toUpperCase()}
+                                  </div>
+                                </div>
+                              )}
+                            </motion.div>
+                          </div>
+
+                          {/* Certificate Title and Info - Ensure visibility */}
+                          <div className="absolute bottom-4 left-0 right-0 text-center px-4 z-20">
+                            <div
+                              className="backdrop-blur-sm rounded-lg p-3 mx-2"
+                              style={{ backgroundColor: 'rgba(127, 29, 29, 0.8)' }}
+                            >
+                              <h3 className="text-sm font-bold text-white mb-1 line-clamp-2 leading-tight">
+                                {item.title}
+                              </h3>
+
+                              {/* Certificate Body */}
+                              {item.certificationBody && (
+                                <p className="text-xs text-red-100 mb-1 line-clamp-1">
+                                  Issued by {item.certificationBody}
+                                </p>
+                              )}
+
+                              {/* Certificate Number */}
+                              {item.certificateNumber && (
+                                <p
+                                  className="text-xs font-mono px-2 py-1 rounded text-center border"
+                                  style={{
+                                    color: '#fecaca',
+                                    backgroundColor: 'rgba(153, 27, 27, 0.6)',
+                                    borderColor: 'rgba(185, 28, 28, 0.5)'
+                                  }}
+                                >
+                                  {item.certificateNumber}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* View Details Button */}
+                          <motion.div
+                            className="absolute bottom-2 right-2 px-3 py-1 bg-white/95 dark:bg-gray-800/95 border rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm text-xs font-medium"
+                            style={{
+                              borderColor: '#fca5a5',
+                              color: '#dc2626'
+                            }}
+                            whileHover={shouldReduceMotion ? {} : { scale: 1.05, x: 2 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                          >
+                            <Eye size={12} className="mr-1" />
+                            View Details
+                          </motion.div>
+                        </div>
                       </div>
+
                     </motion.div>
                   ))}
                 </div>
@@ -1326,49 +1363,58 @@ const Certifications = () => {
           </div>
         </motion.section>
         
-        {/* Certificate Detail Modal */}
+        {/* Certificate Detail Slide-in Panel */}
         <AnimatePresence>
-          {selectedItem && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm z-[10000] flex items-center justify-center p-4"
-              onClick={handleModalClick}
-              style={{ 
-                touchAction: "pan-y",
-                WebkitOverflowScrolling: "touch",
-                overscrollBehavior: "contain"
-              }}
-            >
-              <motion.div 
-                ref={modalRef}
-                initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.9, opacity: 0, y: 10 }}
-                transition={{ 
-                  type: "spring",
-                  stiffness: 500,
-                  damping: 30
-                }}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-auto relative bg-dot-pattern dark:bg-dot-pattern-dark"
-                style={{
-                  maxHeight: "calc(100vh - 40px)"
-                }}
-              >
-                {/* Certificate border */}
-                <div className="absolute inset-0 border-[12px] border-rashmi-red/5 dark:border-rashmi-red/10 rounded-lg pointer-events-none"></div>
+          {isDetailPanelOpen && selectedItem && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
+                onClick={closeDetailPanel}
+              />
 
-                <div className="sticky top-0 bg-white dark:bg-gray-800 z-10 p-4 border-b border-border dark:border-gray-700 flex justify-between items-center">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{selectedItem.title}</h3>
-                  <button 
-                    onClick={closeModal}
-                    className="p-1 rounded-full hover:bg-muted-foreground/10 dark:hover:bg-gray-700/50"
-                  >
-                    <X size={20} className="text-gray-500 dark:text-gray-400" />
-                  </button>
+              {/* Slide-in Panel */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                className="fixed top-0 right-0 h-full w-full max-w-2xl bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-y-auto"
+              >
+                {/* Panel Header */}
+                <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-6 z-10">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-800 dark:to-amber-700 rounded-lg flex items-center justify-center">
+                        <FolderOpen className="w-5 h-5 text-amber-600 dark:text-amber-300" />
+                      </div>
+                      <div>
+                        <h2 className="text-xl font-bold text-gray-900 dark:text-white line-clamp-2">{selectedItem.title}</h2>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {selectedItem.category === 'management' ? 'Management System Certificate' :
+                           selectedItem.category === 'product' ? 'Product Certificate' :
+                           selectedItem.category === 'pipes' ? 'DI Pipe Certificate' :
+                           selectedItem.category === 'fittings' ? 'DI Fitting Certificate' :
+                           selectedItem.category === 'laboratory' ? 'Laboratory Certificate' :
+                           selectedItem.category === 'approval' ? 'Approval Certificate' : 'Certificate'}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={closeDetailPanel}
+                      className="w-8 h-8 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors"
+                    >
+                      <X className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    </button>
+                  </div>
                 </div>
+
+                {/* Panel Content */}
+                <div className="p-6 space-y-6">
                 
                 <div className="p-6 relative">
                   {/* Certificate header with decorative elements */}
@@ -1403,13 +1449,14 @@ const Certifications = () => {
                   </div>
                   
                   {/* Certificate Thumbnail/Preview - Centered with frame */}
-                  {selectedItem.thumbnailUrl && (
+                  {selectedItem.thumbnailUrl && !imageErrors.has(selectedItem.thumbnailUrl) && (
                     <div className="mb-6 flex justify-center">
                       <div className="relative p-2 bg-white border border-muted rounded-sm shadow-sm">
-                        <img 
-                          src={selectedItem.thumbnailUrl} 
+                        <img
+                          src={selectedItem.thumbnailUrl}
                           alt={`${selectedItem.title} Certificate`}
                           className="max-h-64 object-contain"
+                          onError={() => handleImageError(selectedItem.thumbnailUrl!)}
                         />
                         {/* Corner decorations */}
                         <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-rashmi-red/20"></div>
@@ -1515,19 +1562,42 @@ const Certifications = () => {
                       </div>
                     )}
                     
-                    {/* Decorative seal/watermark */}
-                    <div className="absolute bottom-6 right-8 w-24 h-24 opacity-5 pointer-events-none">
-                      <div className="w-full h-full rounded-full border-8 border-rashmi-red flex items-center justify-center">
-                        <Award size={40} className="text-rashmi-red" />
+                    {/* Download Actions */}
+                    {selectedItem.fileUrl && (
+                      <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <a
+                          href={selectedItem.fileUrl}
+                          download
+                          className="flex items-center justify-center px-6 py-3 text-white rounded-lg transition-colors"
+                          style={{
+                            backgroundColor: '#dc2626',
+                          }}
+                          onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#b91c1c'}
+                          onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#dc2626'}
+                        >
+                          <Download className="w-4 h-4 mr-2" />
+                          Download PDF
+                          {selectedItem.pdfSize && <span className="ml-2 text-sm opacity-90">({selectedItem.pdfSize})</span>}
+                        </a>
+                        <a
+                          href={selectedItem.fileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center px-6 py-3 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          View in Browser
+                        </a>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
+                </div>
               </motion.div>
-            </motion.div>
+            </>
           )}
         </AnimatePresence>
-        
+
         <Footer />
       </div>
     </>
