@@ -363,7 +363,7 @@ const AboutRashmi = () => {
       <main>
         {/* Hero Section with Video Background */}
         <section className="relative h-screen overflow-hidden pt-20">
-          {/* Cloudinary Video Background */}
+          {/* Local Video Background */}
           <div className="absolute inset-0 w-full h-full z-0">
             <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
               <video
@@ -379,7 +379,7 @@ const AboutRashmi = () => {
                   top: 0, 
                   left: 0 
                 }}
-                src="https://res.cloudinary.com/dada5hjp3/video/upload/f_auto:video,q_auto/v1/VLFP_Fittings/gmhimvhvgusli6syp6pk"
+                src="/lovable-uploads/About-rashmi-header.mp4"
                 title="Rashmi Metaliks Video Presentation"
                 preload="auto"
                 onCanPlay={(e) => {
@@ -911,7 +911,7 @@ const AboutRashmi = () => {
                 e.currentTarget.play().catch(error => console.log("Autoplay prevented:", error));
               }}
             >
-              <source src="https://res.cloudinary.com/dada5hjp3/video/upload/f_auto:video,q_auto/v1/Rashmi%20Metaliks/ugu9wvskab56vwewo0dl" type="video/mp4" />
+              <source src="/lovable-uploads/video-journey.mp4" type="video/mp4" />
             </video>
           </div>
           

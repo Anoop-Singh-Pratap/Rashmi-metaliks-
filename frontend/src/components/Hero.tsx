@@ -80,7 +80,7 @@ const Hero = () => {
           }}
         >
           <source 
-            src="https://res.cloudinary.com/dada5hjp3/video/upload/f_auto:video,q_auto/video-hero_d0kgi3" 
+            src="/lovable-uploads/video-hero.mp4" 
             type="video/mp4" 
           />
           Your browser does not support the video tag.

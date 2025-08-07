@@ -586,7 +586,7 @@ const CSR = () => {
   useEffect(() => {
     // Create video element for preloading
     const video = document.createElement('video');
-    video.src = "https://res.cloudinary.com/dada5hjp3/video/upload/v1744694427/6950522_Wind_Turbines_Towering_1920x1080_qlvseg.mp4";
+    video.src = "/lovable-uploads/CSR-page.mp4";
     video.muted = true;
     video.preload = "auto";
     
@@ -765,7 +765,7 @@ const CSR = () => {
             className="fixed inset-0 object-cover -z-10" // Removed w-full, h-full as style overrides
             style={{ minWidth: '100vw', minHeight: '100vh' }} // Force viewport dimensions
           >
-            <source src="https://res.cloudinary.com/dada5hjp3/video/upload/v1744694427/6950522_Wind_Turbines_Towering_1920x1080_qlvseg.mp4" type="video/mp4" />
+            <source src="/lovable-uploads/CSR-page.mp4" type="video/mp4" />
           </video>
           
           {/* Re-added Overlay for text contrast, above video, below text */}
