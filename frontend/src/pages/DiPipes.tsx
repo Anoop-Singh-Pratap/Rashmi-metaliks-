@@ -673,31 +673,39 @@ const DiPipes = () => {
         </div>
         
         {/* Scroll indicator with responsive positioning */}
-        <motion.div 
-          className="absolute bottom-12 sm:bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center justify-center cursor-pointer z-20"
+        <motion.div
+          className="absolute bottom-12 sm:bottom-16 left-1/2 -translate-x-1/2 z-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          onClick={() => scrollToSection('features')}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
+          style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
-          <div className="bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full text-white/90 hover:text-white transition-colors duration-300 flex flex-col items-center shadow-lg">
-            <span className="text-sm font-medium mb-1">Scroll to explore</span>
+          <a
+            href="#features"
+            aria-label="Scroll to explore features"
+            className="outline-none"
+          >
             <motion.div
-              animate={{ 
-                y: [0, 5, 0],
-                opacity: [0.5, 1, 0.5] 
-              }}
-              transition={{ 
-                duration: 1.5, 
-                repeat: Infinity,
-                ease: "easeInOut" 
-              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="bg-black/50 backdrop-blur-sm px-5 py-3 min-h-[44px] rounded-full text-white transition-colors duration-300 flex flex-col items-center shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 transform-gpu"
             >
-              <ArrowDown size={16} />
+              <span className="text-sm font-medium mb-1">Scroll to explore</span>
+              <motion.div
+                animate={{
+                  y: [0, 5, 0],
+                  opacity: [0.6, 1, 0.6]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <ArrowDown size={16} />
+              </motion.div>
             </motion.div>
-          </div>
+          </a>
         </motion.div>
       </section>
       
@@ -908,7 +916,7 @@ const DiPipes = () => {
       </section>
       
       {/* Features Section - Enhanced */}
-      <section id="features" className="py-24 relative gradient-border overflow-hidden geometric-pattern dark:bg-rashmi-dark/5">
+      <section id="features" className="py-24 relative gradient-border overflow-hidden geometric-pattern dark:bg-rashmi-dark/5 scroll-mt-24 md:scroll-mt-32">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rashmi-red/0 via-rashmi-red to-rashmi-red/0"></div>
         <div className="absolute -right-64 -top-64 w-[500px] h-[500px] rounded-full bg-rashmi-red/3 blur-3xl opacity-50"></div>
         <div className="absolute -left-64 -bottom-64 w-[500px] h-[500px] rounded-full bg-rashmi-red/3 blur-3xl opacity-50"></div>
@@ -1011,7 +1019,7 @@ const DiPipes = () => {
       </section>
       
       {/* Technical Specifications Section with Tabs */}
-      <section id="specifications" className="py-24 relative gradient-border">
+      <section id="specifications" className="py-24 relative gradient-border scroll-mt-24 md:scroll-mt-32">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rashmi-red/0 via-rashmi-red to-rashmi-red/0"></div>
         <div className="absolute inset-0 bg-gradient-to-tr from-rashmi-dark/5 to-transparent"></div>
         
