@@ -5,34 +5,19 @@ import { ContactFormData } from '../types/contact';
 
 console.log('DEBUG: emailService.ts module loaded');
 
-// Country code to name mapping
+// Country code to name mapping (broadened)
 const countryMapping: { [key: string]: string } = {
-  'in': 'India',
-  'ae': 'United Arab Emirates',
-  'au': 'Australia',
-  'bg': 'Bangladesh',
-  'bt': 'Bhutan',
-  'ca': 'Canada',
-  'cn': 'China',
-  'de': 'Germany',
-  'fr': 'France',
-  'gb': 'United Kingdom',
-  'id': 'Indonesia',
-  'it': 'Italy',
-  'jp': 'Japan',
-  'kr': 'South Korea',
-  'lk': 'Sri Lanka',
-  'my': 'Malaysia',
-  'np': 'Nepal',
-  'nz': 'New Zealand',
-  'qa': 'Qatar',
-  'ru': 'Russia',
-  'sa': 'Saudi Arabia',
-  'sg': 'Singapore',
-  'th': 'Thailand',
-  'us': 'United States',
-  'za': 'South Africa',
-  'others': 'Others'
+  in: 'India', ae: 'United Arab Emirates', au: 'Australia', bd: 'Bangladesh', bg: 'Bangladesh', bt: 'Bhutan', br: 'Brazil',
+  ca: 'Canada', cn: 'China', co: 'Colombia', cz: 'Czech Republic', de: 'Germany', dk: 'Denmark', eg: 'Egypt',
+  es: 'Spain', fi: 'Finland', fr: 'France', gb: 'United Kingdom', gr: 'Greece', hu: 'Hungary', id: 'Indonesia',
+  ie: 'Ireland', il: 'Israel', it: 'Italy', jp: 'Japan', kr: 'South Korea', lk: 'Sri Lanka', mx: 'Mexico', my: 'Malaysia',
+  ng: 'Nigeria', nl: 'Netherlands', no: 'Norway', np: 'Nepal', nz: 'New Zealand', ph: 'Philippines', pl: 'Poland',
+  pt: 'Portugal', qa: 'Qatar', ro: 'Romania', ru: 'Russia', sa: 'Saudi Arabia', se: 'Sweden', sg: 'Singapore', th: 'Thailand',
+  tr: 'Turkey', us: 'United States', ve: 'Venezuela', vn: 'Vietnam', za: 'South Africa', ch: 'Switzerland', be: 'Belgium',
+  ar: 'Argentina', cl: 'Chile', pk: 'Pakistan', ua: 'Ukraine', at: 'Austria', pe: 'Peru', sk: 'Slovakia', si: 'Slovenia',
+  hr: 'Croatia', ee: 'Estonia', lt: 'Lithuania', lv: 'Latvia', rs: 'Serbia', by: 'Belarus', ge: 'Georgia', is: 'Iceland',
+  lu: 'Luxembourg', mt: 'Malta', cy: 'Cyprus', md: 'Moldova', al: 'Albania', mk: 'North Macedonia', me: 'Montenegro',
+  ba: 'Bosnia and Herzegovina', li: 'Liechtenstein', sm: 'San Marino', mc: 'Monaco', va: 'Vatican City', others: 'Others'
 };
 
 // Helper function to get country name from code
@@ -235,13 +220,20 @@ export const sendContactFormEmail = async (data: ContactFormData): Promise<boole
 
 export const sendVendorRegistrationEmail = async (data: VendorFormData, files?: Express.Multer.File[]): Promise<boolean> => {
   try {
+    // Allow skipping emails in non-critical environments
+    if (process.env.SKIP_EMAILS === 'true') {
+      console.log('SKIP_EMAILS=true -> skipping vendor emails');
+      return true;
+    }
+
     const transporter = createTransporter(
       process.env.PROCUREMENT_EMAIL_USER!,
       process.env.PROCUREMENT_EMAIL_PASS!
     );
 
-    // Generate unique reference ID
-    const refId = `TOKEN-${uuidv4().substring(0, 8).toUpperCase()}`;
+    // Use provided referenceId if present, else generate
+    const refId = data.referenceId || `TOKEN-${uuidv4().substring(0, 8).toUpperCase()}`;
+    if (!data.referenceId) data.referenceId = refId;
 
     // Format turnover information with currency
     const turnoverText = data.turnover && data.turnoverCurrency
@@ -266,6 +258,7 @@ export const sendVendorRegistrationEmail = async (data: VendorFormData, files?: 
       <p><strong>Firm Type:</strong> ${data.firmType}</p>
       <p><strong>Vendor Type:</strong> ${data.vendorType}</p>
       <p><strong>Country:</strong> ${getCountryName(data.country)}</p>
+      ${data.address ? `<p><strong>Address:</strong> ${data.address}</p>` : ''}
       ${data.country === 'others' ? `<p><strong>Custom Country:</strong> ${data.customCountry || ''}</p><p><strong>Custom Country Code:</strong> ${data.customCountryCode || ''}</p>` : ''}
       <p><strong>Website:</strong> ${data.website || 'Not provided'}</p>
       <p><strong>GST Number:</strong> ${data.gstNumber || 'Not provided'}</p>
@@ -289,12 +282,16 @@ export const sendVendorRegistrationEmail = async (data: VendorFormData, files?: 
 
     // Add file attachments if available
     if (files && files.length > 0) {
-      files.forEach((file, index) => {
-        mailOptions.attachments.push({
-          filename: `${data.companyName.replace(/[^a-zA-Z0-9]/g, '_')}_Document_${index + 1}.${file.originalname.split('.').pop()}`,
-          content: file.buffer,
-          contentType: file.mimetype
-        });
+      files.forEach((file) => {
+        const originalName = file.originalname;
+        const lastDot = originalName.lastIndexOf('.');
+        const baseName = lastDot !== -1 ? originalName.substring(0, lastDot) : originalName;
+        const ext = lastDot !== -1 ? originalName.substring(lastDot + 1) : '';
+        const safeCompany = (data.companyName || 'company').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const safeBase = baseName.replace(/[^a-zA-Z0-9_-]/g, '_');
+        const safeRef = (refId || 'TOKEN').replace(/[^a-zA-Z0-9_-]/g, '_');
+        const newFilename = `${safeCompany}_${safeBase}_${safeRef}${ext ? '.' + ext : ''}`;
+        mailOptions.attachments.push({ filename: newFilename, content: file.buffer, contentType: file.mimetype });
       });
     }
 
@@ -318,6 +315,12 @@ export const sendVendorRegistrationEmail = async (data: VendorFormData, files?: 
         <p>Dear ${data.name},</p>
         <p>We have received your vendor registration application. Your Token ID is: <strong>${refId}</strong></p>
         <p>Our procurement team will review your details and contact you shortly.</p>
+        <div style="background:#fff3cd;border:2px solid #ffc107;border-radius:8px;padding:12px;margin:12px 0;">
+          <strong>Important:</strong> Registration is free. We never request payment for registration. Ignore and report any such requests.
+        </div>
+        <div style="background:#e8f4fd;border:2px solid #2196f3;border-radius:8px;padding:12px;margin:12px 0;">
+          <strong>BidNemo Bidding Portal:</strong> After evaluation and as per business needs, we may invite you to bid via <a href="http://bidnemo.com/login" target="_blank" rel="noopener noreferrer">BidNemo</a> or email RFQs.
+        </div>
         <p><strong>Registration Summary:</strong></p>
         <ul>
           <li><strong>Company Name:</strong> ${data.companyName}</li>

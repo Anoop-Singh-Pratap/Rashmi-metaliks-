@@ -96,7 +96,7 @@ const SEO: React.FC<SEOProps> = ({
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@rashmi_group" />
+      <meta name="twitter:site" content="@Rashmi_Metalik" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`} />

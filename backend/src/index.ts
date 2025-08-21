@@ -164,6 +164,13 @@ app.use('/api/applications', strictLimiter, applicationRoutes);
 app.use('/api/news', cmsRoutes);
 app.use('/api/contact', strictLimiter, contactRoutes);
 app.use('/api/vendors', strictLimiter, vendorRoutes);
+
+// Development-only route to introspect rate limiter status if needed
+if (process.env.NODE_ENV === 'development') {
+  app.get('/api/debug/rate-limiter', (_req, res) => {
+    res.json({ message: 'Rate limiter debug endpoint enabled in development' });
+  });
+}
 // app.use('/api/test-email', testEmailRoutes); // Re-enabled for email testing
 
 // Health check endpoint

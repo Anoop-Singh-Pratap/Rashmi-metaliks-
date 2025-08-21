@@ -33,6 +33,8 @@ interface VendorFormData {
   firmType: string;
   vendorType: string; // domestic or global
   country: string;
+  customCountry?: string;
+  customCountryCode?: string;
   website?: string;
   contactNo: string;
   email: string;
@@ -43,48 +45,54 @@ interface VendorFormData {
   turnoverCurrency: string; // 'INR' or 'USD'
   terms: boolean;
   gstNumber?: string; // <-- Added GST field
+  referenceId?: string; // Tracking token returned from backend
 }
 
 const firmTypes = [
-  { id: 'manufacturer', label: 'MANUFACTURER/OEM' },
-  { id: 'dealer', label: 'DEALER/TRADER' },
-  { id: 'oem-distributor', label: 'OEM AUTHORISED DISTRIBUTER' },
-  { id: 'service', label: 'SERVICE COMPANY' },
-  { id: 'consultant', label: 'CONSULTANT/AGENCY' },
+  { id: 'manufacturer', label: '1. Manufacturer/OEM' },
+  { id: 'dealer', label: '2. Dealer/Trader' },
+  { id: 'oem-distributor', label: '3. OEM Authorized Distributor' },
+  { id: 'service', label: '4. Service Company' },
+  { id: 'consultant', label: '5. Consultant/Agency' },
+  { id: 'contractor', label: '6. Contractor' },
+  { id: 'transport', label: '7. Transport/Logistic' },
 ];
 
 const categories = [
-  { id: 'stationary-computer', label: 'Stationary, Computer & Computer Accessories' },
-  { id: 'cloth-textiles', label: 'Cloth, Textiles' },
-  { id: 'rubber-pvc-belts', label: 'Rubber, PVC, Conveyor Belts, V Belts, Tyre' },
-  { id: 'safety-fire-service', label: 'Safety Items & Fire Service' },
-  { id: 'paint-abrasive-hardware', label: 'Paint, Abrasive, Hardware' },
-  { id: 'pipe-building-material', label: 'Pipe, Pipe Fitting, Building Material & Sanitary' },
-  { id: 'packing-materials', label: 'Packing Materials' },
-  { id: 'chemicals', label: 'Chemicals' },
-  { id: 'gases', label: 'Gases' },
-  { id: 'petroleum-lubricants', label: 'Petrol, Oils, Lubricant & HSD' },
-  { id: 'refractory-basic-mcb', label: 'Refractory - Basic, MCB' },
-  { id: 'refractory-castables', label: 'Refractory - Castables & other Bricks' },
-  { id: 'raw-materials', label: 'Raw Materials' },
-  { id: 'instrumentation-electronics', label: 'Instrumentation & Electronics items' },
-  { id: 'bearings-cutting-tools', label: 'Bearings, cutting tools' },
-  { id: 'fastener-nut-bolts', label: 'Fastener, Nut & Bolts' },
-  { id: 'tools-lifting-equipment', label: 'Tools & Tackles & Lifting Equipment' },
-  { id: 'electrical-spares', label: 'Electrical Spares' },
-  { id: 'cable-winding-wires', label: 'Cable, Cabling Accessories & Winding Wires' },
-  { id: 'electrical-consumables', label: 'Electrical Consumables' },
-  { id: 'motors-spares', label: 'Motors & Motor Spares' },
-  { id: 'electrical-welding-equipment', label: 'Electrical Equ & Welding Equ' },
-  { id: 'fluxes-electrodes', label: 'Fluxes & Electrodes' },
-  { id: 'rolls-roll-chocks', label: 'Rolls & Roll Chocks' },
-  { id: 'minor-raw-materials', label: 'Minor Raw Materials, Ferron Alloys' },
-  { id: 'amc-civil', label: 'AMC-Civil' },
-  { id: 'amc-electrical', label: 'AMC-electrical' },
-  { id: 'amc-mechanical', label: 'AMC-Mechanical' },
-  { id: 'amc-others', label: 'AMC-others (IT, rent, HR related, Mrk related etc)' },
-  { id: 'material-handling-rental', label: 'Material Handling equip Rental' },
-  { id: 'logistics', label: 'Logistics (sea, CHAs)' }
+  { id: 'pure-magnesium-zinc-pearlite', label: '1. Pure Magnesium Ingot, Zinc Wire, Unexpended Pearlite Ore' },
+  { id: 'metallic-mould-ferro-silica', label: '2. Metallic Mould, Ferro Silica Lump' },
+  { id: 'inopipe-zircobar-silica', label: '3. Inopipe, Zircobar, Silica Sand, Ceramic Fibre Blanket' },
+  { id: 'tools-tackles', label: '4. Tools, Tackles' },
+  { id: 'industrial-paints', label: '5. Industrial Paints (Black Bituminous, Thinners, Epoxy Paint, Road marking paint, Zinc Rich Paint)' },
+  { id: 'flux-limestone', label: '6. Flux (Limestone, Quartzite, Mn Ore, Dolomite)' },
+  { id: 'bulk-material-coke', label: '7. Bulk Material (Coke Fines, PCI Coal)' },
+  { id: 'bulk-material-iron', label: '8. Bulk Material (Iron Ore, Iron Fines & Lumps, Pellets)' },
+  { id: 'cardboard-sponge-chalk', label: '9. Cardboard, Sponge/Foam, Heat Resistant Chalk' },
+  { id: 'service-contracts', label: '10. Service Contracts (AMC Civil, AMC Mechanical, AMC Electrical, AMC HR, IT & Marketing etc)' },
+  { id: 'general-purchase', label: '11. General Purchase (Admin, Stationary, Cloth & Textile, Travel, Security etc)' },
+  { id: 'packing-materials', label: '12. Packing materials (Wood Plank, Water Hose Pipe, Steel Strap, Cardboard Box)' },
+  { id: 'logistics-service', label: '13. Logistics Service (Road, Sea, Air, CHA etc)' },
+  { id: 'transporter', label: '14. Transporter (Road, Rail)' },
+  { id: 'material-handling-equipment', label: '15. Material Handling equipment rentals, & Lifting Equipment' },
+  { id: 'gases-chemicals-oil', label: '16. Gases/Chemicals/Petrol & Oil/Lubricants' },
+  { id: 'foundry-resins', label: '17. Foundry Resins (Resin, Hardener, Catalyst, Cleaning Agent)' },
+  { id: 'it-hardware-software', label: '18. IT HARDWARE AND SOFTWARE (server, Rental laptop and Printer, hardware parts, software)' },
+  { id: 'refractory-castables', label: '19. Refractory (Basic, MCB, Castable & Other Bricks), Castables (Whythteat A & K, Ramming Mass), Foundry Resins (Resin, Hardener, Catalyst, Cleaning Agent)' },
+  { id: 'rubber-pvc-belts', label: '20. Rubber, PVC, Conveyor Belts, V Belts, Tyre, Rolls & Roll Chocks' },
+  { id: 'fire-fighting', label: '21. Plant Fire Fighting equipment and Service' },
+  { id: 'safety-items', label: '22. Plant Safety Item (shoes, helmet, Gloves, Harness etc)' },
+  { id: 'pipe-building-materials', label: '23. Pipe, Fitting, Building, Materials & Sanitary' },
+  { id: 'electrical-spares', label: '24. ELECTRICAL Spare and Consumables' },
+  { id: 'mechanical-spares', label: '25. MRO MECHANICAL Spare and Consumables' },
+  { id: 'hydraulics-pneumatics', label: '26. HYDRAULICS-PNEUMATICS Spare and Consumables' },
+  { id: 'material-handling-automobile', label: '27. Material Handling equipment Spare and Consumables (AUTOMOBILE)' },
+  { id: 'mro-general', label: '28. MRO (Bearing, Cutting Tools, Electrical Spares, Fasteners, Nut & Bolts, Pump, Motors & Motors Spares, Rolls & Roll Chocks)' },
+  { id: 'instrumentation-electronics', label: '29. Instrumentation & Electronics Items, Electrical Equipment & Electrical Consumable' },
+  { id: 'welding-equipment', label: '30. Fluxes & Electrodes, Mould Welding Wire, Welding Flux & OTHER Welding Equipments' },
+  { id: 'cable-accessories', label: '31. Cable, Cabling Accessories & Winding Wires' },
+  { id: 'drawing-based-items', label: '32. Drawing based item - Casting, fabrication & Machining and Assembly' },
+  { id: 'manpower-contractor', label: '33. Manpower Contractor' },
+  { id: 'any-other', label: '34. Any Other' },
 ];
 
 // Countries data for the dropdown
@@ -92,7 +100,7 @@ const sortableCountries = [
   { code: "in", name: "India", countryCode: "+91" },
   { code: "ae", name: "United Arab Emirates", countryCode: "+971" },
   { code: "au", name: "Australia", countryCode: "+61" },
-  { code: "bg", name: "Bangladesh", countryCode: "+880" },
+  { code: "bd", name: "Bangladesh", countryCode: "+880" },
   { code: "bt", name: "Bhutan", countryCode: "+975" },
   { code: "ca", name: "Canada", countryCode: "+1" },
   { code: "cn", name: "China", countryCode: "+86" },
@@ -122,8 +130,18 @@ const countries = [
   { code: "others", name: "Others", countryCode: "" },
 ];
 
-// Updated allowed file types to only include PDF and Word documents
-const ALLOWED_FILE_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+// Updated allowed file types to include PDF, Word, Excel, Text and common images (to match backend)
+const ALLOWED_FILE_TYPES = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'text/plain',
+  'image/jpeg',
+  'image/jpg',
+  'image/png'
+];
 const MAX_FILE_SIZE_MB = 10;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
@@ -214,6 +232,7 @@ const VendorRegistration = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [customCountry, setCustomCountry] = useState('');
   const [customCountryCode, setCustomCountryCode] = useState('');
+  const [submissionData, setSubmissionData] = useState<{ referenceId?: string; submissionId?: string } | null>(null);
 
   const { register, handleSubmit, control, formState: { errors, isSubmitting }, reset, watch, setValue } = useForm<VendorFormData>({
     mode: 'onBlur', // Validate on blur for better UX
@@ -307,7 +326,7 @@ const VendorRegistration = () => {
       if (!handleFileValidation(file)) {
         const errorMessage = file.size > MAX_FILE_SIZE_BYTES
           ? `File "${file.name}" is too large (Max ${MAX_FILE_SIZE_MB}MB).`
-          : `File "${file.name}" has an invalid format. Only PDF and Word documents (DOC/DOCX) are allowed.`;
+          : `File "${file.name}" has an invalid format. Allowed: PDF, DOC/DOCX, XLS/XLSX, TXT, JPG/PNG.`;
 
         setFileErrors(prev => [...prev, errorMessage]);
         return;
@@ -416,14 +435,23 @@ const VendorRegistration = () => {
 
       // More robust error handling
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Server error: ${response.status}`);
+        const errorData = await response.json().catch(() => ({} as any));
+        if (response.status === 409) {
+          const duplicateMessage = (errorData && (errorData as any).message) || 'A similar submission already exists.';
+          setFileErrors(prev => [...prev, `Duplicate Submission: ${duplicateMessage}`]);
+          setUploadProgress(0);
+          return;
+        }
+        throw new Error((errorData && (errorData as any).message) || `Server error: ${response.status}`);
       }
 
       const responseData = await response.json();
 
       if (responseData.success) {
         setUploadProgress(100);
+
+        // Store referenceId and submissionId if provided
+        setSubmissionData({ referenceId: responseData.referenceId, submissionId: responseData.submissionId });
 
         // Smoothly scroll to top before showing success state
         await new Promise<void>((resolve) => {
@@ -780,13 +808,39 @@ const VendorRegistration = () => {
                 </motion.h2>
                 <motion.p
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-                  className="text-muted-foreground dark:text-neutral-300 mb-10 leading-relaxed text-lg"
+                  className="text-muted-foreground dark:text-neutral-300 mb-6 leading-relaxed text-lg"
                 >
                   Thank you for your interest! We've received your company profile and our procurement team will review your details. If your profile meets our requirements, we'll contact you to proceed with the formal vendor registration process.
                 </motion.p>
 
+                {/* Reference Info */}
+                {submissionData?.referenceId && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}
+                    className="mx-auto mb-8 max-w-md rounded-xl border border-emerald-300/50 dark:border-emerald-700/40 bg-emerald-50/70 dark:bg-emerald-900/20 p-4"
+                  >
+                    <div className="text-sm text-emerald-900 dark:text-emerald-200">
+                      <div className="font-semibold">Your Token ID</div>
+                      <div className="text-lg font-mono mt-1">{submissionData.referenceId}</div>
+                      <div className="text-xs mt-2 opacity-80">Please save this reference for future communication.</div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Notices */}
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="space-y-3 text-left max-w-2xl mx-auto mb-8">
+                  <div className="rounded-md border border-yellow-300/60 dark:border-yellow-700/50 bg-yellow-50/80 dark:bg-yellow-900/20 p-3">
+                    <div className="text-sm text-yellow-900 dark:text-yellow-200"><strong>Important:</strong> Registration is free. We never request fees for vendor registration. Ignore and report any such requests.</div>
+                  </div>
+                  <div className="rounded-md border border-blue-300/60 dark:border-blue-700/50 bg-blue-50/80 dark:bg-blue-900/20 p-3">
+                    <div className="text-sm text-blue-900 dark:text-blue-200">
+                      <strong>BidNemo Bidding Portal:</strong> After evaluation and based on our requirements, we may invite you to bid via <a href="http://bidnemo.com/login" target="_blank" rel="noopener noreferrer" className="underline">BidNemo</a> or share RFQs via email.
+                    </div>
+                  </div>
+                </motion.div>
+
                 {/* Button to Reset */}
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}>
                   <Button
                      variant="outline"
                      size="lg"
@@ -906,14 +960,24 @@ const VendorRegistration = () => {
                           {/* === Company Information === */}
                            <motion.div variants={fadeInUp} className="space-y-6 pt-8">
                              <SectionHeader icon={Building} title="Company Information" description="Official details about your business." />
-                              <FormField label="Company/Firm Name" required id="companyName" error={errors.companyName?.message}>
-                                  <Input
-                                    id="companyName"
-                                    placeholder="Your company's registered name"
-                                    className="bg-background/70 dark:bg-neutral-800/50 focus:ring-offset-0 focus:ring-rashmi-red/50 focus:border-rashmi-red/80"
-                                    {...register("companyName", { required: "Company name is required" })}
-                                    aria-invalid={errors.companyName ? "true" : "false"}
-                                  />
+                              <FormField id="companyName" label="Company Name" required error={errors.companyName?.message}>
+                                <Input
+                                  {...register('companyName', {
+                                    required: 'Company name is required',
+                                    minLength: { value: 2, message: 'Company name must be at least 2 characters' }
+                                  })}
+                                  placeholder="Enter your company name"
+                                  className="h-12"
+                                />
+                              </FormField>
+
+                              {/* Optional Address */}
+                              <FormField id="address" label="Company Address" error={(errors as any).address?.message}>
+                                <Input
+                                  {...register('address' as any)}
+                                  placeholder="Street, City, State, ZIP"
+                                  className="h-12"
+                                />
                               </FormField>
 
                                <div className="grid md:grid-cols-2 gap-x-6 gap-y-5">
@@ -1260,67 +1324,19 @@ const VendorRegistration = () => {
 
                                  {/* Last Year Turnover Section */}
                                  <div className="mt-6">
-                                   <FormField label="Last Year Turnover" required id="turnover" error={errors.turnover?.message}>
-                                     <div className="flex items-center gap-3">
-                                       <div className="flex-1">
-                                         <Input
-                                           id="turnover"
-                                           type="number"
-                                           step="0.01"
-                                           inputMode="decimal"
-                                           placeholder="Enter turnover value"
-                                           className="bg-background/70 dark:bg-neutral-800/50 focus:ring-offset-0 focus:ring-rashmi-red/50 focus:border-rashmi-red/80"
-                                           {...register("turnover", {
-                                             required: "Turnover value is required",
-                                             pattern: {
-                                               value: /^[0-9]*\.?[0-9]*$/,
-                                               message: "Please enter only numbers (e.g., 10.5)"
-                                             },
-                                             onChange: (e) => {
-                                               // Replace any non-numeric characters (except decimal point)
-                                               e.target.value = e.target.value.replace(/[^\d.]/g, '');
-                                               // Ensure only one decimal point
-                                               const parts = e.target.value.split('.');
-                                               if (parts.length > 2) {
-                                                 e.target.value = parts[0] + '.' + parts.slice(1).join('');
-                                               }
-                                             }
-                                           })}
-                                           aria-invalid={errors.turnover ? "true" : "false"}
-                                         />
-                                       </div>
-                                       <div className="w-40">
-                                         <Controller
-                                           name="turnoverCurrency"
-                                           control={control}
-                                           rules={{ required: "Currency is required" }}
-                                           render={({ field }) => (
-                                             <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
-                                               <SelectTrigger
-                                                 id="turnoverCurrency"
-                                                 className="bg-background/70 dark:bg-neutral-800/50 focus:ring-offset-0 focus:ring-rashmi-red/50 focus:border-rashmi-red/80"
-                                                 aria-invalid={errors.turnoverCurrency ? "true" : "false"}
-                                               >
-                                                 <SelectValue placeholder="Currency" />
-                                               </SelectTrigger>
-                                               <SelectContent className="bg-card backdrop-blur-md border-border/80 dark:bg-neutral-800 dark:border-neutral-700">
-                                                 <SelectItem value="INR" className="focus:bg-rashmi-red/10 focus:text-rashmi-red dark:focus:bg-rashmi-red/20">
-                                                   Rs (in Cr)
-                                                 </SelectItem>
-                                                 <SelectItem value="USD" className="focus:bg-rashmi-red/10 focus:text-rashmi-red dark:focus:bg-rashmi-red/20">
-                                                   USD (in Million)
-                                                 </SelectItem>
-                                               </SelectContent>
-                                             </Select>
-                                           )}
-                                         />
-                                       </div>
-                                     </div>
-                                     <p className="text-xs text-muted-foreground mt-1">
-                                       {watch('turnoverCurrency') === 'INR'
-                                         ? 'Enter value in Crores (e.g., 10.5 for ₹10.5 Crores)'
-                                         : 'Enter value in Millions (e.g., 2.5 for $2.5 Million)'}
-                                     </p>
+                                   <FormField id="turnover" label="Annual Turnover" required error={errors.turnover?.message}>
+                                     <Input
+                                       {...register('turnover', {
+                                         required: 'Annual turnover is required',
+                                         pattern: {
+                                           value: /^[0-9]+(\.[0-9]{1,2})?$/,
+                                           message: 'Please enter a valid amount'
+                                         },
+                                         validate: (v) => parseFloat(v) >= 0.1 || 'Turnover must be at least 0.1'
+                                       })}
+                                       placeholder="Enter amount (numbers only)"
+                                       className="h-12"
+                                     />
                                    </FormField>
                                  </div>
                            </motion.div>
@@ -1374,7 +1390,7 @@ const VendorRegistration = () => {
                                 multiple
                                 className="sr-only"
                                 onChange={handleFileChange}
-                                accept={ALLOWED_FILE_TYPES.join(',')}
+                                accept=".pdf,.doc,.docx,.xls,.xlsx,.txt,.jpg,.jpeg,.png"
                                 disabled={files.length >= 3 || isSubmitting} // Disable if at max files or submitting
                               />
 

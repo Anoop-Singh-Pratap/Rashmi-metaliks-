@@ -41,10 +41,11 @@ export const organizationSchema = {
     }
   ],
   "sameAs": [
-    "https://www.facebook.com/rashmimetaliks",
-    "https://twitter.com/rashmimetaliks",
-    "https://www.linkedin.com/company/rashmi-metaliks-limited",
-    "https://www.youtube.com/channel/UCrashmimetaliks"
+    "https://www.facebook.com/rashmimetaliksdipipes",
+    "https://x.com/Rashmi_Metalik",
+    "https://www.linkedin.com/company/rashmi-metaliks/",
+    "https://www.instagram.com/rashmimetaliksltd?igsh=MTRodTIzemw3MnJtbA==",
+    "https://www.youtube.com/@Rashmi_Metaliks"
   ],
   "slogan": "Global Leadership in Metallic Excellence",
   "foundingDate": "1984",

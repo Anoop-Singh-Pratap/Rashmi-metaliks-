@@ -92,19 +92,19 @@ const Footer = () => {
               Leading manufacturer of high-quality steel products with a commitment to excellence and sustainability.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
+              <a href="https://www.facebook.com/rashmimetaliksdipipes" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="https://twitter.com/rashmi_group" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
+              <a href="https://x.com/Rashmi_Metalik" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="https://www.instagram.com/rashmimetaliksltd/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
+              <a href="https://www.instagram.com/rashmimetaliksltd?igsh=MTRodTIzemw3MnJtbA==" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="https://youtube.com/@rashmi_metaliks?feature=shared" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
+              <a href="https://www.youtube.com/@Rashmi_Metaliks" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
                 <Youtube size={20} />
               </a>
-              <a href="https://www.linkedin.com/company/rashmi-metaliks-limited/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
+              <a href="https://www.linkedin.com/company/rashmi-metaliks/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-rashmi-red transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>

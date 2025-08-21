@@ -9,6 +9,7 @@ export interface VendorFormData {
   customCountryCode?: string;
   website?: string;
   contactNo: string;
+  address?: string;
   email: string;
   category: string;
   productDescription: string;
@@ -17,4 +18,5 @@ export interface VendorFormData {
   turnoverCurrency: string; // 'INR' or 'USD'
   terms: boolean;
   gstNumber?: string; // GST Number (optional)
+  referenceId?: string; // Tracking token/reference returned to user
 }
